@@ -1,0 +1,66 @@
+{% extends "sciencefair/views/templates/base.html" %}
+{% block content %}
+
+<h1>Registration</h1>
+
+<br/>
+
+<h4> First Child </h4>
+
+<form class="form-horizontal" role="form" method="POST" action="/thanks">
+
+    <div class="row">
+        <div class="col-xs-2 text-right">
+            <b>Name</b>
+        </div>
+
+        <div class="col-xs-4">
+            <input type="Name" class="form-control" id="child1" placeholder="Jonny Smith">
+        </div>
+    </div>
+
+    <div class="row">&nbsp;</div>
+
+    <div class="row">
+        <div class="col-xs-2 text-right">
+            <b>Grade</b>
+        </div>
+        <div class="col-xs-4">
+
+            <input type="radio" id="inlineCheckbox1" value="option1"> K
+            &nbsp;
+            <input type="radio" id="inlineCheckbox2" value="option2"> 1st
+            &nbsp;
+            <input type="radio" id="inlineCheckbox3" value="option3"> 2nd
+            &nbsp;
+            <input type="radio" id="inlineCheckbox3" value="option3"> 3nd
+            &nbsp;
+            <input type="radio" id="inlineCheckbox3" value="option3"> 4nd
+        </div>
+    </div>
+
+    <div class="row">&nbsp;</div>
+
+    <div class="row">
+        <div class="col-xs-2 text-right">
+            <b>Project One Line Description</b>
+        </div>
+
+        <div class="col-xs-7">
+            <input type="Name" class="form-control" id="child1" placeholder="Jonny Smith">
+            <br>
+            (ie.  Energy Efficient Windows)
+        </div>
+
+    </div>
+
+    <div class="row">&nbsp;</div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-primary">Finish</button>
+        </div>
+    </div>
+</form>
+
+{% endblock %}

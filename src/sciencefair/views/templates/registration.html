@@ -1,0 +1,90 @@
+{% extends "sciencefair/views/templates/base.html" %}
+{% block content %}
+
+<h1>Registration</h1>
+
+
+<form class="form-horizontal" role="form" method="POST" action="/regpost">
+    <br>
+
+    <h4>First Parent/Guardian</h4>
+
+    <div class="row">
+        <div class="col-xs-2 text-right">
+            <b>Name</b>
+        </div>
+        <div class="col-xs-3">
+            <input type="input" name="name1" class="form-control" placeholder="Jane Smith">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-2 text-right">
+            <b>Email</b>
+        </div>
+        <div class="col-xs-3">
+            <input type="input" name="email1" class="form-control" placeholder="Jane.Smith@examples.com">
+        </div>
+    </div>
+
+
+    <br>
+
+    <h4>Second Parent/Guardian Optional</h4>
+
+    <div class="row">
+        <div class="col-xs-2 text-right">
+            <b>Name</b>
+        </div>
+        <div class="col-xs-3">
+            <input type="input" name="name2" class="form-control" placeholder="John Smith">
+        </div>
+        <div class="col-xs-5">
+            Providing a second email address is optional.
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-2 text-right">
+            <b>Email</b>
+        </div>
+        <div class="col-xs-3">
+            <input type="input" name="email2" class="form-control" placeholder="John.Smith@example.com">
+        </div>
+        <div class="col-xs-5">
+
+        </div>
+    </div>
+
+    <br>
+
+
+    <div class="row">
+        <div class="col-xs-2 text-right">
+            <b>Number Entrants</b>
+        </div>
+
+        <div class="col-xs-5">
+            <input type="radio" name="students" value="0"> 0 Students (receive emails only.)
+            <br>
+            <input type="radio" name="students" value="1"> 1 Student
+            <br>
+            <input type="radio" name="students" value="2"> 2 Students
+            <br>
+            <input type="radio" name="students" value="3"> 3 Students
+            <br>
+            (You may change this later)
+        </div>
+    </div>
+
+    <br>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-primary">Continue</button>
+        </div>
+    </div>
+
+</form>
+
+{% endblock %}
