@@ -1,6 +1,6 @@
 # sciencefair
 
-FIXME
+A science fair web site.   Built for the first science fair for the Groton Dunstable Elementary School.  Mostly for sharing information and registration.
 
 ## Prerequisites
 
@@ -16,4 +16,5 @@ To start a web server for the application, run:
 
 ## License
 
-Copyright © 2014 FIXME
+Copyright © 2014 Bob Herrmann
+
