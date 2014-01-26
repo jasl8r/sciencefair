@@ -10,7 +10,13 @@
                  [com.postspectacular/rotor "0.1.0"]
                  [com.taoensso/tower "2.0.1"]
                  [markdown-clj "0.9.38"]
-                 [environ "0.4.0"]]
+                 [environ "0.4.0"]
+                 [org.clojure/java.jdbc "0.3.2"]
+                 [mysql/mysql-connector-java "5.1.6"]
+                 [commons-validator "1.4.0"]
+                 [ring-http-basic-auth "0.0.1"]
+                 [org.apache.commons/commons-email "1.2"]
+                 ]
   :aot :all
   :repl-options {:init-ns sciencefair.repl}
   :plugins [[lein-ring "0.8.8"]

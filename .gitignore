@@ -10,3 +10,5 @@ pom.xml
 *.log
 .idea
 *.iml
+smtppass.txt
+dbpass.txt

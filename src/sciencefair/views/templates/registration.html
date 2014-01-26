@@ -3,6 +3,16 @@
 
 <h1>Registration</h1>
 
+        <h4>
+            The registration process collects information about you and the students participating in the science fair.
+            <br>
+            <br>
+            We use email to send out informational updates.
+            <br>
+            <br>
+            We collect student information to (1) get a count of students (2) to monitor what kinds of projects students are planning.
+        </h4>
+
 
 <form class="form-horizontal" role="form" method="POST" action="/regpost">
     <br>
@@ -13,8 +23,8 @@
         <div class="col-xs-2 text-right">
             <b>Name</b>
         </div>
-        <div class="col-xs-3">
-            <input type="input" name="name1" class="form-control" placeholder="Jane Smith">
+        <div class="col-xs-4">
+            <input type="input" name="name1" value="{{name1}}" class="form-control" placeholder="Jane Smith">
         </div>
     </div>
 
@@ -22,9 +32,12 @@
         <div class="col-xs-2 text-right">
             <b>Email</b>
         </div>
-        <div class="col-xs-3">
-            <input type="input" name="email1" class="form-control" placeholder="Jane.Smith@examples.com">
+        <div class="col-xs-4">
+            <input type="input" name="email1" value="{{email1}}" class="form-control" placeholder="Jane.Smith@examples.com">
         </div>
+        {% if error-email1 %}
+        <p class="error">{{error-email1}}</p>
+        {% endif %}
     </div>
 
 
@@ -36,10 +49,10 @@
         <div class="col-xs-2 text-right">
             <b>Name</b>
         </div>
-        <div class="col-xs-3">
-            <input type="input" name="name2" class="form-control" placeholder="John Smith">
+        <div class="col-xs-4">
+            <input type="input" name="name2"  value="{{name2}}" class="form-control" placeholder="John Smith">
         </div>
-        <div class="col-xs-5">
+        <div class="col-xs-6">
             Providing a second email address is optional.
         </div>
     </div>
@@ -48,11 +61,13 @@
         <div class="col-xs-2 text-right">
             <b>Email</b>
         </div>
-        <div class="col-xs-3">
-            <input type="input" name="email2" class="form-control" placeholder="John.Smith@example.com">
+        <div class="col-xs-4">
+            <input type="input" name="email2" value="{{email2}}" class="form-control" placeholder="John.Smith@example.com">
         </div>
         <div class="col-xs-5">
-
+            {% if error-email2 %}
+            <p class="error">{{error-email2}}</p>
+            {% endif %}
         </div>
     </div>
 
@@ -65,13 +80,19 @@
         </div>
 
         <div class="col-xs-5">
-            <input type="radio" name="students" value="0"> 0 Students (receive emails only.)
+            {% if error-students %}
+            <p class="error">{{error-students}}</p>
+            {% endif %}
+
+            <input type="radio" name="students" {% if students = 0 %} checked {% endif %} value="0"> 0 Students (receive emails only.)
             <br>
-            <input type="radio" name="students" value="1"> 1 Student
+            <input type="radio" name="students" {% if students = 1 %} checked {% endif %} value="1"> 1 Student
             <br>
-            <input type="radio" name="students" value="2"> 2 Students
+            <input type="radio" name="students" {% if students = 2 %} checked {% endif %}  value="2"> 2 Students
             <br>
-            <input type="radio" name="students" value="3"> 3 Students
+            <input type="radio" name="students" {% if students = 3 %} checked {% endif %} value="3"> 3 Students
+            <br>
+            <input type="radio" name="students" {% if students = 3 %} checked {% endif %} value="4"> 4 Students
             <br>
             (You may change this later)
         </div>

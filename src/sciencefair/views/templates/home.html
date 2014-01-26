@@ -1,22 +1,31 @@
 {% extends "sciencefair/views/templates/base.html" %}
 {% block content %}
 
-<h1>Welcome to the Groton Dunstable Sciene Fair site</h1>
-<br>
-<br>
-If you havent yet signed up, then please <a class="btn-primary btn-sm" href="/registration">Registration &raquo;</a></p>
-<p>&nbsp;
-<p>
-If you need to update your prior registration, please <a class="btn-primary btn-sm" href="/login">Make Changes &raquo;</a></p>
-
-<h1>Latest News</h1>
-<div class="row-fluid">
-    <div class="span8">
-       07-Jan-2014 Initial site roll out.
+<div class="row">
+    <div class="col-md-2">
+        <img src='img/beaker.png' width='150px'/>
     </div>
-    <div class="span8">
-       07-Jan-2014 Beta site testing.
+    <div class="col-md-10">
+        <h2>Welcome to the<br><nobr><b>G</b>roton <b>D</b>unstable <b>E</b>lementary Science Fair</nobr></h2>
     </div>
 </div>
+
+
+<br>
+<h3>First time here?</h3>
+<ol>
+    <li style="line-height: 30px">Read <a class="btn-primary btn-sm" href="/about">About &raquo;</a> the fair
+    <li style="line-height: 30px">Read the <a class="btn-primary btn-sm" href="/rules">Rules &raquo;</a>
+    <li style="line-height: 30px">Optionally read the <a class="btn-primary btn-sm" href="faq">FAQ &raquo;</a>
+    <li style="line-height: 30px"><a class="btn-primary btn-sm" href="/registration">Register &raquo;</a> your children
+        and get email updates
+    </li>
+</ol>
+<h3>Returning to make changes?</h3>
+<ul>
+    <li>Make changes to your registration, <a class="btn-primary btn-sm" href="/makechanges">Make Changes &raquo;</a></li>
+</ul>
+
+
 
 {% endblock %}
