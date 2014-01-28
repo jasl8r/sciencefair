@@ -5,117 +5,132 @@
 
 <br/>
 
-{% if error %}
-<p class="error">{{error}}</p>
-{% endif %}
-
 
 <form class="form-horizontal" role="form" method="POST" action="/students">
 
     {% for item in students %}
 
-    <h4> {{item.title}} Student</h4>
+    <h4> {{item.h4}} Student</h4>
 
-    <div class="row">
-        <div class="col-xs-3 text-right">
+    <div class="row form-group {% if item.student_error|length > 0 %}has-error{% endif %}">
+        <div class="col-xs-2 text-right">
             <b>Name</b>
         </div>
 
         <div class="col-xs-4">
-            <input type="Name" class="form-control" name="student{{item.id}}" value="{{item.name}}"
+            <input type="text" class="form-control" name="student{{item.id}}" value="{{item.student}}"
                    placeholder="Jonny Smith">
         </div>
+        <div class="col-xs-4">
+            <label class="control-label">{{item.student_error}}</label>
+        </div>
     </div>
 
-    <div class="row">&nbsp;</div>
+    <div class="row form-group {% if item.school_error|length > 0 %}has-error{% endif %}">
 
-    <div class="row">
-        <div class="col-xs-3 text-right">
+        <div class="col-xs-2 text-right">
             <b>School</b>
         </div>
-        <div class="col-xs-6">
-            <input type="radio" name="school{{item.id}}" {% ifequal item.school "groton" %}checked{% endifequal %} value="g0">
-            Groton
-            &nbsp;
-            <input type="radio" name="school{{item.id}}" {% ifequal item.school "dunstable" %}checked{% endifequal %} value="g1">
-            Dunstable
-            &nbsp;
-            <input type="radio" name="school{{item.id}}" {% ifequal item.school "other" %}checked{% endifequal %} value="g2">
-            Other
+        <div class="col-xs-5 ">
+            <label class="radio-inline">
+                <input type="radio" name="school{{item.id}}" {% ifequal item.school
+                "florence"%}checked{% endifequal %} value="florence">Florence Roche</label>
+            <label class="radio-inline">
+                <input type="radio" name="school{{item.id}}" {% ifequal item.school "swallow"%}checked{% endifequal
+                %}>Swallow Union
+            </label>
+            <label class="radio-inline">
+                <input type="radio" class="" name="school{{item.id}}" {% ifequal item.school "other"%}checked{%
+                endifequal
+                %}>Other
+            </label>
+        </div>
+        <div class="col-xs-4">
+            <label class="control-label">{{item.school_error}}</label>
         </div>
     </div>
 
-    <div class="row">&nbsp;</div>
 
-    <div class="row">
-        <div class="col-xs-3 text-right">
+    <div class="form-group row {% if item.grade_error|length > 0 %}has-error{% endif %}">
+        <div class="col-xs-2 text-right">
             <b>Grade</b>
         </div>
-        <div class="col-xs-6">
-
-            <input type="radio" name="grade{{item.id}}" {% ifequal item.grade "g0" %}checked{% endifequal %} value="g0">
-            K
-            &nbsp;
-            <input type="radio" name="grade{{item.id}}" {% ifequal item.grade "g1" %}checked{% endifequal %} value="g1">
-            1st
-            &nbsp;
-            <input type="radio" name="grade{{item.id}}" {% ifequal item.grade "g2" %}checked{% endifequal %} value="g2">
-            2nd
-            &nbsp;
-            <input type="radio" name="grade{{item.id}}" {% ifequal item.grade "g3" %}checked{% endifequal %} value="g3">
-            3rd
-            &nbsp;
-            <input type="radio" name="grade{{item.id}}"{% ifequal item.grade "g4" %}checked{% endifequal %} value="g4">
-            4th
+        <div class="col-xs-4">
+            <label class="radio-inline">
+                <input type="radio" name="grade{{item.id}}" {% ifequal item.grade "k" %}checked{%
+                endifequal %} value="k">
+                K
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="grade{{item.id}}" {% ifequal item.grade "1" %}checked{% endifequal %}
+                value="1">
+                1st
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="grade{{item.id}}" {% ifequal item.grade "2" %}checked{% endifequal %}
+                value="2">
+                2nd
+                &nbsp;
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="grade{{item.id}}" {% ifequal item.grade "3" %}checked{% endifequal %}
+                value="3">
+                3rd
+                &nbsp;
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="grade{{item.id}}" {% ifequal item.grade "4" %}checked{% endifequal %}
+                value="4">
+                4th
+            </label>
+        </div>
+        <div class="col-xs-4">
+            <label class="control-label">{{item.grade_error}}</label>
         </div>
     </div>
 
 
-    <div class="row">&nbsp;</div>
-
-    <div class="row">
-        <div class="col-xs-3 text-right">
+    <div class="row form-group {% if item.teacher_error|length > 0 %}has-error{% endif %}">
+        <div class="col-xs-2 text-right">
             <b>Teacher</b>
         </div>
         <div class="col-xs-4">
-            <input type="input" class="form-control" name="teacher{{item.id}}" value="{{item.teacher}}"
+            <input type="text" class="form-control" name="teacher{{item.id}}" value="{{item.teacher}}"
                    placeholder="Teacher">
-
+        </div>
+        <div class="col-xs-4">
+            <label class="control-label">{{item.teacher_error}}</label>
         </div>
     </div>
 
-    <div class="row">&nbsp;</div>
 
-    <div class="row">
-        <div class="col-xs-3 text-right">
+    <div class="row form-group {% if item.title_error|length > 0 %}has-error{% endif %}">
+        <div class="col-xs-2 text-right">
             <b>Project Title</b>
         </div>
 
-        <div class="col-xs-7">
-            <input type="Name" class="form-control" name="project{{item.id}}" value="{{item.title}}"
-                   placeholder="Simple project summary">
-            (ie. Can Plants Grow Without Sunlight or Water?)
-            </textarea>
+        <div class="col-xs-6">
+            <input type="text" class="form-control" name="title{{item.id}}" value="{{item.title}}">
+            <span class="help-block">You can revisit and change this later.</span>
         </div>
-
+        <div class="col-xs-4">
+            <label class="control-label">{{item.title_error}}</label>
+        </div>
     </div>
 
-    <div class="row">&nbsp;</div>
 
-    <div class="row">
-        <div class="col-xs-3 text-right">
+    <div class="row form-group">
+        <div class="col-xs-2 text-right">
             <b>Project Description</b>
+            (Optional)
         </div>
 
         <div class="col-xs-7">
-            <textarea rows="4" type="Description" class="form-control" name="project{{item.id}}">
-                {{item.description}}
-            </textarea>
+            <textarea rows="4" class="form-control" name="description{{item.id}}">{{item.description}}</textarea>
         </div>
     </div>
 
 
-    <div class="row">&nbsp;</div>
     {% endfor %}
 
     <div class="form-group">

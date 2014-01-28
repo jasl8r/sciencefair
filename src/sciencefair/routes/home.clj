@@ -2,94 +2,55 @@
   (:require noir.session)
   (:use compojure.core)
   (:use clojure.string)
+  (:require clojure.string)
   (:require [sciencefair.views.layout :as layout]
             [sciencefair.util :as util]
             [sciencefair.models.db :as db]
             ))
 
-;; This is a cop out... trying to meet a deadline.... oh the shame
-(defn make-students-vec [students data]
-  (cond
-    (= students "1")
-    [{
-       :id "0"
-       :title "First"
-       :name (get (get data 0) 0)
-       :grade (get (get data 0) 1)
-       :project (get (get data 0) 2)
-       }]
-    (= students "2")
-    [{
-       :id "0"
-       :title "First"
-       :name (get (get data 0) 0)
-       :grade (get (get data 0) 1)
-       :project (get (get data 0) 2)
-       }
-     {
-       :id "1"
-       :title "Second"
-       :name (get (get data 1) 0)
-       :grade (get (get data 1) 1)
-       :project (get (get data 1) 2)
-       }
-     ]
-    (= students "3")
-    [{
-       :id "0"
-       :title "First"
-       :name (get (get data 0) 0)
-       :grade (get (get data 0) 1)
-       :project (get (get data 0) 2)
-       }
-     {
-       :id "1"
-       :title "Second"
-       :name (get (get data 1) 0)
-       :grade (get (get data 1) 1)
-       :project (get (get data 1) 2)
-       }
-     {
-       :id "2"
-       :title "Third"
-       :name (get (get data 2) 0)
-       :grade (get (get data 2) 1)
-       :project (get (get data 2) 2)
-       }
-     ]
-    :else
-    [{
-       :id "0"
-       :title "First"
-       :name (get (get data 0) 0)
-       :grade (get (get data 0) 1)
-       :project (get (get data 0) 2)
-       }
-     {
-       :id "1"
-       :title "Second"
-       :name (get (get data 1) 0)
-       :grade (get (get data 1) 1)
-       :project (get (get data 1) 2)
-       }
-     {
-       :id "2"
-       :title "Third"
-       :name (get (get data 2) 0)
-       :grade (get (get data 2) 1)
-       :project (get (get data 2) 2)
-       }
-     {
-       :id "3"
-       :title "Fourth"
-       :name (get (get data 3) 0)
-       :grade (get (get data 3) 1)
-       :project (get (get data 3) 2)
-       }
-     ]
+(def h4s ["First" "Second" "Third" "Forth"])
+
+(defn make-students-vec [current students data vec validate]
+  (defn ex [field]
+    (get data (keyword (str field current)))
     )
+  (defn is-blank [field]
+    (if (and validate (clojure.string/blank? (get data (keyword (str field current)))))
+      (str "A " field " is required.")))
+
+  (if (= current students)
+    vec
+    (recur (inc current) students data (conj vec {:id current
+                                                  :h4 (get h4s current)
+                                                  :student (ex "student")
+                                                  :student_error (is-blank "student")
+                                                  :school (ex "school")
+                                                  :school_error (is-blank "school")
+                                                  :grade (ex "grade")
+                                                  :grade_error (is-blank "grade")
+                                                  :teacher (ex "teacher")
+                                                  :teacher_error (is-blank "teacher")
+                                                  :title (ex "title")
+                                                  :title_error (is-blank "title")
+                                                  :description (ex "description")
+                                                  }) validate))
+
   )
 
+(defn mock-student-data [current limit vec]
+  (if (= current limit)
+    vec
+    (recur (inc current) limit
+      (conj vec {:id current
+                 :h4 (get h4s current)
+                 :student (str "student no " current)
+                 :school (str "florence")
+                 :grade (str (inc current))
+                 :teacher (str "teach no " current)
+                 :title (str "experiement # " current)
+                 :description (str "can frogs hop " current "?")
+                 })))
+  )
 
 (defn reg-post [name1 email1 name2 email2 students]
 
@@ -120,75 +81,55 @@
       (db/register email1 name1 email2 name2 [])
       (layout/render "thanks.html")
       )
-    :else (do
+    :else (let [students-as-integer (Integer/parseInt students)]
             (noir.session/assoc-in! [:register-students ] [students email1 name1 email2 name2])
-            (layout/render "registration2.html" {:students (make-students-vec students [])})
+            (def students-data (if (util/dev-mode?) (mock-student-data 0 students-as-integer []) (make-students-vec 0 students-as-integer {} [] false)))
+            (layout/render "registration2.html" {:students students-data})
             )
     )
   )
 
-(defn students-post [
-                     & args
-                     ]
-  (prn "student-post-args"
-    student0 school0 teach0 grade0 title0 description0
-    student1 school1 teach2 grade1 title1 description1
-    student2 school2 teach2 grade2 title2 description2
-    student3 school3 teach3 grade3 title3 description3)
 
+(defn form-data-has-errors [form-data]
+  (if-not (seq form-data)
+    false
+    (let [scrub-nil-values (reduce (fn [m [k v]] (if (nil? v) m (assoc m k v))) {} (first form-data))]
+      (if (some #(.contains (str %1) "_error") (keys scrub-nil-values))
+        true
+        (recur (rest form-data)))
+      )))
+
+(defn students-post [args]
   (let [students (first (noir.session/get-in [:register-students ]))
-        students-int (Integer/parseInt students)
         adults (subvec (noir.session/get-in [:register-students ]) 1)
-        student-list (subvec [
-                       [student0
-                        grade0
-                        project0]
-                       [student1
-                        grade1
-                        project1]
-                       [student2
-                        grade2
-                        project2]] 0 students-int) ]
-
-    (defn render-error [message]
-      (layout/render "registration2.html" {:error message :students (make-students-vec students student-list)})
-      )
-
-    (cond
-      (blank? student0) (render-error "Need first student's name")
-      (blank? grade0) (render-error "Need first student's grade")
-      (blank? project0) (render-error "Need first student's project")
-      (and (or (= students "2") (= students "3")) (blank? student1)) (render-error "Need second student's name")
-      (and (or (= students "2") (= students "3")) (blank? grade1)) (render-error "Need second student's grade")
-      (and (or (= students "2") (= students "3")) (blank? project1)) (render-error "Need second student's project")
-      (and (= students "3") (blank? student2)) (render-error "Need third student's name")
-      (and (= students "3") (blank? grade2)) (render-error "Need third student's grade")
-      (and (= students "3") (blank? project2)) (render-error "Need third student's project")
-      :else (do
-              (apply db/register (conj adults student-list))
-              (layout/render "thanks.html")
-              )
-      )
+        student-as-integer (Integer/parseInt students)
+        students-form-data (make-students-vec 0 student-as-integer args [] true)]
+    (if (form-data-has-errors students-form-data)
+      (layout/render "registration2.html" {:students students-form-data})
+      (do
+        (apply db/register (conj [adults] student-as-integer args))
+        (layout/render "thanks.html")
+        ))
     )
   )
 
-(defn admin []
-  (layout/render "admin.html" {:students (db/get-students)})
- )
-
+(defn admin [ & args ]
+;  (if (noir.session/get-in [:admin])
+;    (layout/render "admin.html" {:students (db/get-students)})
+;    (if (= (slurp "adminpass.txt" ) (:password args)
+  )
 
 (defroutes home-routes
   (GET "/" [] (layout/render "home.html"))
   (GET "/makechanges" [] (layout/render "makechanges.html"))
-  (GET "/registration" [] (layout/render "registration.html" (if (util/dev-mode?) {:email1 "mooky@example.com" :name1 "Mooky Starks" :students "1" } {})))
+  (GET "/registration" [] (layout/render "registration.html" (if (util/dev-mode?) {:email1 "mooky@example.com" :name1 "Mooky Starks" :email2 "timbuck@example.com" :name2 "Timmy Buck" :students 2} {})))
   (POST "/regpost" [name1 email1 name2 email2 students] (reg-post name1 email1 name2 email2 students))
-  (POST "/students" [student0 grade0 project0 student1 grade1 project1 student2 grade2 project2] (students-post student0 grade0 project0 student1 grade1 project1 student2 grade2 project2))
+  (POST "/students" [& args] (students-post args))
   (GET "/registration2" [] (layout/render "registration2.html"))
   (GET "/thanks" [] (layout/render "thanks.html"))
   (POST "/thanks" [] (layout/render "thanks.html"))
   (GET "/rules" [] (layout/render "rules.html"))
   (GET "/contact" [] (layout/render "contact.html"))
-  (GET "/unsubscribe" [] (layout/render "unsubscribe.html"))
   (GET "/about" [] (layout/render "about.html"))
   (GET "/a" [] (admin))
   )

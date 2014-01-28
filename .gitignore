@@ -12,3 +12,4 @@ pom.xml
 *.iml
 smtppass.txt
 dbpass.txt
+adminpass.txt

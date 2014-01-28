@@ -3,9 +3,6 @@
   (:require [clojure.java.jdbc :as sql]
             [sciencefair.util]))
 
-; create table adults (id int not null auto_increment, email varchar(100), name varchar(100), first_id int, created_date datetime, updated_date datetime, paid int, PRIMARY KEY(id));
-; create table students (id int not null auto_increment, adult_id int, name varchar(100), grade varchar(2), project varchar(200), created_date datetime, updated_date datetime, PRIMARY KEY(id));
-
 (def db-spec
   {:subprotocol "mysql"
    :subname "//localhost/sciencefair"
@@ -21,25 +18,37 @@
   (:id (first (sql/query db-spec ["select id from adults where email = ?" email])))
   )
 
-(defn register [email1 name1 email2 name2 students]
-  (prn "Asked to register: " email1 name1 email2 name2 students)
+(defn register [adults student-count students-map]
+  (prn "Asked to register: " adults student-count students-map)
 
-  (sql/execute! db-spec ["insert into adults (email, name, created_date) values (?, ?, now())" email1 name1])
-  (def first-adult-id (lookup-id email1))
-  (if (not (blank? email2))
-    (sql/execute! db-spec ["insert into adults (email, name, first_id, created_date) values (?, ?, ?, now())" email2 name2 first-adult-id])
+  (let [[email1 name1 email2 name2] adults]
+    (sql/execute! db-spec ["insert into adults (email, name, created_date) values (?, ?, now())" email1 name1])
+    (def first-adult-id (lookup-id email1))
+    (if (not (blank? email2))
+      (sql/execute! db-spec ["insert into adults (email, name, first_id, created_date) values (?, ?, ?, now())" email2 name2 first-adult-id])
+      )
+
+    (def colnames [:student, :school, :grade, :teacher, :title, :description ])
+    (defn col-names []
+      (clojure.string/join ", " (map name colnames))
+      )
+    (defn extract-value [dex col-name]
+      ((keyword (str (name col-name) dex)) students-map)
+      )
+    (defn col-values [dex]
+      (map #(extract-value dex %1) colnames)
+      )
+    (dotimes [dex student-count]
+      (prn "parameters are" (into [] (col-values dex)))
+      (sql/execute! db-spec (concat [(str "insert into students ( adult_id, " (col-names) ", created_date ) values ( ?, ?, ?, ?, ?, ?, ?, now() )") first-adult-id] (col-values dex))))
+
+    (sciencefair.util/send-email-confirmation email1 name1)
+    (if (not (blank? email2))
+      (sciencefair.util/send-email-confirmation email2 name2))
     )
-
-  ;; insert students
-  (doseq [[name grade project] students]
-    (sql/execute! db-spec ["insert into students (adult_id, name, grade, project, created_date) values (?, ?, ?, ?, now())"
-                           first-adult-id name grade project]))
-
-  (sciencefair.util/send-email-confirmation email1 name1)
-  (if (not (blank? email2))
-    (sciencefair.util/send-email-confirmation email2 name2))
-
   )
+
+
 
 
 (defn get-students []
