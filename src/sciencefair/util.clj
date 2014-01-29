@@ -49,7 +49,7 @@
     (str "Hello " email-name ",\n\n"
     "This message is to confirm that you have signed up for emails.\n\n"
     "We will send out occasional emails about the Groton Dunstatable Elementary Sciene Fair.\n\n"
-    "The latest info is aways at the site, http://gdesciencefair.org\n\n"
+    "The latest info is always at the site, http://gdesciencefair.org\n\n"
     "If you wish to stop receiving email notifications, do so at this link\n"
     "    http://gdesciencefair.org/makechanges\n\nTHANKS\n")
   )
