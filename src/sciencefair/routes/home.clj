@@ -141,8 +141,8 @@
   (GET "/rules" [] (layout/render "rules.html"))
   (GET "/contact" [] (layout/render "contact.html"))
   (GET "/about" [] (layout/render "about.html"))
+  (GET "/info" [] (layout/render "info.html"))
   (GET "/a" [] (admin))
   (POST "/a" [password] (admin-login password))
-  (get "/info" [] (layout/render "info.html"))
   )
 
