@@ -79,7 +79,7 @@
     (error-render :error-students "You must select a number of students.")
     (= "0" students)
     (do
-      (db/register email1 name1 email2 name2 [])
+      (db/register [email1 name1 email2 name2] 0  {} )
       (layout/render "thanks.html")
       )
     :else (let [students-as-integer (Integer/parseInt students)]
@@ -143,5 +143,6 @@
   (GET "/about" [] (layout/render "about.html"))
   (GET "/a" [] (admin))
   (POST "/a" [password] (admin-login password))
+  (get "/info" [] (layout/render "info.html"))
   )
 
