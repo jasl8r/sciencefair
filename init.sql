@@ -9,7 +9,7 @@ CREATE TABLE adults (id INT NOT NULL AUTO_INCREMENT,
 
 CREATE TABLE students (id           INT NOT NULL AUTO_INCREMENT,
                        adult_id     INT,
-                       student         VARCHAR(100),
+                       student      VARCHAR(100),
                        school       VARCHAR(100),
                        grade        VARCHAR(2),
                        teacher      VARCHAR(100),

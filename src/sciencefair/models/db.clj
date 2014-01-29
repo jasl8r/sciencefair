@@ -7,7 +7,7 @@
   {:subprotocol "mysql"
    :subname "//localhost/sciencefair"
    :user "root"
-   :password (.trim (slurp "dbpass.txt"))})
+   :password (.trim (slurp "/fair-data/dbpass.txt"))})
 
 
 (defn registered? [email]
@@ -39,7 +39,6 @@
       (map #(extract-value dex %1) colnames)
       )
     (dotimes [dex student-count]
-      (prn "parameters are" (into [] (col-values dex)))
       (sql/execute! db-spec (concat [(str "insert into students ( adult_id, " (col-names) ", created_date ) values ( ?, ?, ?, ?, ?, ?, ?, now() )") first-adult-id] (col-values dex))))
 
     (sciencefair.util/send-email-confirmation email1 name1)
@@ -48,9 +47,7 @@
     )
   )
 
-
-
-
 (defn get-students []
-  (sql/query db-spec ["select b.name, b.grade, b.project, a.name, a.email, a.created_date, a.paid from adults a, students b where a.id = b.adult_id"])
+  (sql/query db-spec ["select b.student, b.school, b.grade, b.teacher, b.title, b.description, a.name, a.email as 'secondary' , d.name AS 'secondary', d.email, a.created_date, a.paid
+                      from adults a join students b on a.id = b.adult_id left join adults d on a.id = d.first_id order by a.name"] )
   )

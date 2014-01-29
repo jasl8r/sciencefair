@@ -16,7 +16,7 @@
   )
 
 (defn get-smtp-pass []
-  (.trim (slurp "smtppass.txt")))
+  (.trim (slurp "/fair-data/smtppass.txt")))
 
 ; https://gist.github.com/eliasson/1302024
 (defn md5

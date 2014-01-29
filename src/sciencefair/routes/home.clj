@@ -3,6 +3,7 @@
   (:use compojure.core)
   (:use clojure.string)
   (:require clojure.string)
+  (:require noir.response)
   (:require [sciencefair.views.layout :as layout]
             [sciencefair.util :as util]
             [sciencefair.models.db :as db]
@@ -113,11 +114,20 @@
     )
   )
 
-(defn admin [ & args ]
-;  (if (noir.session/get-in [:admin])
-;    (layout/render "admin.html" {:students (db/get-students)})
-;    (if (= (slurp "adminpass.txt" ) (:password args)
+(defn admin []
+  (if (noir.session/get-in [:admin ])
+    (layout/render "admin.html" {:students (db/get-students)})
+    (layout/render "login.html")
+    )
   )
+
+(defn admin-login [password]
+  (if (and (not (clojure.string/blank? password))
+        (= password (.trim (slurp "/fair-data/adminpass.txt"))))
+    (noir.session/assoc-in! [:admin ] true))
+  (noir.response/redirect "/a")
+  )
+
 
 (defroutes home-routes
   (GET "/" [] (layout/render "home.html"))
@@ -132,5 +142,6 @@
   (GET "/contact" [] (layout/render "contact.html"))
   (GET "/about" [] (layout/render "about.html"))
   (GET "/a" [] (admin))
+  (POST "/a" [password] (admin-login password))
   )
 

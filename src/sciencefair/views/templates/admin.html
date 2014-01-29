@@ -1,33 +1,35 @@
 {% extends "sciencefair/views/templates/base.html" %}
 {% block content %}
 
-<!--{% for student in students %}-->
-        <!--{{ student }}-->
-        <!--<br>-->
-<!--{% endfor %}-->
-
 <h1>Administration</h1>
 
         Total students {{students|count}}
         <br>
+<br>
 
 <table class="table table-striped">
     <tr>
-        <th>Name</th>
+        <th>Student</th>
+        <th>School</th>
         <th>Grade</th>
         <th>Project</th>
-        <th>Guardian Name</th>
-        <th>Guardian Email</th>
+        <th>Parent 1</th>
+        <th>Email 1</th>
+        <th>Parent 2</th>
+        <th>Email 2</th>
         <th>Created</th>
         <th>Paid</th>
     </tr>
     {% for student in students %}
     <tr>
-        <td>{{ student.name }}</td>
+        <td>{{ student.student }}</td>
+        <td>{{ student.school }} </td>
         <td>{{ student.grade }} </td>
-        <td>{{ student.project }} </td>
-        <td>{{ student.name_2 }}</td>
+        <td>{{ student.title }} </td>
+        <td>{{ student.name }}</td>
         <td>{{ student.email }}</td>
+        <td>{{ student.secondary_2 }}</td>
+        <td>{{ student.secondary }}</td>
         <td>{{ student.created_date }}</td>
         <td>{{ student.paid }}</td>
     </tr>
