@@ -79,7 +79,7 @@
     (error-render :error-students "You must select a number of students.")
     (= "0" students)
     (do
-      (db/register [email1 name1 email2 name2] 0  {} )
+      (db/register [email1 name1 email2 name2] 0 {})
       (layout/render "thanks.html")
       )
     :else (let [students-as-integer (Integer/parseInt students)]
@@ -128,10 +128,21 @@
   (noir.response/redirect "/a")
   )
 
+(defn make-changes-request [email]
+  (if (not (.isValid (org.apache.commons.validator.routines.EmailValidator/getInstance) email))
+    (layout/render "makechanges2.html" {:error "That is not a vaild email address" :email email})
+    (if-not (db/registered? email)
+      (layout/render "makechanges2.html" {:error "Sorry, that email address is not on registered with us." :email email})
+      (layout/render "checkyouremail.html")
+      )
+    )
+  )
+
 
 (defroutes home-routes
   (GET "/" [] (layout/render "home.html"))
   (GET "/makechanges" [] (layout/render "makechanges.html"))
+  (POST "/makechanges" [email] (make-changes-request email))
   (GET "/registration" [] (layout/render "registration.html" (if (util/dev-mode?) {:email1 "mooky@example.com" :name1 "Mooky Starks" :email2 "timbuck@example.com" :name2 "Timmy Buck" :students 2} {})))
   (POST "/regpost" [name1 email1 name2 email2 students] (reg-post name1 email1 name2 email2 students))
   (POST "/students" [& args] (students-post args))
