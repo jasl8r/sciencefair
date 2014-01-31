@@ -1,0 +1,36 @@
+{% extends "sciencefair/views/templates/base.html" %}
+{% block content %}
+
+<h1>Make Changes</h1>
+
+To make changes to your registration, enter your email address.    We will email you a link to access your registration.
+
+
+        <form action="/makechanges" method="POST">
+
+            <div class="row form-group">
+                <div class="col-xs-2 text-right">
+                    <b>Email</b>
+                </div>
+                <div class="col-xs-4">
+                    <input type="input" name="email1" value="{{email}}" class="form-control" placeholder="Jane.Smith@examples.com">
+                </div>
+                {% if error-email1 %}
+                <p class="error">{{error-email1}}</p>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary">Email me the link to my registration</button>
+                </div>
+            </div>
+        </form>
+
+
+
+{% endblock %}
+
+
+<script>
+    document.getElementById("email").focus();
+</script>
