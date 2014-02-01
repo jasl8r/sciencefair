@@ -133,20 +133,25 @@
     (layout/render "makechanges2.html" {:error "That is not a vaild email address" :email email})
     (if-not (db/registered? email)
       (layout/render "makechanges2.html" {:error "Sorry, that email address is not on registered with us." :email email})
-      (layout/render "checkyouremail.html")
+      (do
+        (util/send-make-changes-link email)
+        (layout/render "checkyouremail.html")
+        )
       )
     )
   )
 
 (defn editreg [e h]
-  (if (= (util/make-md5-hash e) h)
-    (prn "You pass")
-    (prn "No pass")
-    ))
+  (if-not (= (util/make-md5-hash e) h)
+    (layout/render "problem.html")
+    (do
+      (noir.session/assoc-in! [:edit-reg ] e )
+      (layout/render "editreg.html" {:reg (db/get-registration e)} )
+    ))                              )
 
 (defroutes home-routes
   (GET "/" [] (layout/render "home.html"))
-  (GET "/makechanges" [] (layout/render "makechanges2.html"))
+  (GET "/makechanges" [] (layout/render "makechanges.html"))
   (POST "/makechanges" [email] (make-changes-request email))
   (GET "/registration" [] (layout/render "registration.html" (if (util/dev-mode?) {:email1 "mooky@example.com" :name1 "Mooky Starks" :email2 "timbuck@example.com" :name2 "Timmy Buck" :students 2} {})))
   (POST "/regpost" [name1 email1 name2 email2 students] (reg-post name1 email1 name2 email2 students))
@@ -156,7 +161,6 @@
   (POST "/thanks" [] (layout/render "thanks.html"))
   (GET "/rules" [] (layout/render "rules.html"))
   (GET "/contact" [] (layout/render "contact.html"))
-  (GET "/about" [] (layout/render "about.html"))
   (GET "/info" [] (layout/render "info.html"))
   (GET "/a" [] (admin))
   (POST "/a" [password] (admin-login password))

@@ -8,7 +8,7 @@ Yes, there are rules!  Since this is being organized by adults, obviously there 
 <br>
 #### <u>SAFETY RULES</u>
 
-* Absolutely no materials or actions that can cause harm to people or damage to property!  This includes but is not limited to:  explosions, flame, dangerous chemical reactions, uncontrolled flying objects (UFOs), exposed sharp objects, hot objects that can burn, dangerous drugs, anything illegal or breaks district policy, and anything similar in nature to any of the above.  We hope you get the point and not get stuck by one!
+* Absolutely no materials or actions that can cause harm to people or damage to property are allowed!  This includes but is not limited to:  explosions, flame, dangerous chemical reactions, uncontrolled flying objects (UFOs), exposed sharp objects, hot objects that can burn, dangerous drugs, anything illegal or breaks district policy, and anything similar in nature to any of the above.  We hope you get the point and not get stuck by one!
 * You must have an adult supervise the work you perform for your project.  Also, if there is any dangerous parts of your project (like electricity, heat, or sharp tools), have an adult perform those tasks.
 * Be sure to use proper safety equipment (like safety goggles, gloves, etc.) and proper tools to work on your project.
 * Be sure to follow the safety instructions that come with any materials or equipment that you use for your project.
@@ -35,7 +35,7 @@ Yes, there are rules!  Since this is being organized by adults, obviously there 
 * You must clearly display the resources you used for your project somewhere on your display board.
 * For an Informative type project, you must have some pictures, models, or collections as part of your visual presentation (see below).
 * For a Demonstration type project, you must have a physical demonstration as part of your visual presentation (see below).
-* For an Experimental type project, you must perform your experiments at home; not at the Science Fair as part of your presentation.  You may show your experiment by other visual methods (photos, graphs, videos, etc.).
+* For an Experimental type project, <b>you must perform your experiments at home;</b> not at the Science Fair as part of your presentation.  You may show your experiment by other visual methods (photos, graphs, videos, etc.).
 * See below for items needed on your display board specific for the type of project you choose.
 
 #### <u>ORAL PRESENTATION RULES</u>

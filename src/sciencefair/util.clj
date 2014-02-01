@@ -71,7 +71,7 @@
   )
 
 (defn send-make-changes-link [email]
-  (let [email-link  (str "http://gdesciencfair.org/editreg?h="
+  (let [email-link  (str "http://" (if dev-mode? "localhost:3000" "gdesciencfair.org") "/editreg?h="
         (make-md5-hash email) "&e="  (.replaceAll email "@" "%40"))]
     (send-email email  email
       "Science Fair Edit Registration"
@@ -81,6 +81,5 @@
         "    " email-link "\n\n"
         "\n\nTHANKS\n")
       )))
-
 
 

@@ -11,5 +11,5 @@
 
 (spit "src/sciencefair/views/templates/rules.html"  (template-wrap (md/md-to-html-string (slurp "rules.md"))))
 
-(spit "src/sciencefair/views/templates/info.html"  (md/md-to-html-string (slurp "info.md")))
+(spit "src/sciencefair/views/templates/info.html"   (template-wrap (md/md-to-html-string (slurp "info.md"))))
 
