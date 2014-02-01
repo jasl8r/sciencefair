@@ -138,10 +138,15 @@
     )
   )
 
+(defn editreg [e h]
+  (if (= (util/make-md5-hash e) h)
+    (prn "You pass")
+    (prn "No pass")
+    ))
 
 (defroutes home-routes
   (GET "/" [] (layout/render "home.html"))
-  (GET "/makechanges" [] (layout/render "makechanges.html"))
+  (GET "/makechanges" [] (layout/render "makechanges2.html"))
   (POST "/makechanges" [email] (make-changes-request email))
   (GET "/registration" [] (layout/render "registration.html" (if (util/dev-mode?) {:email1 "mooky@example.com" :name1 "Mooky Starks" :email2 "timbuck@example.com" :name2 "Timmy Buck" :students 2} {})))
   (POST "/regpost" [name1 email1 name2 email2 students] (reg-post name1 email1 name2 email2 students))
@@ -155,5 +160,6 @@
   (GET "/info" [] (layout/render "info.html"))
   (GET "/a" [] (admin))
   (POST "/a" [password] (admin-login password))
+  (GET "/editreg" [e h] (editreg e h))
   )
 

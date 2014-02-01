@@ -55,5 +55,32 @@
   )
   )
 
+(defn md5
+  "Generate a md5 checksum for the given string"
+  [token]
+  (let [hash-bytes
+        (doto (java.security.MessageDigest/getInstance "MD5")
+          (.reset)
+          (.update (.getBytes token)))]
+    (.toString
+      (new java.math.BigInteger 1 (.digest hash-bytes)) ; Positive and the size of the number
+      16)))
+
+(defn make-md5-hash [email]
+  (md5 (str (.trim (slurp "/fair-data/md5phrase.txt")) email))
+  )
+
+(defn send-make-changes-link [email]
+  (let [email-link  (str "http://gdesciencfair.org/editreg?h="
+        (make-md5-hash email) "&e="  (.replaceAll email "@" "%40"))]
+    (send-email email  email
+      "Science Fair Edit Registration"
+
+      (str "\n"
+        "To make changes to your science fair registration click on this link\n\n"
+        "    " email-link "\n\n"
+        "\n\nTHANKS\n")
+      )))
+
 
 
