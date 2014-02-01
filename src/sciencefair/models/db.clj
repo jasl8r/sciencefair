@@ -52,6 +52,6 @@
                       from adults a join students b on a.id = b.adult_id left join adults d on a.id = d.first_id order by a.name"] )
   )
 
-(defn get-registration [email]
-  [ "bob@jadn.com" "Bob" "crystal@jadn.com" "Crystal" [{:student "monkey" :school "groton" :grade "2" :teacher "smith" :title "rock diab" :description "something" }] ]
+(defn get-registration-as-form [email]
+  { :email1 "bob@jadn.com" :name1 "Bob" :email2 "crystal@jadn.com" :name2 "Crystal" :students [{:student "monkey" :school "groton" :grade "2" :teacher "smith" :title "rock diab" :description "something"}] }
   )

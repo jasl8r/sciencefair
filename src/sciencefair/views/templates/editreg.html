@@ -2,7 +2,7 @@
 {% block content %}
 
 
-<form class="form-horizontal" role="form" method="POST" action="/regpost">
+<form class="form-horizontal" role="form" method="POST" action="/regedit">
     <br>
 
     <h4>First Parent/Guardian</h4>
@@ -58,9 +58,14 @@
 
     <br>
 
+    {% if students|count = 0 %}
+    <h4>Students</h4>
+    </br>
+    No students
+    <br>
+    {% endif %}
 
-
-    {% for item in reg.students %}
+    {% for item in students %}
 
     <h4> {{item.h4}} Student</h4>
 
@@ -187,9 +192,17 @@
 
     <br>
 
+
+    <div class="form-group">
+        <div class="col-sm-2">
+            <button type="submit" class="btn btn-success">Add Student</button>
+        </div>
+    </div>
+    </fo
+
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="submit" class="btn btn-primary">Save My Changes</button>
         </div>
     </div>
 
