@@ -13,8 +13,8 @@
 ### <u>Registration and Fee</u>
 
 * Students must register for the Fair through the online registration here on this website.  Go to the “Registration” page and follow the directions.
-* Every participant must register by the Registration Deadline.  If the deadline passes or the maximum number of participants is reached, registrants will be placed on a waiting list.
-  Participants may change any of their Registration Information or delete their entire Registration before the Registration Deadline.  After the Registration Deadline, only the “Project Title” and “Project Description” will be available to change.  Any other changes or deletions after the Registration Deadline must be requested through the Science Fair email link on the “Contact” page.
+* Every participant must register by the Registration Deadline.  If the deadline passes, registrants will be placed on a waiting list.
+* Participants may change any of their Registration Information or delete their entire Registration before the Registration Deadline.  After the Registration Deadline, only the “Project Title” and “Project Description” will be available to change.  Any other changes or deletions after the Registration Deadline must be requested through the Science Fair email link on the <a href="/contact">Contact</a> page.
 * There is Limited Space Available.  If maximum capacity is reached before you register, your Registration will be placed on a Waiting List.
 * There is a Registration Fee of $5 per participant.  Cash or check is acceptable for the fee.  Make all checks out to “GDE Science Fair.”
 * You may pay the Registration Fee in two ways:
@@ -46,7 +46,7 @@ Dunstable, MA  01827
 
 ### <u>Questions</u>
 
-* If you have any questions, please contact the Science Fair Team through the email link on the [Contact](/contact "Contact") page of this website.
+* If you have any questions, please contact the Science Fair Team through the email link on the [Contact](/contact) page of this website.
 
 <br>
 <br>

@@ -54,7 +54,7 @@ Yes, there are rules!  Since this is being organized by adults, obviously there 
 These are the three types of projects that can be performed for the Science Fair.  Please note:  the Informative type project is for Grades K – 2 only.  Grades 3 and 4 must perform either a Demonstration type project or an Experimental type project.
 
 <br>
-#### <u>INFORMATIVE PROJECT (Grades K – 2 ONLY)</u>
+#### <u>INFORMATIVE PROJECT (not for Grades 3 and 4)</u>
 
 This project is similar to a science report.  It involves researching a scientific topic, collecting information about it, and describing what you have discovered or learned.
 
@@ -69,7 +69,7 @@ These items above should be clearly shown on your display board.  Also, don’t 
 <br>
 <br>
 
-#### <u>DEMONSTRATION PROJECT</u>
+#### <u>DEMONSTRATION PROJECT (All Grades, K - 4)</u>
 
 For this project, you will choose a Scientific Law or Principle and demonstrate how it works.  As part of your visual presentation, you must have a physical demonstration that proves the law or principle that you have chosen.  A physical demonstration is when you have objects with you and use them to show something to your audience.  Your demonstration should be directly related to the mathematical formula(s) that represent the law or principle.
 
@@ -86,7 +86,7 @@ An example of a mathematical formula is F=MxA where F, M, and A are variables.  
 Be sure your display board has each of the items listed above on it.  You may also have pictures, graphs, and other things to help you make a nice visual presentation.
 
 <br>
-#### <u>EXPERIMENTAL PROJECT</u>
+#### <u>EXPERIMENTAL PROJECT (All Grades, K - 4)</u>
 
 For this project, you will utilize the Scientific Method to learn cause and effect. The experiment will involve performing multiple tests, collecting data, presenting your results and making your conclusions.  The Scientific Method involves five steps:
 

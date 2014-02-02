@@ -149,9 +149,12 @@
       (layout/render "editreg.html" (db/get-registration-as-form e))
       )))
 
+(defn editreg-post [args]
+  )
+
 (defroutes home-routes
   (GET "/" [] (layout/render "home.html"))
-  (GET "/makechanges" [] (layout/render "makechanges2.html"))
+  (GET "/makechanges" [] (layout/render "makechanges.html"))
   (POST "/makechanges" [email] (make-changes-request email))
   (GET "/registration" [] (layout/render "registration.html" (if (util/dev-mode?) {:email1 "mooky@example.com" :name1 "Mooky Starks" :email2 "timbuck@example.com" :name2 "Timmy Buck" :students 2} {})))
   (POST "/regpost" [name1 email1 name2 email2 students] (reg-post name1 email1 name2 email2 students))
@@ -165,6 +168,6 @@
   (GET "/a" [] (admin))
   (POST "/a" [password] (admin-login password))
   (GET "/editreg" [e h] (editreg e h))
-  (POST "/editreg" [& args] (editreg-post args ]))
+  (POST "/editreg" [& args] (editreg-post args))
   )
 
