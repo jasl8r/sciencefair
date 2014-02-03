@@ -53,5 +53,8 @@
   )
 
 (defn get-registration-as-form [email]
-  { :email1 "bob@jadn.com" :name1 "Bob" :email2 "crystal@jadn.com" :name2 "Crystal" :students [{:student "monkey" :school "groton" :grade "2" :teacher "smith" :title "rock diab" :description "something"}] }
+  { :email1 "bob@jadn.com" :name1 "Bob" :email2 "crystal@jadn.com" :name2 "Crystal"
+    :students [{:student "monkey" :school "groton" :grade "2" :teacher "smith" :title "rock diab" :description "something"}
+               {:student "two" :school "other" :grade "3" :teacher "quick" :title "experiments with soap" :description "soap testing"}
+               ] }
   )

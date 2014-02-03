@@ -51,7 +51,7 @@ Yes, there are rules!  Since this is being organized by adults, obviously there 
 ### PROJECT TYPES
 </center>
 
-These are the three types of projects that can be performed for the Science Fair.  Please note:  the Informative type project is for Grades K – 2 only.  Grades 3 and 4 must perform either a Demonstration type project or an Experimental type project.
+These are the three types of projects that can be performed for the Science Fair.  Grades K - 2 may perform any of the three types of projects; Informative, Demonstration, or Experimental.  Grades 3 and 4 must perform either a Demonstration or Experimental type project only; not an Informative type project.
 
 <br>
 #### <u>INFORMATIVE PROJECT (not for Grades 3 and 4)</u>
