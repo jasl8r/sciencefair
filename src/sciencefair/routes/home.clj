@@ -1,7 +1,6 @@
 (ns sciencefair.routes.home
   (:require noir.session)
   (:use compojure.core)
-  (:use clojure.string)
   (:require clojure.string)
   (:require noir.response)
   (:require [sciencefair.views.layout :as layout]
