@@ -3,230 +3,69 @@
 
 <h1>Edit Registration</h1>
 
-<form class="form-horizontal" role="form" method="POST" action="/regedit">
-<br>
+<form class="form-horizontal" role="form" method="POST" action="/editreg">
+    <br>
 
-<h4>First Parent/Guardian</h4>
+    <table class="table">
+        <tr>
+            <th>Title</th>
+            <th>Name</th>
+            <th>Email</th>
+            <td></td>
+        </tr>
+        <tr>
+            <td>First Parent/Guardian</td>
+            <th>{{name1}}</th>
+            <th>{{email1}}</th>
+            <td>
+                <!--<button type="submit" class="btn">Edit</button>-->
+            </td>
+        </tr>
+        <tr>
+            <td>Second Parent/Guardian</td>
+            <th>{{name2}}</th>
+            <th>{{email2}}</th>
+            <td>
+                <!--<button type="submit" class="btn">Edit</button>-->
+            </td>
+        </tr>
+    </table>
 
-<div class="row form-group">
-    <div class="col-xs-2 text-right">
-        <b>Name</b>
-    </div>
-    <div class="col-xs-4">
-        <input type="input" id="name1" name="name1" value="{{name1}}" class="form-control" placeholder="Jane Smith">
-    </div>
-</div>
+    <br>
 
-<div class="row form-group">
-    <div class="col-xs-2 text-right">
-        <b>Email</b>
-    </div>
-    <div class="col-xs-4">
-        <input type="input" name="email1" value="{{email1}}" class="form-control" placeholder="Jane.Smith@examples.com">
-    </div>
-    {% if error-email1 %}
-    <p class="error">{{error-email1}}</p>
-    {% endif %}
-</div>
+    <table class="table">
+        <tr>
+            <th>Student Name</th>
+            <th>Project Title</th>
+            <th>School</th>
+            <th>Teacher</th>
+            <th>Grade</th>
+            <td></td>
+        </tr>
 
+        {% for item in students %}
+        <tr>
+            <td>{{item.student}}</td>
+            <td>{{item.title}}</td>
+            <td>{{item.school}}</td>
+            <td>{{item.teacher}}</td>
+            <td>{{item.grade}}</td>
+            <td>
+                <button type="submit" name="edit" value="{{item.id}}" class="btn btn-sm">Edit</button>
+                &nbsp;&nbsp;&nbsp;
+                <!--<button type="submit" name="remove" value="{{item.id}}" class="btn btn-danger btn-sm">Remove</button>-->
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
 
-<br>
-
-<h4>Second Parent/Guardian Optional</h4>
-
-<div class="row form-group">
-    <div class="col-xs-2 text-right">
-        <b>Name</b>
-    </div>
-    <div class="col-xs-4">
-        <input type="input" name="name2" value="{{name2}}" class="form-control" placeholder="John Smith">
-    </div>
-</div>
-
-<div class="row form-group">
-    <div class="col-xs-2 text-right">
-        <b>Email</b>
-    </div>
-    <div class="col-xs-4">
-        <input type="input" name="email2" value="{{email2}}" class="form-control" placeholder="John.Smith@example.com">
-    </div>
-    <div class="col-xs-5">
-        {% if error-email2 %}
-        <p class="error">{{error-email2}}</p>
-        {% endif %}
-    </div>
-</div>
-
-<br>
-
-{% if students|count = 0 %}
-<h4>Students</h4>
-</br>
-No students
-<br>
-{% endif %}
-
-{% for item in students %}
-<br>
-
-<div class="row form-group">
-    <div class="col-xs-2">
-        <h4> {{item.h4}} Student</h4>
-    </div>
-    <div class="col-xs-2">
-
-
-        <div class="col-sm-2">
-            <button type="submit" class="btn btn-danger">Remove Student</button>
-        </div>
-    </div>
-</div>
-
-<div class="row form-group {% if item.student_error|length > 0 %}has-error{% endif %}">
-    <div class="col-xs-2 text-right">
-        <b>Name</b>
-    </div>
-
-    <div class="col-xs-4">
-        <input type="text" class="form-control" name="student{{item.id}}" value="{{item.student}}"
-               placeholder="Jonny Smith">
-    </div>
-    <div class="col-xs-4">
-        <label class="control-label">{{item.student_error}}</label>
-    </div>
-</div>
-
-<div class="row form-group {% if item.school_error|length > 0 %}has-error{% endif %}">
-
-    <div class="col-xs-2 text-right">
-        <b>School</b>
-    </div>
-    <div class="col-xs-5 ">
-        <label class="radio-inline">
-            <input type="radio" name="school{{item.id}}" {% ifequal item.school
-            "florence"%}checked{% endifequal %} value="florence">Florence Roche</label>
-        <label class="radio-inline">
-            <input type="radio" name="school{{item.id}}" {% ifequal item.school "swallow"%}checked{% endifequal
-            %}>Swallow Union
-        </label>
-        <label class="radio-inline">
-            <input type="radio" class="" name="school{{item.id}}" {% ifequal item.school "other"%}checked{%
-            endifequal
-            %}>Other
-        </label>
-    </div>
-    <div class="col-xs-4">
-        <label class="control-label">{{item.school_error}}</label>
-    </div>
-</div>
-
-
-<div class="form-group row {% if item.grade_error|length > 0 %}has-error{% endif %}">
-    <div class="col-xs-2 text-right">
-        <b>Grade</b>
-    </div>
-    <div class="col-xs-4">
-        <label class="radio-inline">
-            <input type="radio" name="grade{{item.id}}" {% ifequal item.grade "k" %}checked{%
-            endifequal %} value="k">
-            K
-        </label>
-        <label class="radio-inline">
-            <input type="radio" name="grade{{item.id}}" {% ifequal item.grade "1" %}checked{% endifequal %}
-            value="1">
-            1st
-        </label>
-        <label class="radio-inline">
-            <input type="radio" name="grade{{item.id}}" {% ifequal item.grade "2" %}checked{% endifequal %}
-            value="2">
-            2nd
-            &nbsp;
-        </label>
-        <label class="radio-inline">
-            <input type="radio" name="grade{{item.id}}" {% ifequal item.grade "3" %}checked{% endifequal %}
-            value="3">
-            3rd
-            &nbsp;
-        </label>
-        <label class="radio-inline">
-            <input type="radio" name="grade{{item.id}}" {% ifequal item.grade "4" %}checked{% endifequal %}
-            value="4">
-            4th
-        </label>
-    </div>
-    <div class="col-xs-4">
-        <label class="control-label">{{item.grade_error}}</label>
-    </div>
-</div>
-
-
-<div class="row form-group {% if item.teacher_error|length > 0 %}has-error{% endif %}">
-    <div class="col-xs-2 text-right">
-        <b>Teacher</b>
-    </div>
-    <div class="col-xs-4">
-        <input type="text" class="form-control" name="teacher{{item.id}}" value="{{item.teacher}}"
-               placeholder="Teacher">
-    </div>
-    <div class="col-xs-4">
-        <label class="control-label">{{item.teacher_error}}</label>
-    </div>
-</div>
-
-
-<div class="row form-group {% if item.title_error|length > 0 %}has-error{% endif %}">
-    <div class="col-xs-2 text-right">
-        <b>Project Title</b>
-    </div>
-
-    <div class="col-xs-6">
-        <input type="text" class="form-control" name="title{{item.id}}" value="{{item.title}}">
-        <span class="help-block">You can revisit and change this later.</span>
-    </div>
-    <div class="col-xs-4">
-        <label class="control-label">{{item.title_error}}</label>
-    </div>
-</div>
-
-
-<div class="row form-group">
-    <div class="col-xs-2 text-right">
-        <b>Project Description</b>
-        (Optional)
-    </div>
-
-    <div class="col-xs-7">
-        <textarea rows="4" class="form-control" name="description{{item.id}}">{{item.description}}</textarea>
-    </div>
-</div>
-
-
-{% endfor %}
-
-<br>
-
-
-<div class="form-group">
-    <div class="col-sm-2">
-        <button type="submit" class="btn btn-success">Add Student</button>
-    </div>
-</div>
-
-
-<div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-        <button type="submit" class="btn btn-primary">Save My Changes</button>
-    </div>
-</div>
+    <!--<div class="form-group">-->
+        <!--<div class="col-sm-2">-->
+            <!--<button type="submit" name="AddStudent" class="btn btn-success">Add Student</button>-->
+        <!--</div>-->
+    <!--</div>-->
 
 </form>
 
-<br>
-<br>
-
 {% endblock %}
 
-
-<script>
-    document.getElementById("email").focus();
-</script>
