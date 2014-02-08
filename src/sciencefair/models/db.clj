@@ -54,7 +54,7 @@
 
 (defn get-registration-as-form [email]
   (let [adult (first (sql/query db-spec ["select * from adults where email=?" email]))
-        adult2 (if (empty? (:first_id adult))
+        adult2 (if (nil? (:first_id adult))
                  (first (sql/query db-spec ["select * from adults where first_id = ?" (:id adult)]))
                  (first (sql/query db-spec ["select * from adults where id = ?" (:first_id adult)])))
         [primary secondary] (if (empty? (:first_id adult)) [adult adult2] [adult2 adult])
