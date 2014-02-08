@@ -67,13 +67,13 @@
     (not (.isValid (org.apache.commons.validator.routines.EmailValidator/getInstance) email1))
     (error-render :error-email1 "Please enter a valid email.  We use email to send announcements and for registration identity.")
     (db/registered? email1)
-    (error-render :error-email1 "This email is already registered.  Use 'Make Changes' on the Home page to update an existing registration")
+    (error-render :error-email1 "This email is already registered.  Use 'My Registration' link at the top to view/edit an existing registration.")
     (and (not (clojure.string/blank? email2)) (not (.isValid (org.apache.commons.validator.routines.EmailValidator/getInstance) email2)))
     (error-render :error-email2 "Please enter a valid second email.")
     (= email1 email2)
     (error-render :error-email2 "If providing a second email, please make it different than the first email.")
     (db/registered? email2)
-    (error-render :error-email2 "This email is already registered.  Use 'Make Changes' to update an existing registration.")
+    (error-render :error-email2 "This email is already registered.  Use 'My Registration' link at the top to view/edit an existing registration.")
     (empty? students)
     (error-render :error-students "You must select a number of students.")
     (= "0" students)
@@ -141,7 +141,6 @@
   )
 
 (defn editreg [e h]
-  (prn "editreg" e h)
   (if (empty? e)
     (let [ee (noir.session/get-in [:edit-reg ])]
       (if (empty? ee)
@@ -155,7 +154,6 @@
         ))))
 
 (defn editreg-post [args]
-  (prn "I got" args)
   (let [e (noir.session/get-in [:edit-reg ])]
     (layout/render "editreg.html" (db/get-registration-as-form e)))
   )

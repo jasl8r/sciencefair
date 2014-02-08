@@ -79,7 +79,7 @@
       "Science Fair Edit Registration"
 
       (str "\n"
-        "To make changes to your science fair registration click on this link\n\n"
+        "To view/edit your registration, use this link,\n\n"
         "    " email-link "\n\n"
         "\n\nTHANKS\n")
       )))
