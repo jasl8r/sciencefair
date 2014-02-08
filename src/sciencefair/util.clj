@@ -53,7 +53,7 @@
       "We will send out occasional emails about the Groton Dunstatable Elementary Sciene Fair.\n\n"
       "The latest info is always at the site, http://gdesciencefair.org\n\n"
       "If you wish to stop receiving email notifications, do so at this link\n"
-      "    http://gdesciencefair.org/makechanges\n\nTHANKS\n")
+      "    http://gdesciencefair.org/makechanges\n\nScience Fair Team\n")
     )
   )
 
@@ -81,7 +81,7 @@
       (str "\n"
         "To view/edit your registration, use this link,\n\n"
         "    " email-link "\n\n"
-        "\n\nTHANKS\n")
+        "\n\n")
       )))
 
 
