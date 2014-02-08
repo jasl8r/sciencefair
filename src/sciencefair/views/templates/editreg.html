@@ -2,61 +2,67 @@
 {% block content %}
 
 <h1>My Registration</h1>
- <br>
-    <table class="table table-striped">
-        <tr>
-            <th>Title</th>
-            <th>Name</th>
-            <th>Email</th>
-            <td></td>
-        </tr>
-        <tr>
-            <td>First Parent/Guardian</td>
-            <th>{{name1}}</th>
-            <th>{{email1}}</th>
-            <td>
-                <!--<button type="submit" class="btn">Edit</button>-->
-            </td>
-        </tr>
-        <tr>
-            <td>Second Parent/Guardian</td>
-            <th>{{name2}}</th>
-            <th>{{email2}}</th>
-            <td>
-                <!--<button type="submit" class="btn">Edit</button>-->
-            </td>
-        </tr>
-    </table>
+<br>
+{% if message %}
+<div class="row col-md-4">
+    <div class="alert alert-success">{{message}}</div>
+</div>
+{% endif %}
 
-    <br>
+<table class="table table-striped">
+    <tr>
+        <th>Title</th>
+        <th>Name</th>
+        <th>Email</th>
+        <td></td>
+    </tr>
+    <tr>
+        <td>First Parent/Guardian</td>
+        <th>{{name1}}</th>
+        <th>{{email1}}</th>
+        <td>
+            <!--<button type="submit" class="btn">Edit</button>-->
+        </td>
+    </tr>
+    <tr>
+        <td>Second Parent/Guardian</td>
+        <th>{{name2}}</th>
+        <th>{{email2}}</th>
+        <td>
+            <!--<button type="submit" class="btn">Edit</button>-->
+        </td>
+    </tr>
+</table>
 
-    <table class="table table-striped">
-        <tr>
-            <th>Student Name</th>
-            <th>Project Title</th>
-            <th>School</th>
-            <th>Teacher</th>
-            <th>Grade</th>
-            <td></td>
-        </tr>
+<br>
 
-        {% for item in students %}
-        <tr>
-            <td>{{item.student}}</td>
-            <td>{{item.title}}</td>
-            <td>{{item.school}}</td>
-            <td>{{item.teacher}}</td>
-            <td>{{item.grade}}</td>
-            <td>
-                <a class="btn btn-default" href="/edit-student?id={{item.id}}" role="button">Edit</a>
-                &nbsp;&nbsp;&nbsp;
-                <!--<button type="submit" name="remove" value="{{item.id}}" class="btn btn-danger btn-sm">Remove</button>-->
-            </td>
-        </tr>
+<table class="table table-striped">
+    <tr>
+        <th>Student Name</th>
+        <th>Project Title</th>
+        <th>School</th>
+        <th>Teacher</th>
+        <th>Grade</th>
+        <td></td>
+    </tr>
 
-        {% endfor %}
+    {% for item in students %}
+    <tr>
+        <td>{{item.student}}</td>
+        <td>{{item.title}}</td>
+        <td>{{item.school}}</td>
+        <td>{{item.teacher}}</td>
+        <td>{{item.grade}}</td>
+        <td>
+            <a class="btn btn-default" href="/edit-student?id={{item.id}}" role="button">Edit</a>
+            &nbsp;&nbsp;&nbsp;
+            <!--<button type="submit" name="remove" value="{{item.id}}" class="btn btn-danger btn-sm">Remove</button>-->
+        </td>
+    </tr>
 
-    </table>
+    {% endfor %}
+
+</table>
 
 <!--<div class="form-group">-->
 <!--<div class="col-sm-2">-->

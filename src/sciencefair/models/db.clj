@@ -75,8 +75,6 @@
   ; {:description "", :title "tinkering with heat", :teacher "Gurnsey", :grade "3",
   ;      :school "florence", :student "Liam Herrmann", :id "2"}
 
-  (prn "update-student" smap)
-
   (sql/execute! db-spec ["update students set student=?, school=?, grade=?,teacher=?, title=?, description=?, updated_date=now() where id = ?"
                          (:student smap) (:school smap) (:grade smap)
                          (:teacher smap) (:title smap) (:description smap)

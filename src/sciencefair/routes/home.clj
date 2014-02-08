@@ -145,7 +145,7 @@
     (let [ee (noir.session/get-in [:edit-reg ])]
       (if (empty? ee)
         (layout/render "problem.html")
-        (layout/render "editreg.html" (db/get-registration-as-form ee))))
+        (layout/render "editreg.html" (conj (db/get-registration-as-form ee) {:message (noir.session/flash-get :message)} ))))
     (if-not (= (util/make-md5-hash e) h)
       (layout/render "problem.html")
       (do
@@ -160,7 +160,7 @@
 
 (defn edit-student [id]
   ; (Do security check.  Can user bla, access student bla
-  (layout/render "edit-student.html" {:item (db/get-student id)})
+  (layout/render "edit-student.html" {:item (db/get-student id) })
   )
 
 (defn edit-student-post [args]
@@ -169,7 +169,8 @@
   ;(layout/render "edit-student.html" { :item args } )
 
   (db/update-student args)
-  (noir.response/redirect "/editreg")
+  (noir.session/flash-put! :message (str "Student \"" (:student args) "\" updated!"))
+  (noir.response/redirect "/editreg" )
   )
 
 (defroutes home-routes
