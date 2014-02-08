@@ -1,25 +1,39 @@
 {% extends "sciencefair/views/templates/base.html" %}
 {% block content %}
 
-<h1>Make Changes</h1>
+<h1>Accessing My Registration</h1>
 
 <br>
 <br>
 
-<h4>We just sent you an email with a link to edit your registration!</h4>
-<br>
+<div class="row">
+    <div class="col-md-2">
+        <img src='img/beaker.png' width='120px'/>
+    </div>
+    <div class="col-md-10">
 
-It might take a minute or two to get into your inbox.
-<p>
-<p>
+        <h2>We just sent you an email with a link to edit your registration!</h2>
+        <br>
 
-    If you cant find our email, try checking your spam folder.
+        <div class="h3">
 
-</p>
+            It might take a minute or two to get into your inbox.
+            <br>
+            <br>
+            If you can't find our email, try checking your spam folder.
+            <br>
+            <br>
+        </div>
+        <div class="h4">
+            Kindly add <a href="mailto:gdesciencefair@gmail.com">gdesciencefair@gmail.com</a> to your contacts, so we
+            don't ever
+            end up in your spam folder.
+        </div>
 
-{% endblock %}
 
+    </div>
+    <br>
+    <br>
 
-<script>
-    document.getElementById("email").focus();
-</script>
+    {% endblock %}
+

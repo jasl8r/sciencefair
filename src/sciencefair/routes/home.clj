@@ -177,6 +177,7 @@
 (defroutes home-routes
   (GET "/" [] (layout/render "home.html"))
   (GET "/makechanges" [] (if (util/dev-mode?) (layout/render "makechanges2.html") (layout/render "makechanges.html")))
+  (GET "/2" [] (layout/render "makechanges2.html") )
   (POST "/makechanges" [email] (make-changes-request email))
   (GET "/registration" [] (layout/render "registration.html" (if (util/dev-mode?) {:email1 "mooky@example.com" :name1 "Mooky Starks" :email2 "timbuck@example.com" :name2 "Timmy Buck" :students 2} {})))
   (POST "/regpost" [name1 email1 name2 email2 students] (reg-post name1 email1 name2 email2 students))

@@ -1,16 +1,8 @@
 {% extends "sciencefair/views/templates/base.html" %}
 {% block content %}
 
-<h1>Edit Registration</h1>
-
-        <div class="row">
-            <div class="col-md-4">
-                You have paid: {{paid}}
-                <br>
-                <br>
-            </div>
-        </div>
-
+<h1>My Registration</h1>
+ <br>
     <table class="table">
         <tr>
             <th>Title</th>
@@ -63,13 +55,23 @@
         </tr>
 
         {% endfor %}
+
     </table>
 
-    <!--<div class="form-group">-->
-        <!--<div class="col-sm-2">-->
-            <!--<button type="submit" name="AddStudent" class="btn btn-success">Add Student</button>-->
-        <!--</div>-->
-    <!--</div>-->
+<!--<div class="form-group">-->
+<!--<div class="col-sm-2">-->
+<!--<button type="submit" name="AddStudent" class="btn btn-success">Add Student</button>-->
+<!--</div>-->
+<!--</div>-->
+
+<div class="row">
+    <div class="col-md-4">
+        You have paid: {{paid}}
+        <br>
+        <br>
+    </div>
+</div>
+
 
 </form>
 

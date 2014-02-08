@@ -60,7 +60,7 @@
         [primary secondary] (if (empty? (:first_id adult)) [adult adult2] [adult2 adult])
         students (sql/query db-spec ["select * from students where adult_id = ?" (:id primary)])
         ]
-    {:paid (:paid primary) :email1 (:email primary) :name1 (:name primary) :email2 (:email secondary) :name2 (:name secondary)
+    { :paid (if (empty? (:paid primary)) "$0" (str "$" (:paid primary))) :email1 (:email primary) :name1 (:name primary) :email2 (:email secondary) :name2 (:name secondary)
      :students students
      }
     )
