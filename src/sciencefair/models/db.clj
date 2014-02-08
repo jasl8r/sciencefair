@@ -57,10 +57,10 @@
         adult2 (if (nil? (:first_id adult))
                  (first (sql/query db-spec ["select * from adults where first_id = ?" (:id adult)]))
                  (first (sql/query db-spec ["select * from adults where id = ?" (:first_id adult)])))
-        [primary secondary] (if (empty? (:first_id adult)) [adult adult2] [adult2 adult])
+        [primary secondary] (if (nil? (:first_id adult)) [adult adult2] [adult2 adult])
         students (sql/query db-spec ["select * from students where adult_id = ?" (:id primary)])
         ]
-    { :paid (if (empty? (:paid primary)) "$0" (str "$" (:paid primary))) :email1 (:email primary) :name1 (:name primary) :email2 (:email secondary) :name2 (:name secondary)
+    { :paid (if (nil? (:paid primary)) "$0" (str "$" (:paid primary))) :email1 (:email primary) :name1 (:name primary) :email2 (:email secondary) :name2 (:name secondary)
      :students students
      }
     )
