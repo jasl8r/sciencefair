@@ -141,17 +141,37 @@
   )
 
 (defn editreg [e h]
-  (if-not (= (util/make-md5-hash e) h)
-    (layout/render "problem.html")
-    (do
-      (noir.session/assoc-in! [:edit-reg ] e)
-      (layout/render "editreg.html" (db/get-registration-as-form e))
-      )))
+  (prn "editreg" e h)
+  (if (empty? e)
+    (let [ee (noir.session/get-in [:edit-reg ])]
+      (if (empty? ee)
+        (layout/render "problem.html")
+        (layout/render "editreg.html" (db/get-registration-as-form ee))))
+    (if-not (= (util/make-md5-hash e) h)
+      (layout/render "problem.html")
+      (do
+        (noir.session/assoc-in! [:edit-reg ] e)
+        (layout/render "editreg.html" (db/get-registration-as-form e))
+        ))))
 
 (defn editreg-post [args]
   (prn "I got" args)
   (let [e (noir.session/get-in [:edit-reg ])]
     (layout/render "editreg.html" (db/get-registration-as-form e)))
+  )
+
+(defn edit-student [id]
+  ; (Do security check.  Can user bla, access student bla
+  (layout/render "edit-student.html" {:item (db/get-student id)})
+  )
+
+(defn edit-student-post [args]
+  ; (Do security check.  Can user bla, access student bla
+  ; validate fields
+  ;(layout/render "edit-student.html" { :item args } )
+
+  (db/update-student args)
+  (noir.response/redirect "/editreg")
   )
 
 (defroutes home-routes
@@ -171,5 +191,7 @@
   (POST "/a" [password] (admin-login password))
   (GET "/editreg" [e h] (editreg e h))
   (POST "/editreg" [& args] (editreg-post args))
+  (GET "/edit-student" [id] (edit-student id))
+  (POST "/edit-student" [& args] (edit-student-post args))
   )
 

@@ -1,0 +1,138 @@
+{% extends "sciencefair/views/templates/base.html" %}
+{% block content %}
+
+<h2>Edit Student</h2>
+
+<form method="POST" action="/edit-student">
+
+    <input name="id" type="hidden" value="{{item.id}}"/>
+
+    <div class="row form-group {% if item.student_error|length > 0 %}has-error{% endif %}">
+        <div class="col-xs-2 text-right">
+            <b>Name</b>
+        </div>
+
+        <div class="col-xs-4">
+            <input type="text" class="form-control" name="student" value="{{item.student}}"
+                   placeholder="Jonny Smith">
+        </div>
+        <div class="col-xs-4">
+            <label class="control-label">{{item.student_error}}</label>
+        </div>
+    </div>
+
+    <div class="row form-group {% if item.school_error|length > 0 %}has-error{% endif %}">
+
+        <div class="col-xs-2 text-right">
+            <b>School</b>
+        </div>
+        <div class="col-xs-5 ">
+            <label class="radio-inline">
+                <input type="radio" name="school" {% ifequal item.school
+                "florence"%}checked{% endifequal %} value="florence">Florence Roche</label>
+            <label class="radio-inline">
+                <input type="radio" name="school" {% ifequal item.school "swallow"%}checked{% endifequal
+                %}>Swallow Union
+            </label>
+            <label class="radio-inline">
+                <input type="radio" class="" name="school" {% ifequal item.school "other"%}checked{%
+                endifequal
+                %}>Other
+            </label>
+        </div>
+        <div class="col-xs-4">
+            <label class="control-label">{{item.school_error}}</label>
+        </div>
+    </div>
+
+
+    <div class="form-group row {% if item.grade_error|length > 0 %}has-error{% endif %}">
+        <div class="col-xs-2 text-right">
+            <b>Grade</b>
+        </div>
+        <div class="col-xs-4">
+            <label class="radio-inline">
+                <input type="radio" name="grade" {% ifequal item.grade "k" %}checked{%
+                endifequal %} value="k">
+                K
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="grade" {% ifequal item.grade "1" %}checked{% endifequal %}
+                value="1">
+                1st
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="grade" {% ifequal item.grade "2" %}checked{% endifequal %}
+                value="2">
+                2nd
+                &nbsp;
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="grade" {% ifequal item.grade "3" %}checked{% endifequal %}
+                value="3">
+                3rd
+                &nbsp;
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="grade" {% ifequal item.grade "4" %}checked{% endifequal %}
+                value="4">
+                4th
+            </label>
+        </div>
+        <div class="col-xs-4">
+            <label class="control-label">{{item.grade_error}}</label>
+        </div>
+    </div>
+
+
+    <div class="row form-group {% if item.teacher_error|length > 0 %}has-error{% endif %}">
+        <div class="col-xs-2 text-right">
+            <b>Teacher</b>
+        </div>
+        <div class="col-xs-4">
+            <input type="text" class="form-control" name="teacher" value="{{item.teacher}}"
+                   placeholder="Teacher">
+        </div>
+        <div class="col-xs-4">
+            <label class="control-label">{{item.teacher_error}}</label>
+        </div>
+    </div>
+
+
+    <div class="row form-group {% if item.title_error|length > 0 %}has-error{% endif %}">
+        <div class="col-xs-2 text-right">
+            <b>Project Title</b>
+        </div>
+
+        <div class="col-xs-6">
+            <input type="text" class="form-control" name="title" value="{{item.title}}">
+            <span class="help-block">You can revisit and change this later.</span>
+        </div>
+        <div class="col-xs-4">
+            <label class="control-label">{{item.title_error}}</label>
+        </div>
+    </div>
+
+
+    <div class="row form-group">
+        <div class="col-xs-2 text-right">
+            <b>Project Description</b>
+            (Optional)
+        </div>
+
+        <div class="col-xs-7">
+            <textarea rows="4" class="form-control" name="description">{{item.description}}</textarea>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+        </div>
+    </div>
+
+</form>
+
+{% endblock %}
+
+

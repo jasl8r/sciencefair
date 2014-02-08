@@ -3,8 +3,13 @@
 
 <h1>Edit Registration</h1>
 
-<form class="form-horizontal" role="form" method="POST" action="/editreg">
-    <br>
+        <div class="row">
+            <div class="col-md-4">
+                You have paid: {{paid}}
+                <br>
+                <br>
+            </div>
+        </div>
 
     <table class="table">
         <tr>
@@ -51,11 +56,12 @@
             <td>{{item.teacher}}</td>
             <td>{{item.grade}}</td>
             <td>
-                <button type="submit" name="edit" value="{{item.id}}" class="btn btn-sm">Edit</button>
+                <a class="btn btn-default" href="/edit-student?id={{item.id}}" role="button">Edit</a>
                 &nbsp;&nbsp;&nbsp;
                 <!--<button type="submit" name="remove" value="{{item.id}}" class="btn btn-danger btn-sm">Remove</button>-->
             </td>
         </tr>
+
         {% endfor %}
     </table>
 

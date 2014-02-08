@@ -58,9 +58,29 @@
                  (first (sql/query db-spec ["select * from adults where first_id = ?" (:id adult)]))
                  (first (sql/query db-spec ["select * from adults where id = ?" (:first_id adult)])))
         [primary secondary] (if (empty? (:first_id adult)) [adult adult2] [adult2 adult])
-        students (sql/query db-spec ["select * from students where adult_id = ?" (:id primary) ] )
+        students (sql/query db-spec ["select * from students where adult_id = ?" (:id primary)])
         ]
-    {:email1 (:email primary) :name1 (:name primary) :email2 (:email secondary) :name2 (:name secondary)
-     :students students }
+    {:paid (:paid primary) :email1 (:email primary) :name1 (:name primary) :email2 (:email secondary) :name2 (:name secondary)
+     :students students
+     }
     )
   )
+
+(defn get-student [id]
+  (first (sql/query db-spec ["select * from students where id = ?" id]))
+  )
+
+(defn update-student [smap]
+
+  ; {:description "", :title "tinkering with heat", :teacher "Gurnsey", :grade "3",
+  ;      :school "florence", :student "Liam Herrmann", :id "2"}
+
+  (prn "update-student" smap)
+
+  (sql/execute! db-spec ["update students set student=?, school=?, grade=?,teacher=?, title=?, description=?, updated_date=now() where id = ?"
+                         (:student smap) (:school smap) (:grade smap)
+                         (:teacher smap) (:title smap) (:description smap)
+                         (:id smap)])
+
+  )
+
