@@ -49,7 +49,7 @@
 
 (defn get-students []
   (sql/query db-spec ["select b.student, b.school, b.grade, b.teacher, b.title, b.description, a.name, a.email, d.name as 'secondary' , d.email AS 'secondary', a.created_date, a.paid
-                      from adults a join students b on a.id = b.adult_id left join adults d on a.id = d.first_id order by a.name"])
+                      from adults a join students b on a.id = b.adult_id left join adults d on a.id = d.first_id order by a.created_date"])
   )
 
 (defn get-registration-as-form [email]
@@ -58,13 +58,9 @@
                  (first (sql/query db-spec ["select * from adults where first_id = ?" (:id adult)]))
                  (first (sql/query db-spec ["select * from adults where id = ?" (:first_id adult)])))
         [primary secondary] (if (empty? (:first_id adult)) [adult adult2] [adult2 adult])
+        students (sql/query db-spec ["select * from students where adult_id = ?" (:id primary) ] )
         ]
-    (prn "primary" primary)
-    (prn "secondary" secondary)
-
     {:email1 (:email primary) :name1 (:name primary) :email2 (:email secondary) :name2 (:name secondary)
-     :students [{:id 88 :student "monkey" :school "groton" :grade "2" :teacher "smith" :title "rock diab" :description "something"}
-                {:id 99 :student "two" :school "other" :grade "3" :teacher "quick" :title "experiments with soap" :description "soap testing"}
-                ]}
+     :students students }
     )
   )
