@@ -1,5 +1,6 @@
 (ns sciencefair.util
   (:require [noir.io :as io]
+            [noir.session]
             [markdown.core :as md]))
 
 (import 'org.apache.commons.mail.SimpleEmail)
@@ -83,5 +84,4 @@
         "    " email-link "\n\n"
         "\n\n")
       )))
-
 

@@ -145,7 +145,7 @@
     (let [ee (noir.session/get-in [:edit-reg ])]
       (if (empty? ee)
         (layout/render "problem.html")
-        (layout/render "editreg.html" (conj (db/get-registration-as-form ee) {:message (noir.session/flash-get :message)} ))))
+        (layout/render "editreg.html" (conj (db/get-registration-as-form ee) {:message (noir.session/flash-get :message )}))))
     (if-not (= (util/make-md5-hash e) h)
       (layout/render "problem.html")
       (do
@@ -159,24 +159,28 @@
   )
 
 (defn edit-student [id]
-  ; (Do security check.  Can user bla, access student bla
-  (layout/render "edit-student.html" {:item (db/get-student id) })
-  )
+  (if-not (db/has-student-access id)
+    (layout/render "security-problem.html")
+    (layout/render "edit-student.html" {:item (db/get-student id)})
+    ))
 
 (defn edit-student-post [args]
-  ; (Do security check.  Can user bla, access student bla
-  ; validate fields
-  ;(layout/render "edit-student.html" { :item args } )
-
-  (db/update-student args)
-  (noir.session/flash-put! :message (str "Student \"" (:student args) "\" updated!"))
-  (noir.response/redirect "/editreg" )
+  (if-not (db/has-student-access (:id args))
+    (layout/render "security-problem.html")
+    (do
+      ; validate fields
+      ;(layout/render "edit-student.html" { :item args } )
+      (db/update-student args)
+      (noir.session/flash-put! :message (str "Student \"" (:student args) "\" updated!"))
+      (noir.response/redirect "/editreg")
+      )
+    )
   )
 
 (defroutes home-routes
   (GET "/" [] (layout/render "home.html"))
   (GET "/makechanges" [] (if (util/dev-mode?) (layout/render "makechanges2.html") (layout/render "makechanges.html")))
-  (GET "/2" [] (layout/render "makechanges2.html") )
+  (GET "/2" [] (layout/render "makechanges2.html"))
   (POST "/makechanges" [email] (make-changes-request email))
   (GET "/registration" [] (layout/render "registration.html" (if (util/dev-mode?) {:email1 "mooky@example.com" :name1 "Mooky Starks" :email2 "timbuck@example.com" :name2 "Timmy Buck" :students 2} {})))
   (POST "/regpost" [name1 email1 name2 email2 students] (reg-post name1 email1 name2 email2 students))

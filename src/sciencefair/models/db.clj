@@ -1,6 +1,7 @@
 (ns sciencefair.models.db
   (:use clojure.string)
   (:require [clojure.java.jdbc :as sql]
+            [noir.session]
             [sciencefair.util]))
 
 (def db-spec
@@ -60,7 +61,7 @@
         [primary secondary] (if (nil? (:first_id adult)) [adult adult2] [adult2 adult])
         students (sql/query db-spec ["select * from students where adult_id = ?" (:id primary)])
         ]
-    { :paid (if (nil? (:paid primary)) "$0" (str "$" (:paid primary))) :email1 (:email primary) :name1 (:name primary) :email2 (:email secondary) :name2 (:name secondary)
+    {:paid (if (nil? (:paid primary)) "$0" (str "$" (:paid primary))) :email1 (:email primary) :name1 (:name primary) :email2 (:email secondary) :name2 (:name secondary)
      :students students
      }
     )
@@ -81,4 +82,20 @@
                          (:id smap)])
 
   )
+
+(defn get-primary-adult [email]
+  (let [adult (first (sql/query db-spec ["select * from adults where email=?" email]))]
+    (if (nil? (:first_id adult))
+      adult
+      (first (sql/query db-spec ["select * from adults where id = ?" (:first_id adult)])))))
+
+
+
+
+(defn has-student-access [id]
+  (let [email (noir.session/get-in [:edit-reg ])]
+    (if (nil? email)
+      false
+      (let [primary-adult (get-primary-adult email)]
+        (= (:adult_id (get-student id)) (:id primary-adult))))))
 
