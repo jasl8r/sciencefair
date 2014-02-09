@@ -11,13 +11,13 @@
 
 <table class="table table-striped">
     <tr>
-        <th>Title</th>
+        <th></th>
         <th>Name</th>
         <th>Email</th>
         <td></td>
     </tr>
     <tr>
-        <td width='250px'>First Parent/Guardian</td>
+        <th width='250px'>First Parent/Guardian</th>
         <td>{{name1}}</td>
         <td>{{email1}}</td>
         <td>
@@ -25,7 +25,7 @@
         </td>
     </tr>
     <tr>
-        <td>Second Parent/Guardian</td>
+        <th>Second Parent/Guardian</th>
         <td>{{name2}}</td>
         <td>{{email2}}</td>
         <td>
@@ -35,7 +35,10 @@
 </table>
 
 <br>
+<br>
 
+
+{% for item in students %}
 <table class="table table-striped">
     <tr>
         <th>Student Name</th>
@@ -45,8 +48,6 @@
         <th>Grade</th>
         <td></td>
     </tr>
-
-    {% for item in students %}
     <tr>
         <td>{{item.student}}</td>
         <td>{{item.title}}</td>
@@ -54,15 +55,21 @@
         <td>{{item.teacher}}</td>
         <td>{{item.grade}}</td>
         <td>
-            <a class="btn btn-default" href="/edit-student?id={{item.id}}" role="button">Edit</a>
+            <a class="btn btn-primary" href="/edit-student?id={{item.id}}" role="button">Edit</a>
             &nbsp;&nbsp;&nbsp;
             <!--<button type="submit" name="remove" value="{{item.id}}" class="btn btn-danger btn-sm">Remove</button>-->
         </td>
     </tr>
+    <tr>
+        <td colspan="6"><b>Description:</b> {{item.description}}</td>
 
-    {% endfor %}
+    </tr>
 
 </table>
+<br>
+<br>
+{% endfor %}
+
 
 <!--<div class="form-group">-->
 <!--<div class="col-sm-2">-->
