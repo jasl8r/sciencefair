@@ -33,14 +33,14 @@
         </div>
         <div class="col-xs-5 ">
             <label class="radio-inline">
-                <input type="radio" name="school{{item.id}}" {% ifequal item.school
-                "florence"%}checked{% endifequal %} value="florence">Florence Roche</label>
+                <input type="radio" name="school{{item.id}}"  value="florence" {% ifequal item.school
+                "florence"%}checked{% endifequal %}>Florence Roche</label>
             <label class="radio-inline">
-                <input type="radio" name="school{{item.id}}" {% ifequal item.school "swallow"%}checked{% endifequal
+                <input type="radio" name="school{{item.id}}"  value="swallow" {% ifequal item.school "swallow"%}checked{% endifequal
                 %}>Swallow Union
             </label>
             <label class="radio-inline">
-                <input type="radio" class="" name="school{{item.id}}" {% ifequal item.school "other"%}checked{%
+                <input type="radio" class="" name="school{{item.id}}"  value="other" {% ifequal item.school "other"%}checked{%
                 endifequal
                 %}>Other
             </label>

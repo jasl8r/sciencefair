@@ -184,6 +184,11 @@
       (layout/render "editreg.html" (db/get-registration-as-form email))))
   )
 
+(defn logout-now []
+  (noir.session/clear!)
+  (noir.response/redirect "/")
+  )
+
 (defroutes home-routes
   (GET "/" [] (layout/render "home.html"))
   ;  (GET "/makechanges" [] (if (util/dev-mode?) (layout/render "makechanges2.html") (layout/render "makechanges.html")))
@@ -204,5 +209,6 @@
   (POST "/editreg" [& args] (editreg-post args))
   (GET "/edit-student" [id] (edit-student id))
   (POST "/edit-student" [& args] (edit-student-post args))
+  (GET "/logout" [] (logout-now))
   )
 

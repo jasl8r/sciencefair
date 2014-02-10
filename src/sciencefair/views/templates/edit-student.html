@@ -31,11 +31,11 @@
                 <input type="radio" name="school" {% ifequal item.school
                 "florence"%}checked{% endifequal %} value="florence">Florence Roche</label>
             <label class="radio-inline">
-                <input type="radio" name="school" {% ifequal item.school "swallow"%}checked{% endifequal
+                <input type="radio" name="school" value="swallow" {% ifequal item.school "swallow"%}checked{% endifequal
                 %}>Swallow Union
             </label>
             <label class="radio-inline">
-                <input type="radio" class="" name="school" {% ifequal item.school "other"%}checked{%
+                <input type="radio"  name="school" value="other"  {% ifequal item.school "other"%}checked{%
                 endifequal
                 %}>Other
             </label>
