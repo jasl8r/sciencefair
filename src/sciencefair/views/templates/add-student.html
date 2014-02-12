@@ -1,16 +1,9 @@
 {% extends "sciencefair/views/templates/base.html" %}
 {% block content %}
 
-<h1 xmlns="http://www.w3.org/1999/html">Registration</h1>
+<h2>Add Student</h2>
 
-<br/>
-
-
-<form class="form-horizontal" role="form" method="POST" action="/students">
-
-    {% for item in students %}
-
-    <h4> {{item.h4}} Student</h4>
+<form method="POST" action="/add-student">
 
     <div class="row form-group {% if item.student_error|length > 0 %}has-error{% endif %}">
         <div class="col-xs-2 text-right">
@@ -18,7 +11,7 @@
         </div>
 
         <div class="col-xs-4">
-            <input type="text" class="form-control" name="student{{item.id}}" value="{{item.student}}"
+            <input type="text" class="form-control" name="student" value="{{item.student}}"
                    placeholder="Jonny Smith">
         </div>
         <div class="col-xs-4">
@@ -33,14 +26,14 @@
         </div>
         <div class="col-xs-5 ">
             <label class="radio-inline">
-                <input type="radio" name="school{{item.id}}"  value="florence" {% ifequal item.school
-                "florence"%}checked{% endifequal %}>Florence Roche</label>
+                <input type="radio" name="school" {% ifequal item.school
+                "florence"%}checked{% endifequal %} value="florence">Florence Roche</label>
             <label class="radio-inline">
-                <input type="radio" name="school{{item.id}}"  value="swallow" {% ifequal item.school "swallow"%}checked{% endifequal
+                <input type="radio" name="school" value="swallow" {% ifequal item.school "swallow"%}checked{% endifequal
                 %}>Swallow Union
             </label>
             <label class="radio-inline">
-                <input type="radio" class="" name="school{{item.id}}"  value="other" {% ifequal item.school "other"%}checked{%
+                <input type="radio"  name="school" value="other"  {% ifequal item.school "other"%}checked{%
                 endifequal
                 %}>Other
             </label>
@@ -57,29 +50,29 @@
         </div>
         <div class="col-xs-4">
             <label class="radio-inline">
-                <input type="radio" name="grade{{item.id}}" {% ifequal item.grade "k" %}checked{%
+                <input type="radio" name="grade" {% ifequal item.grade "k" %}checked{%
                 endifequal %} value="k">
                 K
             </label>
             <label class="radio-inline">
-                <input type="radio" name="grade{{item.id}}" {% ifequal item.grade "1" %}checked{% endifequal %}
+                <input type="radio" name="grade" {% ifequal item.grade "1" %}checked{% endifequal %}
                 value="1">
                 1st
             </label>
             <label class="radio-inline">
-                <input type="radio" name="grade{{item.id}}" {% ifequal item.grade "2" %}checked{% endifequal %}
+                <input type="radio" name="grade" {% ifequal item.grade "2" %}checked{% endifequal %}
                 value="2">
                 2nd
                 &nbsp;
             </label>
             <label class="radio-inline">
-                <input type="radio" name="grade{{item.id}}" {% ifequal item.grade "3" %}checked{% endifequal %}
+                <input type="radio" name="grade" {% ifequal item.grade "3" %}checked{% endifequal %}
                 value="3">
                 3rd
                 &nbsp;
             </label>
             <label class="radio-inline">
-                <input type="radio" name="grade{{item.id}}" {% ifequal item.grade "4" %}checked{% endifequal %}
+                <input type="radio" name="grade" {% ifequal item.grade "4" %}checked{% endifequal %}
                 value="4">
                 4th
             </label>
@@ -95,7 +88,7 @@
             <b>Teacher</b>
         </div>
         <div class="col-xs-4">
-            <input type="text" class="form-control" name="teacher{{item.id}}" value="{{item.teacher}}"
+            <input type="text" class="form-control" name="teacher" value="{{item.teacher}}"
                    placeholder="Teacher">
         </div>
         <div class="col-xs-4">
@@ -110,7 +103,7 @@
         </div>
 
         <div class="col-xs-6">
-            <input type="text" class="form-control" name="title{{item.id}}" value="{{item.title}}">
+            <input type="text" class="form-control" name="title" value="{{item.title}}">
             <span class="help-block">You can revisit and change this later.</span>
         </div>
         <div class="col-xs-4">
@@ -126,17 +119,18 @@
         </div>
 
         <div class="col-xs-7">
-            <textarea rows="4" class="form-control" name="description{{item.id}}">{{item.description}}</textarea>
+            <textarea rows="4" class="form-control" name="description">{{item.description}}</textarea>
         </div>
     </div>
-
-    {% endfor %}
 
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-primary">Finish</button>
+            <button type="submit" class="btn btn-primary">Save</button>
         </div>
     </div>
+
 </form>
 
 {% endblock %}
+
+

@@ -189,6 +189,41 @@
   (noir.response/redirect "/")
   )
 
+(defn remove-student [id]
+  (if-not (db/has-student-access id)
+    (layout/render "security-problem.html")
+    (do
+      (db/remove-student id)
+      (noir.session/flash-put! :message "Student removed!")
+      (noir.response/redirect "/editreg")
+      )
+    ))
+
+
+(defn validate-student [required-fields student-map]
+  (if (empty? required-fields)
+    student-map
+    (let [field-name (first required-fields)]
+      (if-not (clojure.string/blank? (field-name student-map))
+        (recur (rest required-fields) student-map)
+        (recur (rest required-fields) (conj student-map {(keyword (str (name field-name) "_error")) (str "A " (name field-name) " is required.") :error true}))
+        ))))
+
+(defn add-student-post [args]
+  (let [required-fields [:school :title :teacher :student, :grade :title ]
+        data-with-errors (validate-student required-fields args)
+        primary-adult (db/get-primary-adult-session)]
+    (if (nil? primary-adult)
+      (layout/render "security-problem.html")
+      (if (= true (:error data-with-errors))
+        (layout/render "add-student.html" {:item data-with-errors})
+        (do
+          (db/add-student (:id primary-adult) data-with-errors)
+          (noir.session/flash-put! :message "Student added!")
+          (noir.response/redirect "/editreg")
+          )
+        ))))
+
 (defroutes home-routes
   (GET "/" [] (layout/render "home.html"))
   ;  (GET "/makechanges" [] (if (util/dev-mode?) (layout/render "makechanges2.html") (layout/render "makechanges.html")))
@@ -210,5 +245,8 @@
   (GET "/edit-student" [id] (edit-student id))
   (POST "/edit-student" [& args] (edit-student-post args))
   (GET "/logout" [] (logout-now))
+  (GET "/remove-student" [id] (remove-student id))
+  (GET "/add-student" [] (layout/render "add-student.html"))
+  (POST "/add-student" [& args] (add-student-post args))
   )
 

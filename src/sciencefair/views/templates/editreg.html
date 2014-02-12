@@ -55,9 +55,9 @@
         <td>{{item.teacher}}</td>
         <td>{{item.grade}}</td>
         <td>
-            <a class="btn btn-primary" href="/edit-student?id={{item.id}}" role="button">Edit</a>
+            <a class="btn btn-primary btn-sm" href="/edit-student?id={{item.id}}" role="button">Edit</a>
             &nbsp;&nbsp;&nbsp;
-            <!--<button type="submit" name="remove" value="{{item.id}}" class="btn btn-danger btn-sm">Remove</button>-->
+            <a href="/remove-student?id={{item.id}}" class="btn btn-danger btn-sm">Remove</a>
         </td>
     </tr>
     <tr>
@@ -67,21 +67,19 @@
 
 </table>
 <br>
-<br>
 {% endfor %}
 
 
-<!--<div class="form-group">-->
-<!--<div class="col-sm-2">-->
-<!--<button type="submit" name="AddStudent" class="btn btn-success">Add Student</button>-->
-<!--</div>-->
-<!--</div>-->
-
+<div class="row">
+    <div class="col-sm-2">
+        <a href="/add-student" name="AddStudent" class="btn btn-success btn-sm">Add Student</a>
+    </div>
+</div>
+<br>
+<br>
 <div class="row">
     <div class="col-md-4">
         You have paid: {{paid}}
-        <br>
-        <br>
     </div>
 </div>
 

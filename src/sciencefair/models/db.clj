@@ -20,8 +20,6 @@
   )
 
 (defn register [adults student-count students-map]
-  (prn "Asked to register: " adults student-count students-map)
-
   (let [[email1 name1 email2 name2] adults]
     (sql/execute! db-spec ["insert into adults (email, name, created_date) values (?, ?, now())" email1 name1])
     (def first-adult-id (lookup-id email1))
@@ -89,9 +87,6 @@
       adult
       (first (sql/query db-spec ["select * from adults where id = ?" (:first_id adult)])))))
 
-
-
-
 (defn has-student-access [id]
   (let [email (noir.session/get-in [:edit-reg ])]
     (if (nil? email)
@@ -99,3 +94,17 @@
       (let [primary-adult (get-primary-adult email)]
         (= (:adult_id (get-student id)) (:id primary-adult))))))
 
+(defn remove-student [id]
+  (sql/execute! db-spec ["delete from students where id = ?" id]))
+
+(defn get-primary-adult-session []
+  (let [email (noir.session/get-in [:edit-reg ])]
+    (get-primary-adult email)
+    ))
+
+(defn add-student [adult-id data]
+  (sql/execute! db-spec [(str "insert into students ( adult_id, description, title, teacher, grade, school, student, created_date )"
+                         " values (?,?,?,?,?,?,?, now())")  adult-id (:description data) (:title data) (:teacher data)
+                           (:grade data) (:school data) (:student data)])
+
+  )
