@@ -115,8 +115,8 @@
 
 (defn admin []
   (if (noir.session/get-in [:admin ])
-    (layout/render "admin.html" {:students (db/get-students)})
-    (layout/render "login.html")
+    (layout/render "/admin/students.html" {:students (db/get-students)})
+    (layout/render "/admin/login.html")
     )
   )
 
@@ -224,6 +224,11 @@
           )
         ))))
 
+(defn adults-get []
+  (if-not (noir.session/get-in [:admin ])
+    (layout/render "/admin/login.html")
+    (layout/render "/admin/adults.html" {:adults []})))
+
 (defroutes home-routes
   (GET "/" [] (layout/render "home.html"))
   ;  (GET "/makechanges" [] (if (util/dev-mode?) (layout/render "makechanges2.html") (layout/render "makechanges.html")))
@@ -248,5 +253,6 @@
   (GET "/remove-student" [id] (remove-student id))
   (GET "/add-student" [] (layout/render "add-student.html"))
   (POST "/add-student" [& args] (add-student-post args))
+  (GET "/adults" [] (adults-get))
   )
 

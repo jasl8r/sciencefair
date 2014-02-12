@@ -1,0 +1,46 @@
+{% extends "sciencefair/views/templates/base.html" %}
+{% block content %}
+
+<h1>Administration</h1>
+
+<ul class="nav nav-tabs">
+    <li><a href="/a" >Students</a></li>
+    <li class="active"><a href="/adults">Adults</a></li>
+</ul>
+<br>
+
+        Total Adults {{adults|count}}
+        <br>
+<br>
+
+<table class="table table-striped">
+    <tr>
+        <th>Parent 1</th>
+        <th>Email 1</th>
+        <th>Parent 2</th>
+        <th>Email 2</th>
+        <th>Paid</th>
+        <th></th>
+    </tr>
+    {% for student in students %}
+    <tr>
+        <td>{{ adult.name1 }}</td>
+        <td>{{ adult.email1 }} </td>
+        <td>{{ adult.grade }} </td>
+        <td>{{ adult.title }} </td>
+        <td>{{ student.name }}</td>
+        <td>{{ student.email }}</td>
+        <td>{{ student.secondary_2 }}</td>
+        <td>{{ student.secondary }}</td>
+        <td>{{ student.created_date }}</td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td colspan="9"><b>Description: </b> {{ student.description }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+
+{% endblock %}
