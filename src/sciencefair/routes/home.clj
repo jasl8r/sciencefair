@@ -227,7 +227,15 @@
 (defn adults-get []
   (if-not (noir.session/get-in [:admin ])
     (layout/render "/admin/login.html")
-    (layout/render "/admin/adults.html" {:adults []})))
+    (let [adults (db/get-adults)]
+      (layout/render "/admin/adults.html" {:adults adults}))))
+
+(defn adults-post [arg]
+  (if-not (noir.session/get-in [:admin ])
+    (noir.response/redirect "/a")
+    (do
+      (db/save-paid (first arg))
+      (layout/render "/admin/adults.html" {:adults (db/get-adults)}))))
 
 (defroutes home-routes
   (GET "/" [] (layout/render "home.html"))
@@ -254,5 +262,6 @@
   (GET "/add-student" [] (layout/render "add-student.html"))
   (POST "/add-student" [& args] (add-student-post args))
   (GET "/adults" [] (adults-get))
+  (POST "/adults" [& args] (adults-post [args]))
   )
 

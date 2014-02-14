@@ -4,14 +4,16 @@
 <h1>Administration</h1>
 
 <ul class="nav nav-tabs">
-    <li><a href="/a" >Students</a></li>
+    <li><a href="/a">Students</a></li>
     <li class="active"><a href="/adults">Adults</a></li>
 </ul>
 <br>
 
-        Total Adults {{adults|count}}
-        <br>
+Total Adults {{adults|count}}
 <br>
+<br>
+
+<form method="POST" action="/adults" class="form-inline" >
 
 <table class="table table-striped">
     <tr>
@@ -19,28 +21,37 @@
         <th>Email 1</th>
         <th>Parent 2</th>
         <th>Email 2</th>
+        <th>Students</th>
+
         <th>Paid</th>
         <th></th>
     </tr>
-    {% for student in students %}
+    {% for adult in adults %}
     <tr>
-        <td>{{ adult.name1 }}</td>
-        <td>{{ adult.email1 }} </td>
-        <td>{{ adult.grade }} </td>
-        <td>{{ adult.title }} </td>
-        <td>{{ student.name }}</td>
-        <td>{{ student.email }}</td>
-        <td>{{ student.secondary_2 }}</td>
-        <td>{{ student.secondary }}</td>
-        <td>{{ student.created_date }}</td>
+        <td>{{ adult.name }}</td>
+        <td>{{ adult.email }}</td>
+        <td>{{ adult.name_2 }}</td>
+        <td>{{ adult.email_2 }}</td>
+        <td>{{ adult.students }}</td>
+        <td width="50px"><input type="text" class="form-control" cols="4" name="paid{{ adult.id }}" value="{{ adult.paid }}" placeholder=""></td>
     </tr>
-    <tr>
-        <td>&nbsp;</td>
-        <td colspan="9"><b>Description: </b> {{ student.description }}</td>
-    </tr>
+
     {% endfor %}
+
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td width="100px"><button type='submit' name="Save" class="btn btn-primary btn-sm">Save</button></td>
+    </tr>
+
 </table>
 
+
+
+</form>
 
 
 {% endblock %}

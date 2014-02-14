@@ -104,7 +104,25 @@
 
 (defn add-student [adult-id data]
   (sql/execute! db-spec [(str "insert into students ( adult_id, description, title, teacher, grade, school, student, created_date )"
-                         " values (?,?,?,?,?,?,?, now())")  adult-id (:description data) (:title data) (:teacher data)
-                           (:grade data) (:school data) (:student data)])
+                           " values (?,?,?,?,?,?,?, now())") adult-id (:description data) (:title data) (:teacher data)
+                         (:grade data) (:school data) (:student data)])
 
   )
+
+(defn get-adults []
+  (sql/query db-spec [(str "select a.id, a.name, a.email, d.name, d.email, a.paid, (select count(*) from students where adult_id = a.id) as students "
+                        " from adults a left join adults d on a.id = d.first_id where a.first_id is null order by a.created_date")])
+  )
+
+(defn save-paid [args]
+  (doseq [[key value] args]
+    (if (.startsWith (name key) "paid")
+      (let [id (.substring (name key) 4)
+            val (if (empty? value) nil value)
+            ]
+        (sql/execute! db-spec [ "update adults set paid=? where id = ?" val id ])
+        )
+      )
+    ))
+
+
