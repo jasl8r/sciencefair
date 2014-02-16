@@ -242,6 +242,7 @@
   ;  (GET "/makechanges" [] (if (util/dev-mode?) (layout/render "makechanges2.html") (layout/render "makechanges.html")))
   (GET "/makechanges" [] (make-changes-click))
   (POST "/makechanges" [email] (make-changes-request email))
+  (GET "/waitinglist" [] (layout/render "waitinglist.html") )
   (GET "/registration" [] (layout/render "registration.html" (if (util/dev-mode?) {:email1 "mooky@example.com" :name1 "Mooky Starks" :email2 "timbuck@example.com" :name2 "Timmy Buck" :students 2} {})))
   (POST "/regpost" [name1 email1 name2 email2 students] (reg-post name1 email1 name2 email2 students))
   (POST "/students" [& args] (students-post args))
