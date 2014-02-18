@@ -1,0 +1,11 @@
+{% extends "sciencefair/views/templates/admin/base.html" %}
+{% block content %}
+
+{% for list in lists %}
+<br>
+<br>
+<a href="?id={{list.name}}">{{ list.name }} (size {{ list.size }})</a>
+{% endfor %}
+
+
+{% endblock %}

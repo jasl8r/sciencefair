@@ -3,6 +3,7 @@
   (:use compojure.core)
   (:require clojure.string)
   (:require noir.response)
+  (:require ring.util.response)
   (:require [sciencefair.views.layout :as layout]
             [sciencefair.util :as util]
             [sciencefair.models.db :as db]
@@ -237,12 +238,32 @@
       (db/save-paid (first arg))
       (layout/render "/admin/adults.html" {:adults (db/get-adults)}))))
 
+(def lists [
+             ["all emails" ""]
+             ["unpaid" "where paid is null or trim(paid) = ''"]
+             ])
+
+(defn make-lists-summary []
+  (map #(hash-map :name (get %1 0) :size (db/list-count (get %1 1))) lists)
+  )
+
+(defn email-lists [id]
+  (if-not (noir.session/get-in [:admin ])
+    (noir.response/redirect "/a")
+    (if-not (nil? id)
+      (ring.util.response/response (clojure.string/join "," (db/list-fetch (second (first (filter #(= "all emails" (first %)) lists))))))
+      (do
+        (layout/render "/admin/lists.html" {:lists (make-lists-summary)})
+        )
+      ))
+  )
+
 (defroutes home-routes
   (GET "/" [] (layout/render "home.html"))
   ;  (GET "/makechanges" [] (if (util/dev-mode?) (layout/render "makechanges2.html") (layout/render "makechanges.html")))
   (GET "/makechanges" [] (make-changes-click))
   (POST "/makechanges" [email] (make-changes-request email))
-  (GET "/waitinglist" [] (layout/render "waitinglist.html") )
+  (GET "/waitinglist" [] (layout/render "waitinglist.html"))
   (GET "/registration" [] (layout/render "registration.html" (if (util/dev-mode?) {:email1 "mooky@example.com" :name1 "Mooky Starks" :email2 "timbuck@example.com" :name2 "Timmy Buck" :students 2} {})))
   (POST "/regpost" [name1 email1 name2 email2 students] (reg-post name1 email1 name2 email2 students))
   (POST "/students" [& args] (students-post args))
@@ -264,5 +285,6 @@
   (POST "/add-student" [& args] (add-student-post args))
   (GET "/adults" [] (adults-get))
   (POST "/adults" [& args] (adults-post [args]))
+  (GET "/lists" [id] (email-lists id))
   )
 

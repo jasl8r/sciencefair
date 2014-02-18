@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Groton Dunstable Elemenentary Science Fair</title>
+</head>
+<body>
+<!-- navbar -->
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+
+            <a class="navbar-brand" href="{{servlet-cnontext}}/">
+                <!--         <img style='display: inline' height='35' src="img/beaker.png" />-->
+                <b>GDE</b>ScienceFair.org</a>
+        </div>
+        <div class="navbar-collapse collapse ">
+            <ul class="nav navbar-nav">
+                <li class="{{home-selected}}"><a href="{{servlet-context}}/">Home</a></li>
+                <li class="{{info-selected}}"><a href="{{servlet-context}}/info">Information</a></li>
+                <li class="{{rules-selected}}"><a href="{{servlet-context}}/rules">Rules</a></li>
+                <li class="{{registration-selected}}"><a href="{{servlet-context}}/waitinglist">New Registration</a></li>
+                <li class="{{makechanges-selected}}"><a href="{{servlet-context}}/makechanges">My Registration</a></li>
+                <li class="{{contact-selected}}"><a href="{{servlet-context}}/contact">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <ul class="nav nav-tabs">
+        <li class="{{/admin/students-selected}}"><a href="/a">Students</a></li>
+        <li class="{{/admin/adults-selected}}"><a href="/adults">Adults</a></li>
+        <li class="{{/admin/lists-selected}}"><a href="/lists">Email Lists</a></li>
+    </ul>
+<br>
+
+    {% block content %}
+    {% endblock %}
+
+</div>
+<!-- scripts and styles -->
+{% style "/css/bootstrap-theme.min.css" %}
+{% style "/css/bootstrap.min.css" %}
+{% style "/css/screen.css" %}
+<script src="//code.jquery.com/jquery-2.0.3.min.js" type="text/javascript"></script>
+{% script "/js/bootstrap.min.js" %}
+<script type="text/javascript">
+    var context = "{{servlet-context}}";
+</script>
+</body>
+</html>
+
