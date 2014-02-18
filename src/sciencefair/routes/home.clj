@@ -239,8 +239,8 @@
       (layout/render "/admin/adults.html" {:adults (db/get-adults)}))))
 
 (def lists [
-             ["all emails" ""]
-             ["unpaid" "where paid is null or trim(paid) = ''"]
+             ["all emails" "from adults a"]
+             ["primary email of unpaid" "from adults a, students s where a.id = s.adult_id and a.paid is null or trim(a.paid) = ''"]
              ])
 
 (defn make-lists-summary []

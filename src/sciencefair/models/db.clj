@@ -127,10 +127,9 @@
 
 
 (defn list-count [where-clause]
-  (:c (first (sql/query db-spec [(str "select count(email) as c from adults " where-clause )])))
+  (:c (first (sql/query db-spec [(str "select count(a.email) as c " where-clause )])))
   )
 
 (defn list-fetch [where-clause]
-  (prn "where-clause" where-clause)
-  (map #(:email  %) (sql/query db-spec [(str "select email from adults " where-clause )]))
+  (map #(:email  %) (sql/query db-spec [(str "select a.email " where-clause )]))
   )
