@@ -133,3 +133,13 @@
 (defn list-fetch [where-clause]
   (map #(:email  %) (sql/query db-spec [(str "select a.email " where-clause )]))
   )
+
+(defn all-students-csv []
+
+  (conj [["Student" "Grade"	"Project"	"Parent 1"	"Email 1"	"Parent 2"	"Email 2"	"Created"]] (get-students)
+
+
+
+  "bla,bla,bla\ncha,cha,cha"
+
+  )

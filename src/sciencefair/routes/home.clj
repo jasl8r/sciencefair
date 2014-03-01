@@ -258,6 +258,16 @@
       ))
   )
 
+(defn all-students-csv []
+  (if-not (noir.session/get-in [:admin ])
+    (noir.response/redirect "/a")
+    (noir.response/set-headers {
+                                 "Content-Disposition"
+                                 "attachment; filename=students.csv"}
+      (noir.response/content-type
+        "application/csv"
+        (db/all-students-csv)))))
+
 (defroutes home-routes
   (GET "/" [] (layout/render "home.html"))
   ;  (GET "/makechanges" [] (if (util/dev-mode?) (layout/render "makechanges2.html") (layout/render "makechanges.html")))
@@ -286,5 +296,6 @@
   (GET "/adults" [] (adults-get))
   (POST "/adults" [& args] (adults-post [args]))
   (GET "/lists" [id] (email-lists id))
+  (GET "/all-students-csv" [] (all-students-csv) )
   )
 
