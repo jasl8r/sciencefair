@@ -120,26 +120,45 @@
       (let [id (.substring (name key) 4)
             val (if (empty? value) nil value)
             ]
-        (sql/execute! db-spec [ "update adults set paid=? where id = ?" val id ])
+        (sql/execute! db-spec ["update adults set paid=? where id = ?" val id])
         )
       )
     ))
 
 
 (defn list-count [where-clause]
-  (:c (first (sql/query db-spec [(str "select count(a.email) as c " where-clause )])))
+  (:c (first (sql/query db-spec [(str "select count(a.email) as c " where-clause)])))
   )
 
 (defn list-fetch [where-clause]
-  (map #(:email  %) (sql/query db-spec [(str "select a.email " where-clause )]))
+  (map #(:email %) (sql/query db-spec [(str "select a.email " where-clause)]))
+  )
+
+(defn make-student-row [row]
+  [
+    (:student row)
+    (:school row)
+    (:grade row)
+    (:title row)
+    (:name row)
+    (:email row)
+    (:secondary_2 row)
+    (:secondary row)
+    (.toString (:created_date row))
+    ]
+  )
+
+(defn make-comma-sep-quoted [row]
+  (prn "working on " row)
+  (clojure.string/join "," (map #(str "\"" (.replaceAll (if (nil? %1) "" %1) "\"" "\"\"") "\"") row))
   )
 
 (defn all-students-csv []
-
-  (conj [["Student" "Grade"	"Project"	"Parent 1"	"Email 1"	"Parent 2"	"Email 2"	"Created"]] (get-students)
-
-
-
-  "bla,bla,bla\ncha,cha,cha"
-
+  (let [
+         rows (concat [["Student" "School" "Grade" "Project" "Parent 1" "Email 1" "Parent 2" "Email 2" "Created"]] (into [] (map make-student-row (get-students))))
+         rows-comma-sep (map #(make-comma-sep-quoted %) rows)
+         csv-file (clojure.string/join "\n" rows-comma-sep)
+         ]
+    csv-file
+    )
   )
