@@ -145,6 +145,7 @@
     (:secondary_2 row)
     (:secondary row)
     (.toString (:created_date row))
+    (:description row)
     ]
   )
 
@@ -155,7 +156,7 @@
 
 (defn all-students-csv []
   (let [
-         rows (concat [["Student" "School" "Grade" "Project" "Parent 1" "Email 1" "Parent 2" "Email 2" "Created"]] (into [] (map make-student-row (get-students))))
+         rows (concat [["Student" "School" "Grade" "Project" "Parent 1" "Email 1" "Parent 2" "Email 2" "Created" "Description"]] (into [] (map make-student-row (get-students))))
          rows-comma-sep (map #(make-comma-sep-quoted %) rows)
          csv-file (clojure.string/join "\n" rows-comma-sep)
          ]
