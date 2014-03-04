@@ -251,7 +251,7 @@
   (if-not (noir.session/get-in [:admin ])
     (noir.response/redirect "/a")
     (if-not (nil? id)
-      (ring.util.response/response (clojure.string/join "," (db/list-fetch (second (first (filter #(= "all emails" (first %)) lists))))))
+      (ring.util.response/response (clojure.string/join "," (db/list-fetch (second (first (filter #(= id (first %)) lists))))))
       (do
         (layout/render "/admin/lists.html" {:lists (make-lists-summary)})
         )
