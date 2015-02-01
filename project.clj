@@ -1,6 +1,6 @@
 (defproject sciencefair "0.1.0-SNAPSHOT"
-            :description "FIXME: write description"
-            :url "http://example.com/FIXME"
+            :description "Groton Dunstable Science Fair site.  Allows for sharing of information and student registration."
+            :url "http://www.gdesciencefair.org"
             :dependencies [[org.clojure/clojure "1.5.1"]
                            [lib-noir "0.7.9"]
                            [compojure "1.1.6"]
