@@ -1,14 +1,16 @@
 (ns sciencefair.models.db
-  (:use clojure.string)
+  (:require clojure.string)
   (:require [clojure.java.jdbc :as sql]
             [noir.session]
             [sciencefair.util]))
 
 (def db-spec
   {:subprotocol "mysql"
-   :subname "//localhost/sciencefair"
-   :user "root"
-   :password (.trim (slurp "/fair-data/dbpass.txt"))})
+   :subname     "//localhost/sciencefair"
+   :user        (.trim (slurp "/fair-data/dbuser.txt"))
+   :password    (.trim (slurp "/fair-data/dbpass.txt"))
+   }
+  )
 
 
 (defn registered? [email]
@@ -23,11 +25,11 @@
   (let [[email1 name1 email2 name2] adults]
     (sql/execute! db-spec ["insert into adults (email, name, created_date) values (?, ?, now())" email1 name1])
     (def first-adult-id (lookup-id email1))
-    (if (not (blank? email2))
+    (if (not (clojure.string/blank? email2))
       (sql/execute! db-spec ["insert into adults (email, name, first_id, created_date) values (?, ?, ?, now())" email2 name2 first-adult-id])
       )
 
-    (def colnames [:student, :school, :grade, :teacher, :title, :description ])
+    (def colnames [:student, :school, :grade, :teacher, :title, :description])
     (defn col-names []
       (clojure.string/join ", " (map name colnames))
       )
@@ -40,8 +42,11 @@
     (dotimes [dex student-count]
       (sql/execute! db-spec (concat [(str "insert into students ( adult_id, " (col-names) ", created_date ) values ( ?, ?, ?, ?, ?, ?, ?, now() )") first-adult-id] (col-values dex))))
 
+    ; This is exposed on the payment form of stripe
+    (noir.session/assoc-in! [:register-primary-email] email1)
+
     (sciencefair.util/send-email-confirmation email1 name1)
-    (if (not (blank? email2))
+    (if (not (clojure.string/blank? email2))
       (sciencefair.util/send-email-confirmation email2 name2))
     )
   )
@@ -59,7 +64,7 @@
         [primary secondary] (if (nil? (:first_id adult)) [adult adult2] [adult2 adult])
         students (sql/query db-spec ["select * from students where adult_id = ?" (:id primary)])
         ]
-    {:paid (if (nil? (:paid primary)) "$0" (str "$" (:paid primary))) :email1 (:email primary) :name1 (:name primary) :email2 (:email secondary) :name2 (:name secondary)
+    {:paid     (if (nil? (:paid primary)) "$0" (str "$" (:paid primary))) :email1 (:email primary) :name1 (:name primary) :email2 (:email secondary) :name2 (:name secondary)
      :students students
      }
     )
@@ -88,7 +93,7 @@
       (first (sql/query db-spec ["select * from adults where id = ?" (:first_id adult)])))))
 
 (defn has-student-access [id]
-  (let [email (noir.session/get-in [:edit-reg ])]
+  (let [email (noir.session/get-in [:edit-reg])]
     (if (nil? email)
       false
       (let [primary-adult (get-primary-adult email)]
@@ -98,20 +103,20 @@
   (sql/execute! db-spec ["delete from students where id = ?" id]))
 
 (defn get-primary-adult-session []
-  (let [email (noir.session/get-in [:edit-reg ])]
+  (let [email (noir.session/get-in [:edit-reg])]
     (get-primary-adult email)
     ))
 
 (defn add-student [adult-id data]
   (sql/execute! db-spec [(str "insert into students ( adult_id, description, title, teacher, grade, school, student, created_date )"
-                           " values (?,?,?,?,?,?,?, now())") adult-id (:description data) (:title data) (:teacher data)
+                              " values (?,?,?,?,?,?,?, now())") adult-id (:description data) (:title data) (:teacher data)
                          (:grade data) (:school data) (:student data)])
 
   )
 
 (defn get-adults []
   (sql/query db-spec [(str "select a.id, a.name, a.email, d.name, d.email, a.paid, (select count(*) from students where adult_id = a.id) as students "
-                        " from adults a left join adults d on a.id = d.first_id where a.first_id is null order by a.created_date")])
+                           " from adults a left join adults d on a.id = d.first_id where a.first_id is null order by a.created_date")])
   )
 
 (defn save-paid [args]
@@ -136,17 +141,17 @@
 
 (defn make-student-row [row]
   [
-    (:student row)
-    (:school row)
-    (:grade row)
-    (:title row)
-    (:name row)
-    (:email row)
-    (:secondary_2 row)
-    (:secondary row)
-    (.toString (:created_date row))
-    (:description row)
-    ]
+   (:student row)
+   (:school row)
+   (:grade row)
+   (:title row)
+   (:name row)
+   (:email row)
+   (:secondary_2 row)
+   (:secondary row)
+   (.toString (:created_date row))
+   (:description row)
+   ]
   )
 
 (defn make-comma-sep-quoted [row]
@@ -156,10 +161,10 @@
 
 (defn all-students-csv []
   (let [
-         rows (concat [["Student" "School" "Grade" "Project" "Parent 1" "Email 1" "Parent 2" "Email 2" "Created" "Description"]] (into [] (map make-student-row (get-students))))
-         rows-comma-sep (map #(make-comma-sep-quoted %) rows)
-         csv-file (clojure.string/join "\n" rows-comma-sep)
-         ]
+        rows (concat [["Student" "School" "Grade" "Project" "Parent 1" "Email 1" "Parent 2" "Email 2" "Created" "Description"]] (into [] (map make-student-row (get-students))))
+        rows-comma-sep (map #(make-comma-sep-quoted %) rows)
+        csv-file (clojure.string/join "\n" rows-comma-sep)
+        ]
     csv-file
     )
   )

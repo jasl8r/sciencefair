@@ -1,0 +1,69 @@
+{% extends "sciencefair/views/templates/base.html" %}
+{% block content %}
+
+<h1>Registration - last step - payment.</h1>
+
+<br/>
+
+<br>
+Pay with one of these choices:
+
+<p>
+
+<div class="row">
+    <div class="col-xs-3">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                Pay with Credit Card.
+            </div>
+            <div class="panel-body">
+                <br>
+                <b>This is the preferred way.</b>
+                <br>
+                <br>
+                <form action="/process-payment" method="POST">
+                    <script
+                            src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                            data-key="pk_kctCEyvzQzhQmcWDpAXPdLk1pgzsb"
+                            data-amount="600"
+                            data-name="GDE Science Fair"
+                            data-description="1 Student Fee ($6.00)"
+                            data-allow-remember-me="false"
+                            data-email="{{email}}"
+                            />
+                    </script>
+             </form>
+        </div>
+    </div>
+    </div>
+
+    <div class="col-xs-3">
+     <div class="panel panel-success">
+ <div class="panel-heading">
+    Mail Check to:</div>
+<div class="panel-body">
+    GDE Science Fair<br>
+    c/o Crystal Herrmann<br>
+    4 Amanda Way<br>
+    Groton, MA 01450<br>
+<br>
+<button type="button" class="btn btn-default">Pay by Mail</button>
+    </div>
+    </div>
+    </div>
+    <div class="col-xs-3">
+    <div class="panel panel-warning">
+      <div class="panel-heading">Send to School</div>
+<div class="panel-body">
+    Send an envolope with "GDE Science Fair" with your child to school.
+<br>
+<br>
+<button type="button" class="btn btn-default">Pay via School</button>
+
+    </div> </div>
+
+</div>
+</div>
+
+</div>
+{% endblock %}

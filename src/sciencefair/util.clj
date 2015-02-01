@@ -15,7 +15,7 @@
 (defn dev-mode? []
   (or
     (= "rherrmann-mbpr.local" (.getHostName (java.net.InetAddress/getLocalHost)))
-    (= "studio" (.getHostName (java.net.InetAddress/getLocalHost)))
+    (= "wilddog" (.getHostName (java.net.InetAddress/getLocalHost)))
     ))
 
 (defn get-smtp-pass []
