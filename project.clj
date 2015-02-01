@@ -16,6 +16,7 @@
                            [commons-validator "1.4.0"]
                            [ring-http-basic-auth "0.0.1"]
                            [org.apache.commons/commons-email "1.2"]
+                           [clj-http "1.0.1"]
                            ]
             :aot :all
             :repl-options {:init-ns sciencefair.repl}

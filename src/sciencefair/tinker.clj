@@ -5,7 +5,7 @@
 
 ; test payment processing
 
-(println (client/post "https://api.stripe.com/v1/charges"
+#_(println (client/post "https://api.stripe.com/v1/charges"
                       {:basic-auth     ["iIlkF1hgFe9uegsF7w6OinE09qhGzLUn" ""]
                        :body           "amount=400&card=tok_5c5qNFUtN0e1lC&currency=usd"
                        :headers        {"Idempotency-Key" "Zkeqvt6vNoyANubW"
