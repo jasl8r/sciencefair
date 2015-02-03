@@ -1,4 +1,15 @@
 
+<br>
+<br>
+<br>
+# WARNING THIS PAGE IS STILL BEING UPDATED FOR 2015
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
 <center>
 # RULES and GUIDELINES
 </center>
@@ -34,7 +45,6 @@ Yes, there are rules!  Since this is being organized by adults, obviously there 
 * You must clearly display the title of your project, your name, your school, and your grade at the top/center of your display board.
 * You must clearly display the resources you used for your project somewhere on your display board.
 * For an Informative type project, you must have some pictures, models, or collections as part of your visual presentation (see below).
-* For a Demonstration type project, you must have a physical demonstration as part of your visual presentation (see below).
 * For an Experimental type project, <b>you must perform your experiments at home;</b> not at the Science Fair as part of your presentation.  You may show your experiment by other visual methods (photos, graphs, videos, etc.).
 * See below for items needed on your display board specific for the type of project you choose.
 
@@ -51,7 +61,7 @@ Yes, there are rules!  Since this is being organized by adults, obviously there 
 ### PROJECT TYPES
 </center>
 
-These are the three types of projects that can be performed for the Science Fair.  Grades K - 2 may perform any of the three types of projects; Informative, Demonstration, or Experimental.  Grades 3 and 4 must perform either a Demonstration or Experimental type project only; not an Informative type project.
+These are the two types of projects that can be performed for the Science Fair.  Grades K - 2 may perform either of the two types of projects; Informative or Experimental.  Grades 3 and 4 must perform an Experimental type project only; not an Informative type project.
 
 <br>
 #### <u>INFORMATIVE PROJECT (not for Grades 3 and 4)</u>
@@ -68,22 +78,6 @@ Your oral and visual presentation should have the following parts:
 These items above should be clearly shown on your display board.  Also, don’t forget to display your resources.
 <br>
 <br>
-
-#### <u>DEMONSTRATION PROJECT (All Grades, K - 4)</u>
-
-For this project, you will choose a Scientific Law or Principle and demonstrate how it works.  As part of your visual presentation, you must have a physical demonstration that proves the law or principle that you have chosen.  A physical demonstration is when you have objects with you and use them to show something to your audience.  Your demonstration should be directly related to the mathematical formula(s) that represent the law or principle.
-
-Your oral and visual presentation should have the following parts:
-
-* Description – What is the Scientific Law or Principle?  Describe it in detail.  Where in life do we experience it?
-* History – Who discovered it?  How was it first used by people?  How is it used today by people?  Has it changed since being discovered?
-* Mathematical Formula – What mathematical formula(s) represents it?  What do the variables represent?  What happens when you change the value of a variable in the formula?
-* Physical Demonstration – Give a demonstration showing how it works.  Explain and show what happens when you change the value of a variable like you did in the mathematical formula.
-* Conclusion – Tell how your demonstration proved the Scientific Law or Principle.  How is it important to people?  How does it affect our lives?
-
-An example of a mathematical formula is F=MxA where F, M, and A are variables.  The variables represent things.  For this formula, F=Force, M=Mass, and A=Acceleration.  The x means multiplication.  Your demonstration may show what happens to the Force if you change the Mass; assuming the Acceleration stays the same.
-
-Be sure your display board has each of the items listed above on it.  You may also have pictures, graphs, and other things to help you make a nice visual presentation.
 
 <br>
 #### <u>EXPERIMENTAL PROJECT (All Grades, K - 4)</u>
