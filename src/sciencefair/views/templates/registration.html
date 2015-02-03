@@ -3,16 +3,16 @@
 
 <h1>New Registration</h1>
 
-        <h4>
-            The registration process collects information about you and the students participating in the science fair.
-            <br>
-            <br>
-            We use email to send out informational updates.
-            <br>
-            <br>
-            We collect student information to (1) get a count of students (2) to monitor what kinds of projects students are planning.
-        </h4>
-
+<h4>
+    The registration process collects information about you and the students participating in the science fair.
+    <br>
+    <br>
+    We use email to send out informational updates.
+    <br>
+    <br>
+    We collect student information to (1) get a count of students (2) to monitor what kinds of projects students are
+    planning.
+</h4>
 
 <form class="form-horizontal" role="form" method="POST" action="/regpost">
     <br>
@@ -33,13 +33,30 @@
             <b>Email</b>
         </div>
         <div class="col-xs-4">
-            <input type="input" name="email1" value="{{email1}}" class="form-control" placeholder="Jane.Smith@examples.com">
+            <input type="input" name="email1" value="{{email1}}" class="form-control"
+                   placeholder="Jane.Smith@examples.com">
         </div>
+        <div class="col-xs-4">
         {% if error-email1 %}
         <p class="error">{{error-email1}}</p>
+            {% else %}
+            Please use an address you check daily.
         {% endif %}
+        </div>
     </div>
 
+    <div class="row form-group">
+        <div class="col-xs-2 text-right">
+            <b>Phone</b>
+        </div>
+        <div class="col-xs-3">
+            <input type="input" id="phone1" name="phone1" value="{{phone1}}" class="form-control"
+                   placeholder="978-448-0000">
+        </div>
+        {% if error-phone1 %}
+        <p class="error">{{error-phone1}}</p>
+        {% endif %}
+    </div>
 
     <br>
 
@@ -50,7 +67,7 @@
             <b>Name</b>
         </div>
         <div class="col-xs-4">
-            <input type="input" name="name2"  value="{{name2}}" class="form-control" placeholder="John Smith">
+            <input type="input" name="name2" value="{{name2}}" class="form-control" placeholder="John Smith">
         </div>
         <div class="col-xs-6">
             Providing a second email address is optional.
@@ -62,11 +79,27 @@
             <b>Email</b>
         </div>
         <div class="col-xs-4">
-            <input type="input" name="email2" value="{{email2}}" class="form-control" placeholder="John.Smith@example.com">
+            <input type="input" name="email2" value="{{email2}}" class="form-control"
+                   placeholder="John.Smith@example.com">
         </div>
         <div class="col-xs-5">
             {% if error-email2 %}
             <p class="error">{{error-email2}}</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-xs-2 text-right">
+            <b>Phone</b>
+        </div>
+        <div class="col-xs-3">
+            <input type="input" id="phone2" name="phone2" value="{{phone2}}" class="form-control"
+                   placeholder="978-448-0000">
+        </div>
+        <div class="col-xs-5">
+            {% if error-phone2 %}
+            <p class="error">{{error-phone2}}</p>
             {% endif %}
         </div>
     </div>
@@ -83,16 +116,16 @@
             {% if error-students %}
             <p class="error">{{error-students}}</p>
             {% endif %}
-
-            <input type="radio" name="students" {% if students = 0 %} checked {% endif %} value="0"> 0 Students (receive emails only.)
+            <input type="radio" name="students" {% if students = 0 %} checked {% endif %} value="0"> 0 Students (receive
+            emails only.)
             <br>
             <input type="radio" name="students" {% if students = 1 %} checked {% endif %} value="1"> 1 Student
             <br>
-            <input type="radio" name="students" {% if students = 2 %} checked {% endif %}  value="2"> 2 Students
+            <input type="radio" name="students" {% if students = 2 %} checked {% endif %} value="2"> 2 Students
             <br>
             <input type="radio" name="students" {% if students = 3 %} checked {% endif %} value="3"> 3 Students
             <br>
-            <input type="radio" name="students" {% if students = 3 %} checked {% endif %} value="4"> 4 Students
+            <input type="radio" name="students" {% if students = 4 %} checked {% endif %} value="4"> 4 Students
             <br>
             (You may change this later)
         </div>
@@ -110,6 +143,8 @@
 
 <script>
     document.getElementById("name1").focus();
+
+
 </script>
 
 {% endblock %}

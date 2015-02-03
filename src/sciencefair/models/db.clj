@@ -17,14 +17,23 @@
 (defn lookup-id [email]
   (:id (first (sql/query db-spec ["select id from adults where email = ?" email]))))
 
+
+(defn record-payment-choice [email how]
+  (sql/execute! db-spec ["update adults set payment_choice=? where email = ?"
+                         how email]))
+
+(defn record-photopermission [email photopermission]
+  (sql/execute! db-spec ["update adults set photo_permission=? where email = ?"
+                         photopermission email]))
+
 (defn register [adults student-count students-map]
-  (let [[email1 name1 email2 name2] adults]
-    (sql/execute! db-spec ["insert into adults (email, name, created_date) values (?, ?, now())" email1 name1])
+  (let [[email1 name1 phone1 email2 name2 phone2] adults]
+    (sql/execute! db-spec ["insert into adults (email, name, created_date, phone) values (?, ?, now(), ?)" email1 name1 phone1])
     (def first-adult-id (lookup-id email1))
     (if (not (clojure.string/blank? email2))
-      (sql/execute! db-spec ["insert into adults (email, name, first_id, created_date) values (?, ?, ?, now())" email2 name2 first-adult-id]))
+      (sql/execute! db-spec ["insert into adults (email, name, first_id, created_date, phone) values (?, ?, ?, now(), ?)" email2 name2 first-adult-id phone2]))
 
-    (def colnames [:student, :school, :grade, :teacher, :title, :description])
+    (def colnames [:student, :school, :grade, :teacher, :partner, :title, :description])
     (defn col-names []
       (clojure.string/join ", " (map name colnames)))
     (defn extract-value [dex col-name]
@@ -32,17 +41,17 @@
     (defn col-values [dex]
       (map #(extract-value dex %1) colnames))
     (dotimes [dex student-count]
-      (sql/execute! db-spec (concat [(str "insert into students ( adult_id, " (col-names) ", created_date ) values ( ?, ?, ?, ?, ?, ?, ?, now() )") first-adult-id] (col-values dex))))
+      (sql/execute! db-spec (concat [(str "insert into students ( adult_id, " (col-names) ", created_date ) values ( ?, ?, ?, ?, ?, ?, ?, ?, now() )") first-adult-id] (col-values dex))))
 
-    ; This is exposed on the payment form of stripe
-    (noir.session/assoc-in! [:register-primary-email] email1)
+    ; This is used by the payment page
+    (noir.session/assoc-in! [:registration-info] [email1 student-count])
 
     (sciencefair.util/send-email-confirmation email1 name1)
     (if (not (clojure.string/blank? email2))
       (sciencefair.util/send-email-confirmation email2 name2))))
 
 (defn get-students []
-  (sql/query db-spec ["select b.student, b.school, b.grade, b.teacher, b.title, b.description, a.name, a.email, d.name as 'secondary' , d.email AS 'secondary', a.created_date, a.paid
+  (sql/query db-spec ["select b.student, b.school, b.grade, b.teacher, b.partner, b.title, b.description, a.name, a.email, d.name as 'secondary' , d.email AS 'secondary', a.created_date, a.paid
                       from adults a join students b on a.id = b.adult_id left join adults d on a.id = d.first_id order by a.created_date"]))
 
 (defn get-registration-as-form [email]
@@ -52,7 +61,8 @@
                  (first (sql/query db-spec ["select * from adults where id = ?" (:first_id adult)])))
         [primary secondary] (if (nil? (:first_id adult)) [adult adult2] [adult2 adult])
         students (sql/query db-spec ["select * from students where adult_id = ?" (:id primary)])]
-    {:paid     (if (nil? (:paid primary)) "$0" (str "$" (:paid primary))) :email1 (:email primary) :name1 (:name primary) :email2 (:email secondary) :name2 (:name secondary)
+    {:paid     (if (nil? (:paid primary)) "$0" (str "$" (:paid primary)))
+     :email1   (:email primary) :name1 (:name primary) :email2 (:email secondary) :name2 (:name secondary)
      :students students}))
 
 (defn get-student [id]
@@ -63,9 +73,9 @@
   ; {:description "", :title "tinkering with heat", :teacher "Gurnsey", :grade "3",
   ;      :school "florence", :student "Liam Herrmann", :id "2"}
   
-  (sql/execute! db-spec ["update students set student=?, school=?, grade=?,teacher=?, title=?, description=?, updated_date=now() where id = ?"
+  (sql/execute! db-spec ["update students set student=?, school=?, grade=?,teacher=?, partner=?, title=?, description=?, updated_date=now() where id = ?"
                          (:student smap) (:school smap) (:grade smap)
-                         (:teacher smap) (:title smap) (:description smap)
+                         (:teacher smap) (:partner smap) (:title smap) (:description smap)
                          (:id smap)]))
 
 (defn get-primary-adult [email]
@@ -89,8 +99,8 @@
     (get-primary-adult email)))
 
 (defn add-student [adult-id data]
-  (sql/execute! db-spec [(str "insert into students ( adult_id, description, title, teacher, grade, school, student, created_date )"
-                              " values (?,?,?,?,?,?,?, now())") adult-id (:description data) (:title data) (:teacher data)
+  (sql/execute! db-spec [(str "insert into students ( adult_id, description, title, teacher, partner, grade, school, student, created_date )"
+                              " values (?,?,?,?,?,?,?, now())") adult-id (:description data) (:title data)  (:teacher data) (:partner data)
                          (:grade data) (:school data) (:student data)]))
 
 (defn get-adults []
@@ -103,6 +113,9 @@
       (let [id (.substring (name key) 4)
             val (if (empty? value) nil value)]
         (sql/execute! db-spec ["update adults set paid=? where id = ?" val id])))))
+
+(defn save-paid-by-email [email amount]
+  (sql/execute! db-spec ["update adults set paid=? where email = ?" amount email]))
 
 
 (defn list-count [where-clause]

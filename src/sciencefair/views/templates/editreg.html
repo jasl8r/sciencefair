@@ -14,12 +14,13 @@
         <th></th>
         <th>Name</th>
         <th>Email</th>
-        <td></td>
+        <th>phone</th>
     </tr>
     <tr>
         <th width='250px'>First Parent/Guardian</th>
         <td>{{name1}}</td>
         <td>{{email1}}</td>
+        <td>{{phone1}}</td>
         <td>
             <!--<button type="submit" class="btn">Edit</button>-->
         </td>
@@ -28,6 +29,7 @@
         <th>Second Parent/Guardian</th>
         <td>{{name2}}</td>
         <td>{{email2}}</td>
+        <td>{{phone2}}</td>
         <td>
             <!--<button type="submit" class="btn">Edit</button>-->
         </td>
@@ -45,6 +47,7 @@
         <th>Project Title</th>
         <th>School</th>
         <th>Teacher</th>
+        <th>Partner</th>
         <th>Grade</th>
         <td></td>
     </tr>
@@ -53,6 +56,7 @@
         <td>{{item.title}}</td>
         <td>{{item.school}}</td>
         <td>{{item.teacher}}</td>
+        <td>{{item.partner}}</td>
         <td>{{item.grade}}</td>
         <td>
             <a class="btn btn-primary btn-sm" href="/edit-student?id={{item.id}}" role="button">Edit</a>

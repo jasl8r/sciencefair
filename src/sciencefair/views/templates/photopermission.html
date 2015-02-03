@@ -1,0 +1,38 @@
+{% extends "sciencefair/views/templates/base.html" %}
+{% block content %}
+
+<h1>Photo Permission</h1>
+
+<br>
+<br>
+
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-8">
+        <form method="post" action="/record-photo-permission">
+            <input type="radio" name="photopermission" value="Yes" onclick="$('#finbutt')[0].disabled=false">
+            <strong>I give permission</strong> for the GDE Science Fair to use any media (photos, video, etc) of my
+            child to be used and/or
+            distributed for various promotions and news coverage pertaining to the science fair. These include but are
+            not
+            limited to those for the GDE Science Fair, the Groton Dunstable Regional School District, Patent/Teacher
+            Organizations, and local news agencies.
+
+            <br>
+            <br>
+            <input type="radio" name="photopermission" value="No" onclick="$('#finbutt')[0].disabled=false">
+
+            <strong>I do not give</strong> permissions any use of photos of my child.
+
+
+            <br>
+            <br>
+
+            <button id='finbutt' class="btn btn-primary" type="submit" disabled>Finish</button>
+        </form>
+    </div>
+    <br>
+    <br>
+
+    {% endblock %}
+

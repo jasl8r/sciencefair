@@ -96,6 +96,18 @@
         </div>
     </div>
 
+    <div class="row form-group {% if item.partner_error|length > 0 %}has-error{% endif %}">
+        <div class="col-xs-2 text-right">
+            <b>Partner</b>
+        </div>
+        <div class="col-xs-4">
+            <input type="text" class="form-control" name="partner" value="{{item.teacher}}"
+                   placeholder="Partner">
+        </div>
+        <div class="col-xs-4">
+            <label class="control-label">{{item.partner_error}}</label>
+        </div>
+    </div>
 
     <div class="row form-group {% if item.title_error|length > 0 %}has-error{% endif %}">
         <div class="col-xs-2 text-right">

@@ -77,5 +77,6 @@
                 (str "\n"
                      "To view/edit your registration, use this link,\n\n"
                      "    " email-link "\n\n"
-                     "\n\n"))))
+                     "\n\n"))
+    email-link))
 

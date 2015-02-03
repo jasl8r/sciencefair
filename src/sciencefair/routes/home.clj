@@ -6,7 +6,8 @@
   (:require ring.util.response)
   (:require [sciencefair.views.layout :as layout]
             [sciencefair.util :as util]
-            [sciencefair.models.db :as db]))
+            [sciencefair.models.db :as db]
+            [sciencefair.stripe]))
 
 (def h4s ["First" "Second" "Third" "Forth"])
 
@@ -29,6 +30,8 @@
                                                   :grade_error   (is-blank "grade")
                                                   :teacher       (ex "teacher")
                                                   :teacher_error (is-blank "teacher")
+                                                  :partner       (ex "partner")
+                                                  :partner_error  nil
                                                   :title         (ex "title")
                                                   :title_error   (is-blank "title")
                                                   :description   (ex "description")}) validate)))
@@ -43,17 +46,20 @@
                       :school      (str "florence")
                       :grade       (str (inc current))
                       :teacher     (str "teach no " current)
+                      :partner     ""
                       :title       (str "experiement # " current)
                       :description (str "can frogs hop " current "?")}))))
 
-(defn reg-post [name1 email1 name2 email2 students]
+(defn reg-post [name1 email1 phone1 name2 email2 phone2 students]
 
   (defn error-render [key message]
     (layout/render "registration.html" {key       message
                                         :name1    name1
                                         :email1   email1
+                                        :phone1   phone1
                                         :name2    name2
                                         :email2   email2
+                                        :phone2   phone2
                                         :students students}))
 
   (cond
@@ -69,12 +75,14 @@
     (error-render :error-email2 "This email is already registered.  Use 'My Registration' link at the top to view/edit an existing registration.")
     (empty? students)
     (error-render :error-students "You must select a number of students.")
+    (empty? phone1)
+    (error-render :error-phone1 "Please provide a contact phone number.")
     (= "0" students)
     (do
-      (db/register [email1 name1 email2 name2] 0 {})
+      (db/register [email1 name1 phone1 email2 name2 phone2] 0 {})
       (layout/render "thanks.html"))
     :else (let [students-as-integer (Integer/parseInt students)]
-            (noir.session/assoc-in! [:register-students] [students email1 name1 email2 name2])
+            (noir.session/assoc-in! [:register-students] [students email1 phone1 name1 email2 name2 phone2])
             (def students-data (if (util/dev-mode?) (mock-student-data 0 students-as-integer []) (make-students-vec 0 students-as-integer {} [] false)))
             (layout/render "registration2.html" {:students students-data}))))
 
@@ -87,6 +95,11 @@
         true
         (recur (rest form-data))))))
 
+(defn sess-get-reg-info []
+  (let [reginfo (noir.session/get-in [:registration-info])]
+    {:email         (first reginfo)
+     :student-count (second reginfo)}))
+
 (defn students-post [args]
   (let [students (first (noir.session/get-in [:register-students]))
         adults (subvec (noir.session/get-in [:register-students]) 1)
@@ -96,12 +109,20 @@
       (layout/render "registration2.html" {:students students-form-data})
       (do
         (apply db/register (conj [adults] student-as-integer args))
-        (layout/render "payment.html" {:email (noir.session/get-in [:register-primary-email])})))))
+        (layout/render "payment.html"
+                       (assoc (sess-get-reg-info) :cost (* 6 (:student-count (sess-get-reg-info)))
+                                                  :stripe-key (sciencefair.stripe/stripe-public-key)))))))
 
-(defn payment [args]
-  (if (true)
-    (layout/render "payment.html")
-    (layout/render "thankyou.html")))
+(defn process-payment [params] (let [email (:email (sess-get-reg-info))
+                                     student-count (:student-count (sess-get-reg-info))
+                                     stripe-token (:stripeToken params)
+                                     fee-dollars (* 6 student-count)]
+                                 (db/record-payment-choice email "cc")
+                                 (println "process-payment" email student-count fee-dollars)
+                                 (sciencefair.stripe/process-charge stripe-token fee-dollars)
+                                 ; can processing fail... if it does do I want to handle it automatically?
+                                 (db/save-paid-by-email email fee-dollars)
+                                 (layout/render "photopermission.html")))
 
 
 (defn admin []
@@ -120,9 +141,8 @@
     (layout/render "makechanges2.html" {:error "That is not a vaild email address" :email email})
     (if-not (db/registered? email)
       (layout/render "makechanges2.html" {:error "Sorry, that email address is not on registered with us." :email email})
-      (do
-        (util/send-make-changes-link email)
-        (layout/render "checkyouremail.html")))))
+      (let [email-link (util/send-make-changes-link email)]
+        (layout/render "checkyouremail.html" (if (util/dev-mode?) {:email-link email-link} {}))))))
 
 (defn editreg [e h]
   (if (empty? e)
@@ -183,7 +203,7 @@
         (recur (rest required-fields) (conj student-map {(keyword (str (name field-name) "_error")) (str "A " (name field-name) " is required.") :error true}))))))
 
 (defn add-student-post [args]
-  (let [required-fields [:school :title :teacher :student, :grade :title]
+  (let [required-fields [:school :title :teacher :partner :student, :grade :title]
         data-with-errors (validate-student required-fields args)
         primary-adult (db/get-primary-adult-session)]
     (if (nil? primary-adult)
@@ -228,42 +248,50 @@
     (noir.response/set-headers {"Content-Disposition"
                                 "attachment; filename=students.csv"}
                                (noir.response/content-type
-                                "application/csv"
-                                (db/all-students-csv)))))
-
-(defn process-payment [args]
-  (prn "got args" args))
+                                 "application/csv"
+                                 (db/all-students-csv)))))
 
 (defn make-fake []
-  {:email1 (str "m"  (System/currentTimeMillis) "@example.com") :name1 "Mooky Starks" :email2 (str "t" (System/currentTimeMillis) "@example.com") :name2 "Timmy Buck" :students 2})
+  {:email1 (str "m" (System/currentTimeMillis) "@example.com") :name1 "Mooky Starks" :phone1 "978-555-1212"
+   :email2 (str "t" (System/currentTimeMillis) "@example.com") :name2 "Timmy Buck" :phone2 "212-555-6666" :students 2})
+
+(defn record-thanks [how]
+  (db/record-payment-choice (:email (sess-get-reg-info)) how)
+  (layout/render "photopermission.html"))
+
+(defn record-photopermission [photopermission]
+  (db/record-photopermission (:email (sess-get-reg-info)) photopermission)
+  (layout/render "thanks.html"))
 
 (defroutes home-routes
-  (GET "/" [] (layout/render "home.html"))
+           (GET "/" [] (layout/render "home.html"))
            ;  (GET "/makechanges" [] (if (util/dev-mode?) (layout/render "makechanges2.html") (layout/render "makechanges.html")))
-  (GET "/makechanges" [] (make-changes-click))
-  (POST "/makechanges" [email] (make-changes-request email))
-  (GET "/waitinglist" [] (layout/render "waitinglist.html"))
-  (GET "/registration" [] (layout/render "registration.html" (if (util/dev-mode?) (make-fake) {})))
-  (POST "/regpost" [name1 email1 name2 email2 students] (reg-post name1 email1 name2 email2 students))
-  (POST "/students" [& args] (students-post args))
-  (GET "/registration2" [] (layout/render "registration2.html"))
-  (GET "/thanks" [] (layout/render "thanks.html"))
-  (POST "/thanks" [] (layout/render "thanks.html"))
-  (GET "/rules" [] (layout/render "rules.html"))
-  (GET "/contact" [] (layout/render "contact.html"))
-  (GET "/info" [] (layout/render "info.html"))
-  (GET "/a" [] (admin))
-  (POST "/a" [password] (admin-login password))
-  (GET "/editreg" [e h] (editreg e h))
-  (POST "/editreg" [& args] (editreg-post args))
-  (GET "/edit-student" [id] (edit-student id))
-  (POST "/edit-student" [& args] (edit-student-post args))
-  (GET "/logout" [] (logout-now))
-  (GET "/remove-student" [id] (remove-student id))
-  (GET "/add-student" [] (layout/render "add-student.html"))
-  (POST "/add-student" [& args] (add-student-post args))
-  (GET "/adults" [] (adults-get))
-  (POST "/adults" [& args] (adults-post [args]))
-  (GET "/lists" [id] (email-lists id))
-  (GET "/all-students-csv" [] (all-students-csv))
-  (POST "/process-payment" [& args] (process-payment args)))
+           (GET "/makechanges" [] (make-changes-click))
+           (POST "/makechanges" [email] (make-changes-request email))
+           (GET "/waitinglist" [] (layout/render "waitinglist.html"))
+           (GET "/registration" [] (layout/render "registration.html" (if (util/dev-mode?) (make-fake) {})))
+           (POST "/regpost" [name1 email1 phone1 name2 email2 phone2 students] (reg-post name1 email1 phone1 name2 email2 phone2 students))
+           (POST "/students" [& args] (students-post args))
+           (GET "/registration2" [] (layout/render "registration2.html"))
+           (GET "/thanks" [] (layout/render "thanks.html"))
+           (POST "/thanks" [] (layout/render "thanks.html"))
+           (GET "/rules" [] (layout/render "rules.html"))
+           (GET "/contact" [] (layout/render "contact.html"))
+           (GET "/info" [] (layout/render "info.html"))
+           (GET "/a" [] (admin))
+           (POST "/a" [password] (admin-login password))
+           (GET "/editreg" [e h] (editreg e h))
+           (POST "/editreg" [& args] (editreg-post args))
+           (GET "/edit-student" [id] (edit-student id))
+           (POST "/edit-student" [& args] (edit-student-post args))
+           (GET "/logout" [] (logout-now))
+           (GET "/remove-student" [id] (remove-student id))
+           (GET "/add-student" [] (layout/render "add-student.html"))
+           (POST "/add-student" [& args] (add-student-post args))
+           (GET "/adults" [] (adults-get))
+           (POST "/adults" [& args] (adults-post [args]))
+           (GET "/lists" [id] (email-lists id))
+           (GET "/all-students-csv" [] (all-students-csv))
+           (POST "/process-payment" [& args] (process-payment args))
+           (POST "/record-payment-choice" [how] (record-thanks how))
+           (POST "/record-photo-permission" [photopermission] (record-photopermission photopermission)))

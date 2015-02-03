@@ -4,10 +4,10 @@
 <h1>Registration - last step - payment.</h1>
 
 <br/>
-
+The registration fee is $6 per student. &nbsp;&nbsp;  With {{student-count}} students, <strong>your fee is
+    ${{cost}}</strong>
 <br>
-Pay with one of these choices:
-
+<br>
 <p>
 
 <div class="row">
@@ -21,49 +21,67 @@ Pay with one of these choices:
                 <b>This is the preferred way.</b>
                 <br>
                 <br>
+
                 <form action="/process-payment" method="POST">
                     <script
                             src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                            data-key="pk_kctCEyvzQzhQmcWDpAXPdLk1pgzsb"
-                            data-amount="600"
+                            data-key="{{stripe-key}}"
+                            data-amount="{{cost}}00"
                             data-name="GDE Science Fair"
-                            data-description="1 Student Fee ($6.00)"
+                            data-description="Registration Fee"
                             data-allow-remember-me="false"
                             data-email="{{email}}"
                             />
                     </script>
              </form>
+            </div>
         </div>
     </div>
-    </div>
 
     <div class="col-xs-3">
-     <div class="panel panel-success">
- <div class="panel-heading">
-    Mail Check to:</div>
-<div class="panel-body">
-    GDE Science Fair<br>
-    c/o Crystal Herrmann<br>
-    4 Amanda Way<br>
-    Groton, MA 01450<br>
-<br>
-<button type="button" class="btn btn-default">Pay by Mail</button>
-    </div>
-    </div>
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                Mail Check to:
+            </div>
+            <div class="panel-body">
+                GDE Science Fair<br>
+                c/o Crystal Herrmann<br>
+                4 Amanda Way<br>
+                Groton, MA 01450<br>
+                <br>
+
+                <form action="/record-payment-choice?how=mail" method="POST">
+                    <button type="submit" class="btn btn-default">Pay by Mail</button>
+                </form>
+            </div>
+        </div>
     </div>
     <div class="col-xs-3">
-    <div class="panel panel-warning">
-      <div class="panel-heading">Send to School</div>
-<div class="panel-body">
-    Send an envolope with "GDE Science Fair" with your child to school.
-<br>
-<br>
-<button type="button" class="btn btn-default">Pay via School</button>
+        <div class="panel panel-warning">
+            <div class="panel-heading">Send to School</div>
+            <div class="panel-body">
+                You can pay by sending the payment to your student's classroom teacher.
+                <p>
+                    <br>
+                    Place the payment into an envelope
+                    marked with the child's name, grade, and "Science Fair".
 
-    </div> </div>
+                    <br><br>
 
+                <form action="/record-payment-choice?how=school" method="POST">
+                    <button type="submit" class="btn btn-default">Pay via School</button>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
 </div>
-</div>
+
+ <div class='row'>
+   <div class="col-xs-12">
+   Note that no refunds are allowed past the sign up deadline, 15 Feb 2015
+   </div>
 
 </div>
 {% endblock %}
