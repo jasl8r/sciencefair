@@ -42,7 +42,7 @@ Groton, MA  01450
 ### <u>Day of the Fair</u>
 
 * Participants must Check In upon arrival at the Fair.  You will receive a Location ID that will tell you where to set up your presentation.  Participants must set up their presentations in a timely manner and be ready for judging.
-* Please be respectful of other Participants and the Judges at the Fair.  Please keep noise level at a MINIMUM during the Judging.  Please give enough room for the Judges to be in front of the participant they are currently judging.  Please give enough room for the judges to move along to the next participant.
+* Please be respectful of other Participants and the Judges at the Fair.  Please keep noise level at a MINIMUM during the Judging. Please give enough room for the Judges to be in front of the participant they are currently judging.
 * Absolutely NO running or horseplay during the Science Fair.
 * There will be Snacks and Drinks available for purchase at the Fair.
 

@@ -12,8 +12,10 @@ Total Adults {{adults|count}}
     <tr>
         <th>Parent 1</th>
         <th>Email 1</th>
+        <th>Phone 1</th>
         <th>Parent 2</th>
         <th>Email 2</th>
+        <th>Phone 2</th>
         <th>Students</th>
 
         <th>Paid</th>
@@ -23,8 +25,10 @@ Total Adults {{adults|count}}
     <tr>
         <td>{{ adult.name }}</td>
         <td>{{ adult.email }}</td>
+        <td>{{ adult.phone }}</td>
         <td>{{ adult.name_2 }}</td>
         <td>{{ adult.email_2 }}</td>
+        <td>{{ adult.phone_2 }}</td>
         <td>{{ adult.students }}</td>
         <td width="50px"><input type="text" class="form-control" cols="4" name="paid{{ adult.id }}" value="{{ adult.paid }}" placeholder=""></td>
     </tr>
@@ -32,6 +36,8 @@ Total Adults {{adults|count}}
     {% endfor %}
 
     <tr>
+        <td></td>
+        <td></td>
         <td></td>
         <td></td>
         <td></td>

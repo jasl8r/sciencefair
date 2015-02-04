@@ -51,7 +51,6 @@
                       :description (str "can frogs hop " current "?")}))))
 
 (defn reg-post [name1 email1 phone1 name2 email2 phone2 students]
-
   (defn error-render [key message]
     (layout/render "registration.html" {key       message
                                         :name1    name1
@@ -82,7 +81,7 @@
       (db/register [email1 name1 phone1 email2 name2 phone2] 0 {})
       (layout/render "thanks.html"))
     :else (let [students-as-integer (Integer/parseInt students)]
-            (noir.session/assoc-in! [:register-students] [students email1 phone1 name1 email2 name2 phone2])
+            (noir.session/assoc-in! [:register-students] [students email1 name1 phone1 email2 name2 phone2])
             (def students-data (if (util/dev-mode?) (mock-student-data 0 students-as-integer []) (make-students-vec 0 students-as-integer {} [] false)))
             (layout/render "registration2.html" {:students students-data}))))
 

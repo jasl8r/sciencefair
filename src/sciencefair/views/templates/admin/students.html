@@ -20,10 +20,9 @@ Download <a href="/all-students-csv">All Students</a> as CSV
         <th>School</th>
         <th>Grade</th>
         <th>Project</th>
+        <th>Partner</th>
         <th>Parent 1</th>
-        <th>Email 1</th>
         <th>Parent 2</th>
-        <th>Email 2</th>
         <th>Created</th>
     </tr>
     {% for student in students %}
@@ -32,15 +31,15 @@ Download <a href="/all-students-csv">All Students</a> as CSV
         <td>{{ student.school }} </td>
         <td>{{ student.grade }} </td>
         <td>{{ student.title }} </td>
+        <td>{{ student.partner }}</td>
         <td>{{ student.name }}</td>
-        <td>{{ student.email }}</td>
-        <td>{{ student.secondary_2 }}</td>
         <td>{{ student.secondary }}</td>
         <td>{{ student.created_date }}</td>
     </tr>
     <tr>
         <td>&nbsp;</td>
-        <td colspan="9"><b>Description: </b> {{ student.description }}</td>
+        <td colspan="9"><b>Title: </b> {{ student.title }}<br>
+        <b>Description: </b> {{ student.description }}</td>
     </tr>
     {% endfor %}
 </table>

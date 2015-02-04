@@ -50,10 +50,6 @@
     (if (not (clojure.string/blank? email2))
       (sciencefair.util/send-email-confirmation email2 name2))))
 
-(defn get-students []
-  (sql/query db-spec ["select b.student, b.school, b.grade, b.teacher, b.partner, b.title, b.description, a.name, a.email, d.name as 'secondary' , d.email AS 'secondary', a.created_date, a.paid
-                      from adults a join students b on a.id = b.adult_id left join adults d on a.id = d.first_id order by a.created_date"]))
-
 (defn get-registration-as-form [email]
   (let [adult (first (sql/query db-spec ["select * from adults where email=?" email]))
         adult2 (if (nil? (:first_id adult))
@@ -62,7 +58,7 @@
         [primary secondary] (if (nil? (:first_id adult)) [adult adult2] [adult2 adult])
         students (sql/query db-spec ["select * from students where adult_id = ?" (:id primary)])]
     {:paid     (if (nil? (:paid primary)) "$0" (str "$" (:paid primary)))
-     :email1   (:email primary) :name1 (:name primary) :email2 (:email secondary) :name2 (:name secondary)
+     :email1   (:email primary) :name1 (:name primary) :phone1 (:phone primary) :email2 (:email secondary) :name2 (:name secondary) :phone2 (:phone secondary)
      :students students}))
 
 (defn get-student [id]
@@ -104,7 +100,7 @@
                          (:grade data) (:school data) (:student data)]))
 
 (defn get-adults []
-  (sql/query db-spec [(str "select a.id, a.name, a.email, d.name, d.email, a.paid, (select count(*) from students where adult_id = a.id) as students "
+  (sql/query db-spec [(str "select a.id, a.name, a.email, a.phone, d.name, d.email, d.phone, a.paid, (select count(*) from students where adult_id = a.id) as students "
                            " from adults a left join adults d on a.id = d.first_id where a.first_id is null order by a.created_date")]))
 
 (defn save-paid [args]
@@ -124,24 +120,29 @@
 (defn list-fetch [where-clause]
   (map #(:email %) (sql/query db-spec [(str "select a.email " where-clause)])))
 
+
+(defn get-students []
+  (sql/query db-spec ["select b.student, b.school, b.grade, b.teacher, b.partner, b.title, b.description, a.name, d.name as 'secondary', a.created_date, a.paid
+                      from adults a join students b on a.id = b.adult_id left join adults d on a.id = d.first_id order by a.created_date"]))
+
 (defn make-student-row [row]
   [(:student row)
    (:school row)
    (:grade row)
    (:title row)
+   (:partner row)
+   (:description row)
    (:name row)
-   (:email row)
-   (:secondary_2 row)
    (:secondary row)
    (.toString (:created_date row))
-   (:description row)])
+   (:paid row)
+   ])
 
 (defn make-comma-sep-quoted [row]
-  (prn "working on " row)
   (clojure.string/join "," (map #(str "\"" (.replaceAll (if (nil? %1) "" %1) "\"" "\"\"") "\"") row)))
 
 (defn all-students-csv []
-  (let [rows (concat [["Student" "School" "Grade" "Project" "Parent 1" "Email 1" "Parent 2" "Email 2" "Created" "Description"]] (into [] (map make-student-row (get-students))))
+  (let [rows (concat [["Student" "School" "Grade" "Project" "Partner" "Description" "Parent 1" "Parent 2" "Created" "Paid" ]] (into [] (map make-student-row (get-students))))
         rows-comma-sep (map #(make-comma-sep-quoted %) rows)
         csv-file (clojure.string/join "\n" rows-comma-sep)]
     csv-file))
