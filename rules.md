@@ -20,7 +20,7 @@ Yes, there are rules!  Since this is being organized by adults, obviously there 
 #### <u>PROJECT RULES</u>
 
 * You may choose any scientific subject for your project.  It may be part of Life Sciences (animal, plant, human body, behaviors, etc.), Physical Sciences (matter, structure, sound, electricity, light, gravity, magnetism, forces, etc.) or Earth/Space Sciences (geology, weather, astronomy, etc.).
-* You man work individually or with one partner.  Teams of more than two people are NOT allowed.   If you are working with a partner, you both must be in the same grade level and must contribute equally to the project including the oral and visual presentation.  This means each partner must give approximately half of the oral presentation three separate times to each of the three different judges.
+* You may work individually or with one partner.  Teams of more than two people are NOT allowed.   If you are working with a partner, you both must be in the same grade level and must contribute equally to the project including the oral and visual presentation.  This means each partner must give approximately half of the oral presentation three separate times to each of the three different judges.
 * You must have an adult to supervise, coach, and guide you.  However, they can not perform the work for you.
 * Grades K through 2 may do either of the two types of projects:  Informative or Experimental (see below for explanation of project types).
 * Grades 3 and 4 must do an Experimental type of project (see below for explanation of project types).  You can not do an Informative type project.

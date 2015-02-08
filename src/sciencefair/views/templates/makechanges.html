@@ -3,12 +3,39 @@
 
 <h1>My Registration</h1>
 
-Soon viewing/editing your registration will happen from here.   Right now the site is not yet completed.
-     <br>
-        <br>
+<br>
+<h4> We dont collect passwords. To access your registration, we will email you a private link.
+<br>
+<br>
+Be sure to provide the email address that you used during registration.<br><br>
+</h4>
 
-To make a change, please send an email describing the change you would like to make to <a href="mailto:gdesciencefair@gmail.com">gdesciencefair@gmail.com</a>
-<br>
-<br>
+<form class="form-horizontal" role="form" method="POST" action="/makechanges">
+
+    <div class="row form-group  {% if error %}has-error{%endif%}">
+        <div class="col-xs-2 text-right">
+            <b>Email</b>
+        </div>
+        <div class="col-xs-4">
+            <input type="input" name="email" value="{{email}}" class="form-control"
+                   placeholder="Jane.Smith@examples.com" value="{{email}}">
+        </div>
+        {% if error %}
+        <label class="control-label">{{error}}</label>
+        {% endif %}
+    </div>
+    <div class="form-group">
+        <div class="col-xs-2"></div>
+        <div class="col-xs-2">
+            <button type="submit" class="btn btn-primary">Email me my registration link</button>
+        </div>
+    </div>
+</form>
+
 
 {% endblock %}
+
+
+<script>
+    document.getElementById("email").focus();
+</script>

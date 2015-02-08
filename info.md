@@ -16,7 +16,7 @@
 * Every participant must register by the Registration Deadline.  If the deadline passes, registrants will be placed on a waiting list.
 * Participants may change any of their Registration Information or delete their entire Registration before the Registration Deadline.  After the Registration Deadline, only the “Project Title” and “Project Description” will be available to change.  Any other changes or deletions after the Registration Deadline must be requested through the Science Fair email link on the <a href="/contact">Contact</a> page.
 * There is Limited Space Available.  If maximum capacity is reached before you register, your Registration will be placed on a Waiting List.
-* There is a Registration Fee of $6 per participant.  If not paying online, Cash or check is acceptable for the fee.  Make all checks out to “GDE Science Fair.”
+* There is a Registration Fee of $6 per participant.  If not paying online, cash or check is acceptable for the fee.  Make all checks out to “GDE Science Fair.”
 * You may pay the Registration Fee in three ways:
   1. Use the online payment system that is part of the Registration process.
   1. Place the fee in an envelope and mark it with “Science Fair” and the “Student’s Name” and “Grade.”  Have the student bring the envelope to his or her classroom.

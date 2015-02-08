@@ -13,3 +13,4 @@
 
 (spit "src/sciencefair/views/templates/info.html"   (template-wrap (md/md-to-html-string (slurp "info.md"))))
 
+(println "Markdown updated.")

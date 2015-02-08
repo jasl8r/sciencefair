@@ -26,9 +26,9 @@
   (sql/execute! db-spec ["update adults set photo_permission=? where email = ?"
                          photopermission email]))
 
-(defn register [adults student-count students-map]
+(defn register [adults student-count students-map photo-permission payment-type]
   (let [[email1 name1 phone1 email2 name2 phone2] adults]
-    (sql/execute! db-spec ["insert into adults (email, name, created_date, phone) values (?, ?, now(), ?)" email1 name1 phone1])
+    (sql/execute! db-spec ["insert into adults (email, name, created_date, phone, photo_permission, payment_choice) values (?, ?, now(), ?, ?, ?)" email1 name1 phone1 photo-permission  payment-type])
     (def first-adult-id (lookup-id email1))
     (if (not (clojure.string/blank? email2))
       (sql/execute! db-spec ["insert into adults (email, name, first_id, created_date, phone) values (?, ?, ?, now(), ?)" email2 name2 first-adult-id phone2]))
@@ -43,9 +43,6 @@
     (dotimes [dex student-count]
       (sql/execute! db-spec (concat [(str "insert into students ( adult_id, " (col-names) ", created_date ) values ( ?, ?, ?, ?, ?, ?, ?, ?, now() )") first-adult-id] (col-values dex))))
 
-    ; This is used by the payment page
-    (noir.session/assoc-in! [:registration-info] [email1 student-count])
-
     (sciencefair.util/send-email-confirmation email1 name1)
     (if (not (clojure.string/blank? email2))
       (sciencefair.util/send-email-confirmation email2 name2))))
@@ -58,6 +55,7 @@
         [primary secondary] (if (nil? (:first_id adult)) [adult adult2] [adult2 adult])
         students (sql/query db-spec ["select * from students where adult_id = ?" (:id primary)])]
     {:paid     (if (nil? (:paid primary)) "$0" (str "$" (:paid primary)))
+     :photo_permission (:photo_permission primary)
      :email1   (:email primary) :name1 (:name primary) :phone1 (:phone primary) :email2 (:email secondary) :name2 (:name secondary) :phone2 (:phone secondary)
      :students students}))
 
@@ -96,7 +94,7 @@
 
 (defn add-student [adult-id data]
   (sql/execute! db-spec [(str "insert into students ( adult_id, description, title, teacher, partner, grade, school, student, created_date )"
-                              " values (?,?,?,?,?,?,?, now())") adult-id (:description data) (:title data)  (:teacher data) (:partner data)
+                              " values (?,?,?,?,?,?,?,?,now())") adult-id (:description data) (:title data)  (:teacher data) (:partner data)
                          (:grade data) (:school data) (:student data)]))
 
 (defn get-adults []
@@ -135,14 +133,13 @@
    (:name row)
    (:secondary row)
    (.toString (:created_date row))
-   (:paid row)
-   ])
+   (:paid row)])
 
 (defn make-comma-sep-quoted [row]
   (clojure.string/join "," (map #(str "\"" (.replaceAll (if (nil? %1) "" %1) "\"" "\"\"") "\"") row)))
 
 (defn all-students-csv []
-  (let [rows (concat [["Student" "School" "Grade" "Project" "Partner" "Description" "Parent 1" "Parent 2" "Created" "Paid" ]] (into [] (map make-student-row (get-students))))
+  (let [rows (concat [["Student" "School" "Grade" "Project" "Partner" "Description" "Parent 1" "Parent 2" "Created" "Paid"]] (into [] (map make-student-row (get-students))))
         rows-comma-sep (map #(make-comma-sep-quoted %) rows)
         csv-file (clojure.string/join "\n" rows-comma-sep)]
     csv-file))

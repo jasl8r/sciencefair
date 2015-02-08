@@ -2,12 +2,19 @@
 {% block content %}
 
 <h1>New Registration</h1>
-
+<br>
 <h4>
     The registration process collects information about you and the students participating in the science fair.
     <br>
     <br>
-    We use email to send out informational updates.
+
+    Please be sure all information is complete and accurate
+    <br>
+    <br>
+    We use email for all communication including critical informational updates.
+    <br>
+    <br>
+    Please provide an email address that you check frequently.
     <br>
     <br>
     We collect student information to (1) get a count of students (2) to monitor what kinds of projects students are
@@ -40,7 +47,7 @@
         {% if error-email1 %}
         <p class="error">{{error-email1}}</p>
             {% else %}
-            Please use an address you check daily.
+            Please use an address you check frequently.
         {% endif %}
         </div>
     </div>
@@ -60,7 +67,7 @@
 
     <br>
 
-    <h4>Second Parent/Guardian Optional</h4>
+    <h4>Second Parent/Guardian (Optional)</h4>
 
     <div class="row form-group">
         <div class="col-xs-2 text-right">
@@ -70,7 +77,7 @@
             <input type="input" name="name2" value="{{name2}}" class="form-control" placeholder="John Smith">
         </div>
         <div class="col-xs-6">
-            Providing a second email address is optional.
+
         </div>
     </div>
 
@@ -133,8 +140,10 @@
 
     <br>
 
+    <br>
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
+            Please check all information above for accuracy. <br> <br>
             <button type="submit" class="btn btn-primary">Continue</button>
         </div>
     </div>

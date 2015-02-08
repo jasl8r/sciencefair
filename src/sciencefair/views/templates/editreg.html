@@ -9,15 +9,15 @@
 </div>
 {% endif %}
 
-<table class="table table-striped">
-    <tr>
+<table class="table">
+    <tr  class="active">
         <th></th>
         <th>Name</th>
         <th>Email</th>
         <th>Phone</th>
         <th></th>
     </tr>
-    <tr>
+    <tr class="warning">
         <th width='250px'>First Parent/Guardian</th>
         <td>{{name1}}</td>
         <td>{{email1}}</td>
@@ -26,7 +26,7 @@
             <!--<button type="submit" class="btn">Edit</button>-->
         </td>
     </tr>
-    <tr>
+    <tr class="warning">
         <th>Second Parent/Guardian</th>
         <td>{{name2}}</td>
         <td>{{email2}}</td>
@@ -36,14 +36,20 @@
         </td>
     </tr>
 </table>
-
+<div class="row">
+    <div class="col-md-12">
+        You have paid: {{paid}} &nbsp;&nbsp;&nbsp;&nbsp;Photo permission: {{photo_permission}}   &nbsp;&nbsp;&nbsp;&nbsp;
+        For changes to the Parent/Guardian section, email us at <a href="mailto:gdesciencefair@gmail.com">gdesciencefair@gmail.com</a>
+    </div>
+</div>
+<br>
 <br>
 <br>
 
 
 {% for item in students %}
-<table class="table table-striped">
-    <tr>
+<table class="table">
+    <tr class="active">
         <th>Student Name</th>
         <th>Project Title</th>
         <th>School</th>
@@ -52,7 +58,7 @@
         <th>Grade</th>
         <td></td>
     </tr>
-    <tr>
+    <tr class="warning">
         <td>{{item.student}}</td>
         <td>{{item.title}}</td>
         <td>{{item.school}}</td>
@@ -65,9 +71,8 @@
             <a href="/remove-student?id={{item.id}}" class="btn btn-danger btn-sm">Remove</a>
         </td>
     </tr>
-    <tr>
-        <td colspan="6"><b>Description:</b> {{item.description}}</td>
-
+    <tr >
+        <td colspan="6" class="success"><b>Description:</b> {{item.description}}</td>
     </tr>
 
 </table>
@@ -80,14 +85,6 @@
         <a href="/add-student" name="AddStudent" class="btn btn-success btn-sm">Add Student</a>
     </div>
 </div>
-<br>
-<br>
-<div class="row">
-    <div class="col-md-4">
-        You have paid: {{paid}}
-    </div>
-</div>
-
 
 </form>
 

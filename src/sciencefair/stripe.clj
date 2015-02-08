@@ -1,4 +1,5 @@
 (ns sciencefair.stripe
+  (:use [taoensso.timbre :only [trace debug info warn error fatal]])
   (:require [clj-http.client :as client]
             [sciencefair.util :as util]))
 
@@ -23,7 +24,7 @@
             "/fair-data/stripe-private-live.key"))))
 
 (defn process-charge [stripe-token amount]
-  (spit "/fair-data/stripe.log" ["process-charge" stripe-token amount] :append true)
+  (info ["process-charge" stripe-token amount])
 
   (let [stripe-says (client/post "https://api.stripe.com/v1/charges"
                                  {:basic-auth     [(stripe-private-key) ""]
@@ -33,4 +34,4 @@
                                   :conn-timeout   30000     ;; in milliseconds
                                   :accept         :json})]
     ; Lets save a copy first.
-    (spit "/fair-data/stripe.log" (str "\n\n" (new java.util.Date) "\n" stripe-says) :append true)))
+    (info  stripe-says)))
