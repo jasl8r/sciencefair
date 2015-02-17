@@ -3,11 +3,25 @@
 
 <h1>My Registration</h1>
 
+{% if changes-message %}
+<br>
+<div class="row" >
+    <div class="col-xs-8" >
+<div class="panel">
+    <div class="panel-body alert-danger">
+        To make changes to a registration, follow these directions.
+    </div>
+</div>
+    </div>
+</div>
+{% endif %}
+
+
 <br>
 <h4> We dont collect passwords. To access your registration, we will email you a private link.
-<br>
-<br>
-Be sure to provide the email address that you used during registration.<br><br>
+    <br>
+    <br>
+    Be sure to provide the email address that you used during registration.<br><br>
 </h4>
 
 <form class="form-horizontal" role="form" method="POST" action="/makechanges">
@@ -38,4 +52,5 @@ Be sure to provide the email address that you used during registration.<br><br>
 
 <script>
     document.getElementById("email").focus();
+
 </script>

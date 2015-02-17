@@ -26,6 +26,7 @@
   (GET "/registration" [] (layout/render "registration.html" (if (util/dev-mode?) (make-fake) {})))
   (GET "/registration2" [] (layout/render "registration2.html"))
   (POST "/regpost" [name1 email1 phone1 name2 email2 phone2 students] (reg-post name1 email1 phone1 name2 email2 phone2 students))
+
   (POST "/students" [& args] (students-post args))
   (POST "/process-payment" [& args] (process-payment args))
   (POST "/record-payment-choice" [how] (record-payment-choice how))

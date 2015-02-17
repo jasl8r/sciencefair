@@ -23,8 +23,10 @@
 (defn adults-get []
   (if-not (noir.session/get-in [:admin])
     (layout/render "/admin/login.html")
-    (let [adults (db/get-adults)]
-      (layout/render "/admin/adults.html" {:adults adults}))))
+    (let [adults (db/get-adults)
+          adults-with-link (map #(assoc % :email-link (util/make-email-link (:email %) )) adults )
+          ]
+      (layout/render "/admin/adults.html" {:adults adults-with-link}))))
 
 (defn adults-post [arg]
   (if-not (noir.session/get-in [:admin])

@@ -34,7 +34,7 @@
                                                   :teacher       (ex "teacher")
                                                   :teacher_error (is-blank "teacher")
                                                   :partner       (ex "partner")
-                                                  :partner_error  nil
+                                                  :partner_error nil
                                                   :title         (ex "title")
                                                   :title_error   (is-blank "title")
                                                   :description   (ex "description")}) validate)))
@@ -83,16 +83,17 @@
         true
         (recur (rest form-data))))))
 
+(defn fetch-reginfo []
+  (noir.session/get-in [:registration-info]))
 
 (defn session-registration-add [& args]
-  (let [has (noir.session/get-in [:registration-info])
+  (let [has (fetch-reginfo)
         has-or-empty (if (nil? has) {} has)]
     (noir.session/assoc-in! [:registration-info] (apply assoc has-or-empty args))))
 
-
 (defn students-post [students-map]
   (if (nil? (noir.session/get-in [:register-students]))
-    (noir.response/redirect "/registration")
+    (layout/render "makechanges.html" {:changes-message true })
     (let [students (first (noir.session/get-in [:register-students]))
           adults (subvec (noir.session/get-in [:register-students]) 1)
           student-as-integer (Integer/parseInt students)
@@ -100,37 +101,42 @@
       (if (form-data-has-errors students-form-data)
         (layout/render "registration2.html" {:students students-form-data})
         (do
-          (session-registration-add  :adults adults :student-count student-as-integer :students-map students-map)
+          (session-registration-add :adults adults :student-count student-as-integer :students-map students-map)
           (layout/render "payment.html"
-                         {:email (first adults) :student-count student-as-integer
-                          :cost (* 6  student-as-integer)
+                         {:email      (first adults) :student-count student-as-integer
+                          :cost       (* 6 student-as-integer)
                           :stripe-key (sciencefair.stripe/stripe-public-key)}))))))
 
-
 (defn process-payment [params]
-  (session-registration-add :payment-type "cc" :stripe-token (:stripeToken params))
-  (layout/render "photopermission.html"))
-
+  (if (nil? (fetch-reginfo))
+    (layout/render "makechanges.html"  {:changes-message true })
+    (do
+      (session-registration-add :payment-type "cc" :stripe-token (:stripeToken params))
+      (layout/render "photopermission.html"))))
 
 (defn record-payment-choice [how]
-  (session-registration-add :payment-type how)
-  (layout/render "photopermission.html"))
+  (if (nil? (fetch-reginfo))
+    (layout/render "makechanges.html"  {:changes-message true })
+    (do
+      (session-registration-add :payment-type how)
+      (layout/render "photopermission.html"))))
 
 (defn record-photopermission [photopermission]
-  (let [reg-map (noir.session/get-in [:registration-info])
-        adults (:adults reg-map)
-        primary-email (first adults)
-        student-count (:student-count reg-map)
-        students-map (:students-map reg-map)]
-
-    ; this prevents double submits, and makes using the back button to edit ineffective.
-    (noir.session/clear!)
-    (info "registration map"  reg-map)
-    (db/register adults student-count students-map photopermission (:payment-type reg-map))
-    (if (= "cc" (:payment-type reg-map))
-      (try
-        (sciencefair.stripe/process-charge (:stripe-token reg-map) (* 6 student-count))
-        (db/save-paid-by-email primary-email (* 6 student-count))
-        (catch RuntimeException ee (prn "Charge issue !!! " ee))))
-    (layout/render "thanks.html")))
+  (if (nil? (fetch-reginfo))
+    (layout/render "makechanges.html" {:changes-message true })
+    (let [reg-map (noir.session/get-in [:registration-info])
+          adults (:adults reg-map)
+          primary-email (first adults)
+          student-count (:student-count reg-map)
+          students-map (:students-map reg-map)]
+      ; this prevents double submits, and makes using the back button to edit ineffective.
+      (noir.session/clear!)
+      (info "registration map" reg-map)
+      (db/register adults student-count students-map photopermission (:payment-type reg-map))
+      (if (= "cc" (:payment-type reg-map))
+        (try
+          (sciencefair.stripe/process-charge (:stripe-token reg-map) (* 6 student-count))
+          (db/save-paid-by-email primary-email (* 6 student-count))
+          (catch RuntimeException ee (prn "Charge issue !!! " ee))))
+      (layout/render "thanks.html"))))
 

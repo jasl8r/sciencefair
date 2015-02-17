@@ -20,6 +20,7 @@ Total Adults {{adults|count}}
         <th>Payment Choice</th>
         <th>Photo</th>
         <th>Paid</th>
+        <td>LoginAs</td>
         <th></th>
     </tr>
     {% for adult in adults %}
@@ -34,6 +35,7 @@ Total Adults {{adults|count}}
         <td>{{ adult.payment_choice }}</td>
         <td>{{ adult.photo_permission }}</td>
         <td width="50px"><input type="text" class="form-control" cols="4" name="paid{{ adult.id }}" value="{{ adult.paid }}" placeholder=""></td>
+        <td><a href="{{adult.email-link}}">LoginAs</a></td>
     </tr>
 
     {% endfor %}

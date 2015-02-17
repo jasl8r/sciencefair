@@ -68,9 +68,13 @@
 (defn make-md5-hash [email]
   (md5 (str (.trim (slurp "/fair-data/md5phrase.txt")) email)))
 
+(defn make-email-link [email]
+  (str "http://" (if (dev-mode?) "localhost:3000" "gdesciencefair.org") "/editreg?h="
+       (make-md5-hash email) "&e=" (.replaceAll email "@" "%40"))
+  )
+
 (defn send-make-changes-link [email]
-  (let [email-link (str "http://" (if (dev-mode?) "localhost:3000" "gdesciencefair.org") "/editreg?h="
-                        (make-md5-hash email) "&e=" (.replaceAll email "@" "%40"))]
+  (let [email-link (make-email-link email)]
     (send-email email email
                 "Science Fair Edit Registration"
 
