@@ -69,9 +69,10 @@
   (md5 (str (.trim (slurp "/fair-data/md5phrase.txt")) email)))
 
 (defn make-email-link [email]
+  (if (nil? email) ""
   (str "http://" (if (dev-mode?) "localhost:3000" "gdesciencefair.org") "/editreg?h="
        (make-md5-hash email) "&e=" (.replaceAll email "@" "%40"))
-  )
+  ))
 
 (defn send-make-changes-link [email]
   (let [email-link (make-email-link email)]

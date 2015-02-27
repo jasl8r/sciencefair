@@ -98,7 +98,7 @@
                          (:grade data) (:school data) (:student data)]))
 
 (defn get-adults []
-  (sql/query db-spec [(str "select a.id, a.name, a.email, a.phone, d.name, d.email, d.phone, a.paid, (select count(*) from students where adult_id = a.id) as students "
+  (sql/query db-spec [(str "select a.id, a.name, a.email, a.phone, d.name, d.email, d.phone, a.paid, a.payment_choice, a.photo_permission, (select count(*) from students where adult_id = a.id) as students "
                            " from adults a left join adults d on a.id = d.first_id where a.first_id is null order by a.created_date")]))
 
 (defn save-paid [args]
