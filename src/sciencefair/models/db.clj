@@ -136,7 +136,7 @@
    (:paid row)])
 
 (defn make-comma-sep-quoted [row]
-  (clojure.string/join "," (map #(str "\"" (.replaceAll (if (nil? %1) "" %1) "\"" "\"\"") "\"") row)))
+  (clojure.string/join "," (map #(str "\"" (.replaceAll (str (if (nil? %1) "" %1)) "\"" "\"\"") "\"") row)))
 
 (defn all-students-csv []
   (let [rows (concat [["Student" "School" "Grade" "Project" "Partner" "Description" "Parent 1" "Parent 2" "Created" "Paid"]] (into [] (map make-student-row (get-students))))
