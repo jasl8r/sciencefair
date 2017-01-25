@@ -20,7 +20,7 @@
                            ]
             :aot :all
             :repl-options {:init-ns sciencefair.repl}
-            :plugins [[lein-ring "0.8.8"]
+            :plugins [[lein-ring "0.10.0"]
                       [lein-environ "1.1.0"]
                       [lein-cljfmt "0.1.4"]
                       ]
