@@ -1,8 +1,8 @@
 
 
-drop table adults;
+DROP TABLE IF EXISTS adults;
 
-drop table students;
+DROP TABLE IF EXISTS students;
 
 CREATE TABLE adults (
 id INT NOT NULL AUTO_INCREMENT,
