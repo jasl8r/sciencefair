@@ -33,7 +33,7 @@
   (doto (SimpleEmail.)
     (.setHostName (env :smtp-host))
     (.setSslSmtpPort (env :smtp-port))
-    (.setSSL (env :smtp-ssl))
+    (.setSSL (= (env :smtp-ssl) "true"))
     (.addTo email-addr email-name)
     (.setFrom (env :smtp-from) (env :smtp-name))
     (.setSubject subject)
