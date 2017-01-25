@@ -2,13 +2,14 @@
   (:require clojure.string)
   (:require [clojure.java.jdbc :as sql]
             [noir.session]
-            [sciencefair.util]))
+            [sciencefair.util]
+            [environ.core :refer [env]]))
 
 (def db-spec
-  {:subprotocol "mysql"
-   :subname     "//localhost/sciencefair"
-   :user        (.trim (slurp "/fair-data/dbuser.txt"))
-   :password    (.trim (slurp "/fair-data/dbpass.txt"))})
+  {:subprotocol (env :db-protocol)
+   :subname     (env :db-path)
+   :user        (env :db-user)
+   :password    (env :db-pass)})
 
 
 (defn registered? [email]

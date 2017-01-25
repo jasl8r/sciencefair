@@ -7,11 +7,12 @@
   (:require [sciencefair.views.layout :as layout]
             [sciencefair.util :as util]
             [sciencefair.models.db :as db]
-            [sciencefair.stripe]))
+            [sciencefair.stripe]
+            [environ.core :refer [env]]))
 
 (defn admin-login [password]
   (if (and (not (clojure.string/blank? password))
-           (= password (.trim (slurp "/fair-data/adminpass.txt"))))
+           (= password (env :admin-pass)))
     (noir.session/assoc-in! [:admin] true))
   (noir.response/redirect "/a"))
 

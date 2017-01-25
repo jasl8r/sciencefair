@@ -1,7 +1,8 @@
 (ns sciencefair.stripe
   (:use [taoensso.timbre :only [trace debug info warn error fatal]])
   (:require [clj-http.client :as client]
-            [sciencefair.util :as util]))
+            [sciencefair.util :as util]
+            [environ.core :refer [env]]))
 
 
 ;(println (client/get "http://google.com" ) )
@@ -10,18 +11,10 @@
 
 
 (defn
-  stripe-public-key []
-  (.trim (slurp
-          (if (util/dev-mode?)
-            "/fair-data/stripe-public-test.key"
-            "/fair-data/stripe-public-live.key"))))
+  stripe-public-key [] (env :stripe-public-key))
 
 (defn
-  stripe-private-key []
-  (.trim (slurp
-          (if (util/dev-mode?)
-            "/fair-data/stripe-private-test.key"
-            "/fair-data/stripe-private-live.key"))))
+  stripe-private-key [] (env :stripe-private-key))
 
 (defn process-charge [stripe-token amount]
   (info ["process-charge" stripe-token amount])

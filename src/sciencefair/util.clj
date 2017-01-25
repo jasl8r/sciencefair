@@ -1,7 +1,8 @@
 (ns sciencefair.util
   (:require [noir.io :as io]
             [noir.session]
-            [markdown.core :as md]))
+            [markdown.core :as md]
+            [environ.core :refer [env]]))
 
 (import 'org.apache.commons.mail.SimpleEmail)
 
@@ -12,13 +13,9 @@
    (io/slurp-resource filename)
    (md/md-to-html-string)))
 
-(defn dev-mode? []
-  (or
-   (= "rherrmann-mbpr.local" (.getHostName (java.net.InetAddress/getLocalHost)))
-   (= "wilddog" (.getHostName (java.net.InetAddress/getLocalHost)))))
+(defn dev-mode? [] true)
 
-(defn get-smtp-pass []
-  (.trim (slurp "/fair-data/smtppass.txt")))
+(defn get-smtp-pass [] (env :smtp-pass))
 
 ; https://gist.github.com/eliasson/1302024
 (defn md5
@@ -34,14 +31,14 @@
 
 (defn send-email [email-addr email-name subject message]
   (doto (SimpleEmail.)
-    (.setHostName "smtp.sendgrid.net")
-    (.setSslSmtpPort "465")
-    (.setSSL true)
+    (.setHostName (env :smtp-host))
+    (.setSslSmtpPort (env :smtp-port))
+    (.setSSL (env :smtp-ssl))
     (.addTo email-addr email-name)
-    (.setFrom "gdesciencefair@gmail.com" "GD Science Fair")
+    (.setFrom (env :smtp-from) (env :smtp-name))
     (.setSubject subject)
     (.setMsg message)
-    (.setAuthentication "bherrmann7" (get-smtp-pass))
+    (.setAuthentication (env :smtp-user) (get-smtp-pass))
     (.send)))
 
 (defn send-email-confirmation [email-addr email-name]
@@ -66,11 +63,11 @@
      16)))
 
 (defn make-md5-hash [email]
-  (md5 (str (.trim (slurp "/fair-data/md5phrase.txt")) email)))
+  (md5 (str (env :secret) email)))
 
 (defn make-email-link [email]
   (if (nil? email) ""
-  (str "http://" (if (dev-mode?) "localhost:3000" "gdesciencefair.org") "/editreg?h="
+  (str (env :url) "/editreg?h="
        (make-md5-hash email) "&e=" (.replaceAll email "@" "%40"))
   ))
 
