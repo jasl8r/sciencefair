@@ -15,7 +15,7 @@
                            [mysql/mysql-connector-java "5.1.6"]
                            [commons-validator "1.4.0"]
                            [ring-http-basic-auth "0.0.1"]
-                           [org.apache.commons/commons-email "1.2"]
+                           [org.apache.commons/commons-email "1.4"]
                            [clj-http "1.0.1"]
                            ]
             :aot :all

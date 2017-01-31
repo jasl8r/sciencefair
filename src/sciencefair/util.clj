@@ -32,8 +32,10 @@
 (defn send-email [email-addr email-name subject message]
   (doto (SimpleEmail.)
     (.setHostName (env :smtp-host))
-    (.setSslSmtpPort (env :smtp-port))
     (.setSSL (= (env :smtp-ssl) "true"))
+    (.setTLS (= (env :smtp-tls) "true"))
+    (.setSslSmtpPort (env :smtp-port))
+    (.setSmtpPort (Integer/parseInt (env :smtp-port)))
     (.addTo email-addr email-name)
     (.setFrom (env :smtp-from) (env :smtp-name))
     (.setSubject subject)
