@@ -18,23 +18,23 @@
 
 (defn admin []
   (if (noir.session/get-in [:admin])
-    (layout/render "/admin/students.html" {:students (db/get-students)})
-    (layout/render "/admin/login.html")))
+    (layout/render "admin/students.html" {:students (db/get-students)})
+    (layout/render "admin/login.html")))
 
 (defn adults-get []
   (if-not (noir.session/get-in [:admin])
-    (layout/render "/admin/login.html")
+    (layout/render "admin/login.html")
     (let [adults (db/get-adults)
           adults-with-link (map #(assoc % :email-link (util/make-email-link (:email %) )) adults )
           ]
-      (layout/render "/admin/adults.html" {:adults adults-with-link}))))
+      (layout/render "admin/adults.html" {:adults adults-with-link}))))
 
 (defn adults-post [arg]
   (if-not (noir.session/get-in [:admin])
     (noir.response/redirect "/a")
     (do
       (db/save-paid (first arg))
-      (layout/render "/admin/adults.html" {:adults (db/get-adults)}))))
+      (layout/render "admin/adults.html" {:adults (db/get-adults)}))))
 
 (def lists [["all emails" "from adults a"]
             ["primary email of unpaid" "from adults a, students s where a.id = s.adult_id and a.paid is null or trim(a.paid) = ''"]])
@@ -48,7 +48,7 @@
     (if-not (nil? id)
       (ring.util.response/response (clojure.string/join "," (db/list-fetch (second (first (filter #(= id (first %)) lists))))))
       (do
-        (layout/render "/admin/lists.html" {:lists (make-lists-summary)})))))
+        (layout/render "admin/lists.html" {:lists (make-lists-summary)})))))
 
 (defn all-students-csv []
   (if-not (noir.session/get-in [:admin])
