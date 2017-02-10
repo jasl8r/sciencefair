@@ -25,7 +25,7 @@
 <table><tr><td width=150><td>
 GDE Science Fair<br>
 c/o Crystal Herrmann<br>
-4 Amandas Way<br>
+43 Fawn Terrace<br>
 Groton, MA  01450
 </table>
 
@@ -34,14 +34,14 @@ Groton, MA  01450
 ### <u>Judging/Awards</u>
 
 * Each participant will give their presentation three separate times to three different judges.
-* Judges will score each participant on their oral and visual presentations.  Scoring will be based on:  effort and difficulty of project, knowledge of project topic, and quality of oral and visual presentations.
+* Judges will score each participant on their oral and visual presentations.  Scoring will be based on:  effort of project, knowledge of project topic, and quality of oral and visual presentations.
 * All scoring will be kept confidential to the Judging and Scoring personnel only.  No scores will be announced or available for viewing to the participants or the general public.
 * Every participant will receive a Recognition Award upon performing their third presentation to a judge.
 * Awards and prizes will be presented to the top presentations for each grade level.
 
 ### <u>Day of the Fair</u>
 
-* Participants must Check In upon arrival at the Fair.  You will receive a Location ID that will tell you where to set up your presentation.  Participants must set up their presentations in a timely manner and be ready for judging.
+* Prior to the Science Fair, you will receive a Location ID that will tell you where to set up your presentation.  Participants must set up their presentations in a timely manner and be ready for judging.
 * Please be respectful of other Participants and the Judges at the Fair.  Please keep noise level at a MINIMUM during the Judging. Please give enough room for the Judges to be in front of the participant they are currently judging.
 * Absolutely NO running or horseplay during the Science Fair.
 * There will be Snacks and Drinks available for purchase at the Fair.
