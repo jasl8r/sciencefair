@@ -13,7 +13,7 @@
    (io/slurp-resource filename)
    (md/md-to-html-string)))
 
-(defn dev-mode? [] true)
+(defn dev-mode? [] (= (env :dev-mode) "true"))
 
 (defn get-smtp-pass [] (env :smtp-pass))
 
