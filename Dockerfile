@@ -10,7 +10,7 @@ WORKDIR /usr/src/app
 COPY project.clj /usr/src/app/
 RUN lein deps
 
-COPY info.md init.sql markdown.clj profiles.clj rules.md /usr/src/app/
+COPY info.md init.sql markdown.clj rules.md /usr/src/app/
 COPY src /usr/src/app/src
 COPY resources /usr/src/app/resources
 RUN mv "$(lein ring uberjar | sed -n 's/^Created \(.*standalone\.jar\)/\1/p')" app-standalone.jar
