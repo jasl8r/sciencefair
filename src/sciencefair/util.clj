@@ -47,10 +47,11 @@
   (send-email email-addr email-name
               "Science Fair Signup Confirmation"
               (str "Hello " email-name ",\n\n"
-                   "This message is to confirm that you have signed up for emails.\n\n"
-                   "We will send out occasional emails about the Groton Dunstatable Elementary Sciene Fair.\n\n"
-                   "The latest info is always at the site, https://gdesciencefair.org\n\n"
-                   "If you wish to stop receiving email notifications, do so at this link\n"
+                   "This message is to confirm that you have signed up for\n"
+                   "the Groton Dunstable Elementary Science Fair.\n\n"
+                   "We may send you occasional emails regarding the event."
+                   "The latest info is always available on the website: https://gdesciencefair.org\n\n"
+                   "If you wish to stop receiving email notifications, you may do so at this link\n"
                    "    https://gdesciencefair.org/makechanges\n\nScience Fair Team\n")))
 
 (defn md5
