@@ -17,19 +17,10 @@
 * Participants may change any of their Registration Information or delete their entire Registration before the Registration Deadline.  After the Registration Deadline, only the “Project Title” and “Project Description” will be available to change.  Any other changes or deletions after the Registration Deadline must be requested through the Science Fair email link on the <a href="/contact">Contact</a> page.
 * There is Limited Space Available.  If maximum capacity is reached before you register, your Registration will be placed on a Waiting List.
 
-<table><tr><td width=150><td>
-GDE Science Fair<br>
-c/o Crystal Herrmann<br>
-43 Fawn Terrace<br>
-Groton, MA  01450
-</table>
-
-* Registration Fees must be received by the Registration Fee Deadline or risk losing your spot for the Science Fair.
-
 ### <u>Judging/Awards</u>
 
 * Each participant will show their presentation and give their oral explanation (if any) to multiple judges.
-* Judges will provide feedback to each participant on their oral explanation and visual presentations. Feedback will be based on: knowledge of project topic, and quality of oral explanation and visual presentation.
+* Judges will provide feedback to each participant on their oral explanation and visual presentation. Feedback will be based on: knowledge of project topic, and quality of oral explanation and visual presentation.
 * Every participant will receive a Recognition Award before leaving the Fair.
 
 ### <u>Day of the Fair</u>

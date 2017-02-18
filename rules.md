@@ -39,8 +39,9 @@ Yes, there are rules!  Since this is being organized by adults, obviously there 
 #### <u>ORAL EXPLANATION GUIDELINES</u>
 
 * You may use any notation needed for your oral explanation.
-* You may not have any parent or other person assist or coach you verbally while making your oral explanation.  You may have a parent or other person hold an object for you while you are making your oral explanation.
-* Students should keep their oral explanation to under 3 minutes.
+* You should try to provide your oral explanation without the assistance of your parents or any other person.
+* You may have a parent or other person hold an object for you while you are making your oral explanation.
+* You should try to keep your oral explanation under 3 minutes.
 
 <br>
 <center>
