@@ -9,7 +9,8 @@
             [sciencefair.util :as util]
             [sciencefair.routes.dev-helper :as dev]
             [sciencefair.models.db :as db]
-            [sciencefair.stripe]))
+            [sciencefair.stripe]
+            [environ.core :refer [env]]))
 
 
 (def h4s ["First" "Second" "Third" "Forth"])
@@ -102,10 +103,15 @@
         (layout/render "registration2.html" {:students students-form-data})
         (do
           (session-registration-add :adults adults :student-count student-as-integer :students-map students-map)
-          (layout/render "payment.html"
-                         {:email      (first adults) :student-count student-as-integer
-                          :cost       (* 6 student-as-integer)
-                          :stripe-key (sciencefair.stripe/stripe-public-key)}))))))
+          (if (= (env :registration-fee) "0")
+            (layout/render "photopermission.html")
+            (layout/render "payment.html"
+                           {:email      (first adults) :student-count student-as-integer
+                            :cost       (* (Integer/parseInt (env :registration-fee)) student-as-integer)
+                            :stripe-key (sciencefair.stripe/stripe-public-key)})))))))
+
+
+(defn dev-mode? [] (= (env :dev-mode) "true"))
 
 (defn process-payment [params]
   (if (nil? (fetch-reginfo))
