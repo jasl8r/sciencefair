@@ -17,43 +17,40 @@ Yes, there are rules!  Since this is being organized by adults, obviously there 
 * Use proper safety precautions when using the internet.  Please have an adult supervise this activity carefully.
 * Dispose of any waste products properly.
 
-#### <u>PROJECT RULES</u>
+#### <u>PROJECT GUIDELINES</u>
 
 * You may choose any scientific subject for your project.  It may be part of Life Sciences (animal, plant, human body, behaviors, etc.), Physical Sciences (matter, structure, sound, electricity, light, gravity, magnetism, forces, etc.) or Earth/Space Sciences (geology, weather, astronomy, etc.).
-* You may work individually or with one partner.  Teams of more than two people are NOT allowed.   If you are working with a partner, you both must be in the same grade level and must contribute equally to the project including the oral and visual presentation.  This means each partner must give approximately half of the oral presentation three separate times to each of the three different judges.
-* You must have an adult to supervise, coach, and guide you.  <b>However, they can not perform the work for you.</b>  This event is an opportunity for children to be part of the scientific process and feel proud of their accomplishments. Effort is one criteria that judges will use to score a project.  Projects where the majority of the effort was performed by the child should be rewarded appropriately.
-* Grades K through 2 may do either of the two types of projects:  Informative or Experimental (see below for explanation of project types).
-* Grades 3 and 4 must do an Experimental type of project (see below for explanation of project types).  You can not do an Informative type project.
-* You must have at least two resources for your research.  These can be books, websites, magazines, expert people, etc.  Keep track of your resources.  You will need to list them on your display board (see below).
+* You may work individually or with a partner.
+* You must have an adult to supervise, coach, and guide you.  <b>However, they can not perform the work for you.</b>  This event is an opportunity for children to be part of the scientific process and feel proud of their accomplishments.
+* Students may do either of the two types of projects:  Informative or Experimental (see below for explanation of project types).
+* Please try to provide at least two resources for your research. These can be books, websites, magazines, expert people, etc. Keep track of your resources. You will need to list them on your display board (see below).
 
-#### <u>VISUAL PRESENTATION RULES</u>
+#### <u>VISUAL PRESENTATION GUIDELINES</u>
 
 * See Appendix A for a diagram of the Display Board Layout.
 * You must use a tri-fold display board as part of your visual presentation.  The display board must not be any larger than 36 inches high and 48 inches wide when fully open.  Each side panel width must be approximately equal to ¼ of the full open width.  You may purchase your tri-fold display board or make your own from cardboard.
 * The width of table space each student will have is approximately 30 inches.  You will have the area in front of your display board for table space.  You may use the space under the table for storage.
-* You must clearly display the title of your project, your name, your school, and your grade at the top/center of your display board.
-* You must clearly display the resources you used for your project somewhere on your display board.
-* For an Informative type project, you must have some pictures, models, or collections as part of your visual presentation (see below).
+* You should clearly display the title of your project, your name, your school, and your grade at the top/center of your display board.
+* You should clearly display the resources you used for your project somewhere on your display board.
+* For an Informative type project, you should have some pictures, models, or collections as part of your visual presentation (see below).
 * For an Experimental type project, <b>you must perform your experiments at home;</b> not at the Science Fair as part of your presentation.  You may show your experiment by other visual methods (photos, graphs, videos, etc.).
 * See below for items needed on your display board specific for the type of project you choose.
 
-#### <u>ORAL PRESENTATION RULES</u>
+#### <u>ORAL EXPLANATION GUIDELINES</u>
 
-* You may use any notation needed for your oral presentation.
-* You may not have any parent or other person assist or coach you verbally while making your oral presentation.  You may have a parent or other person hold an object for you while you are making your oral presentation.
-* Grades K through 2 are expected to give a 1 to 2 minute oral presentation.
-* Grades 3 and 4 are expected to give a 2 to 3 minute oral presentation.
-* See below for items needed during your oral presentation specific for the type of project you choose.
+* You may use any notation needed for your oral explanation.
+* You may not have any parent or other person assist or coach you verbally while making your oral explanation.  You may have a parent or other person hold an object for you while you are making your oral explanation.
+* Students should keep their oral explanation to under 3 minutes.
 
 <br>
 <center>
 ### PROJECT TYPES
 </center>
 
-These are the two types of projects that can be performed for the Science Fair.  Grades K - 2 may perform either of the two types of projects; Informative or Experimental.  Grades 3 and 4 must perform an Experimental type project only; not an Informative type project.
+These are the two types of projects that can be performed for the Science Fair.
 
 <br>
-#### <u>INFORMATIVE PROJECT (not for Grades 3 and 4)</u>
+#### <u>INFORMATIVE PROJECT</u>
 
 This project is similar to a science report.  It involves researching a scientific topic, collecting information about it, and describing what you have discovered or learned.
 
@@ -69,7 +66,7 @@ These items above should be clearly shown on your display board.  Also, don’t 
 <br>
 
 <br>
-#### <u>EXPERIMENTAL PROJECT (All Grades, K - 4)</u>
+#### <u>EXPERIMENTAL PROJECT</u>
 
 For this project, you will utilize the Scientific Method to learn cause and effect. The experiment will involve performing multiple tests, collecting data, presenting your results and making your conclusions.  The Scientific Method involves five steps:
 
