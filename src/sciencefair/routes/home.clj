@@ -25,9 +25,13 @@
    ; New Registration  - this are in typical invocation order
   (GET "/waitinglist" [] (layout/render "waitinglist.html")) ; Used when past the signup deadline, currently inactive
   (GET "/registration" []
-    (if (= (env :registration-open) "true")
-      (layout/render "registration.html" (if (util/dev-mode?) (make-fake) {}))
-      (layout/render "registration-soon.html")))
+    (cond
+      (= (env :registration-status) "open")
+        (layout/render "registration.html" (if (util/dev-mode?) (make-fake) {}))
+      (= (env :registration-status) "closed")
+        (layout/render "registration-closed.html")
+      (= (env :registration-status) "soon")
+        (layout/render "registration-soon.html")))
   (GET "/registration2" [] (layout/render "registration2.html"))
   (POST "/regpost" [name1 email1 phone1 name2 email2 phone2 students] (reg-post name1 email1 phone1 name2 email2 phone2 students))
 
