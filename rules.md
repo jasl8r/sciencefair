@@ -3,6 +3,8 @@
 # RULES and GUIDELINES
 </center>
 
+<br/>
+
 Yes, there are rules!  Since this is being organized by adults, obviously there has to be some rules.  <b>Please be sure to read <u>everything</u> below <u>carefully</u> before starting your project.</b>
 <br>
 <br>
@@ -17,83 +19,90 @@ Yes, there are rules!  Since this is being organized by adults, obviously there 
 * Use proper safety precautions when using the internet.  Please have an adult supervise this activity carefully.
 * Dispose of any waste products properly.
 
+<br/>
 #### <u>PROJECT GUIDELINES</u>
 
-* You may choose any scientific subject for your project.  It may be part of Life Sciences (animal, plant, human body, behaviors, etc.), Physical Sciences (matter, structure, sound, electricity, light, gravity, magnetism, forces, etc.) or Earth/Space Sciences (geology, weather, astronomy, etc.).
+* You may choose any scientific subject for your project. It may be part of Life Sciences (animal, plant, human body, behaviors, etc.), Physical Sciences (matter, structure, sound, electricity, light, gravity, magnetism, forces, etc.) or Earth/Space Sciences (geology, weather, astronomy, etc.).
+* All students may do either of the two types of projects: Informative or Experimental (see below for explanation of project types).
 * You may work individually or with a partner.
-* You must have an adult to supervise, coach, and guide you.  <b>However, they can not perform the work for you.</b>  This event is an opportunity for children to be part of the scientific process and feel proud of their accomplishments.
-* Students may do either of the two types of projects:  Informative or Experimental (see below for explanation of project types).
-* Please try to provide at least two resources for your research. These can be books, websites, magazines, expert people, etc. Keep track of your resources. You will need to list them on your display board (see below).
+* You must have an adult to supervise, coach, and guide you. <b>However, they can not perform the work for you.</b> This event is an opportunity for children to be part of the scientific process and feel proud of their accomplishments.
+* Please provide at least two resources for your research. These can be books, websites, magazines, interview people, etc. Keep track of your resources and show them in your presentation.
 
+<br/>
 #### <u>VISUAL PRESENTATION GUIDELINES</u>
 
-* See Appendix A for a diagram of the Display Board Layout.
-* You must use a tri-fold display board as part of your visual presentation.  The display board must not be any larger than 36 inches high and 48 inches wide when fully open.  Each side panel width must be approximately equal to ¼ of the full open width.  You may purchase your tri-fold display board or make your own from cardboard.
-* The width of table space each student will have is approximately 30 inches.  You will have the area in front of your display board for table space.  You may use the space under the table for storage.
-* You should clearly display the title of your project, your name, your school, and your grade at the top/center of your display board.
-* You should clearly display the resources you used for your project somewhere on your display board.
-* For an Informative type project, you should have some pictures, models, or collections as part of your visual presentation (see below).
-* For an Experimental type project, <b>you must perform your experiments at home;</b> not at the Science Fair as part of your presentation.  You may show your experiment by other visual methods (photos, graphs, videos, etc.).
-* See below for items needed on your display board specific for the type of project you choose.
+The Groton Dunstable Regional School District is in the process of implementing Universal Design for Learning (UDL) 
+throughout their curriculum.<b>*</b>  One of the three principles of the Universal Design for Learning states that learners 
+differ in the ways in which they navigate a learning environment and express what they know so providing options for 
+expression of learning is necessary.  As our school environment evolves to embrace the principles of UDL, so won't 
+our Science Showcase.  This year we are offering participants the opportunity to express their learning in whatever 
+way they choose so be creative and have fun!!
 
+You must follow the project guidelines and safety rules.
+
+* The width of your table space is approximately 30 inches. You may use the space under the table for storage. If you chose to make a tri-fold you can use the space in front of it.
+* You will need to find a way to display/share the title of your project, your name, your school, and your grade, and any resources you used for your project.
+* For an Informative type project, you should have some pictures, models, or collections as part of your visual presentation (see below).
+* For an Experimental type project, you must perform your experiments at home; do not demonstrate live. You may show your experiment by other visual methods (photos, graphs, videos, etc.).
+
+<br/>
 #### <u>ORAL EXPLANATION GUIDELINES</u>
 
-* You may use any notation needed for your oral explanation.
-* You should try to provide your oral explanation without the assistance of your parents or any other person.
-* You may have a parent or other person hold an object for you while you are making your oral explanation.
-* You should try to keep your oral explanation under 3 minutes.
+* You may use any notation needed for your oral explanation such as index cards.
+* Provide your oral explanation without the assistance of your parents or any other person.
+* You may have a parent or other person hold an object for you if needed while you are making your oral explanation.
+* Try to keep your oral explanation under 3 minutes.
 
-<br>
+<br/>
+<br/>
+
 <center>
-### PROJECT TYPES
+# PROJECT TYPES
 </center>
 
-These are the two types of projects that can be performed for the Science Fair.
+<br/>
+There are two types of projects that can be performed for the Science Fair.
 
-<br>
+<br/>
+
 #### <u>INFORMATIVE PROJECT</u>
 
-This project is similar to a science report.  It involves researching a scientific topic, collecting information about it, and describing what you have discovered or learned.
+The informative project is similar to a science report. It involves researching a scientific topic, collecting information about it, and describing what you have discovered or learned.
 
-Your oral and visual presentation should have the following parts:
+Your presentation should have the following parts:
 
-* A scientific topic or question.  For example, “The Planets in the Solar System” or “What is the difference between a rock and a mineral?”
-* Written information that explains or describes your topic or question.
-* Pictures, models, or collections that complement your written descriptions or explanations about the topic or question.
+* A scientific topic or question. For example, "The Planets in the Solar System" or "What are the differences between a rock and a mineral?"
+* Information that explains or describes your topic or question.
+* Supporting materials that complement your descriptions or explanations about the topic or question.
 * Conclusion(s) of what you have learned or discovered.
 
-These items above should be clearly shown on your display board.  Also, don’t forget to display your resources.
-<br>
-<br>
+<br/>
 
-<br>
 #### <u>EXPERIMENTAL PROJECT</u>
 
-For this project, you will utilize the Scientific Method to learn cause and effect. The experiment will involve performing multiple tests, collecting data, presenting your results and making your conclusions.  The Scientific Method involves five steps:
+With the experimental project you will utilize the Scientific Method to learn cause and effect. The experiment involves performing multiple tests, collecting data, presenting your results, and making a conclusion(s). The Scientific Method involves five steps:
 
-1. Ask – Ask a question that you would like to find an answer to by doing research and testing.  Questions can begin like “What happens if…” or “Which one does…”
-2. Research – Perform research on the scientific subject(s) involved with your question.  Read books, magazines, websites, etc. or talk to experts with knowledge in the subject.
-3. Predict – After researching the subject, predict what will happen when you perform a test to find the answer to your question.
-4. Test – Perform a test to find the answer to your question.  You will perform your test multiple times and collect the data.  Then show the results of the data you collected in a visual form using charts or graphs.
-5. Conclude – After reviewing your test results, what can you conclude?  Did you predict correctly?  Why or why not?  Tell what all this means and why it is important.
+1. Ask - Ask a question that you would like to find an answer to by doing research and testing.  Think of question words (why, how, who, what, when, where) to generate your research question.
+2. Research - Perform research on the scientific subject(s) involved with your question. Read books, magazines, websites, or talk to experts with knowledge in the subject.
+3. Predict - After researching the subject predict what will happen when you perform a test and conduct your experiment.
+4. Test - Perform a test to find the answer to your question. You will need to perform your test multiple times and collect data. Show the results of the data you collected in a visual form.
+5. Conclude - After reviewing your test results, what can you conclude? Did you predict correctly? Why or why not? Tell what all this means and why it is important.
 
-Your oral and visual presentation should have the following parts:
+Your presentation should have the following parts:
 
-* Title & Purpose – What’s the name of your project and what do you want to find out by performing the experiment.  State your question here.
-* Resources – List the resources you used in doing your research.
-* Hypothesis – This is the prediction that you are making based on your research.
-* Test Set Up – What equipment and materials are you using to perform your test and what does it look like when testing?  Diagrams or photos with labels are a good way to show this.
-* Test Procedure – What were the steps that you used to conduct the experiment?  Be very detailed.  Every time you perform your test, you must follow these steps exactly.
-* Test Variables – What parts of the experiment were the same and which ones did you change?
-* Test Data – Record the results of your test in a table.  You will have data for each of the multiple times you performed your test.
-* Test Results – Take the data you collected in the table and show it in a graph(s) or chart(s).  Lines on your graph or bars on your chart may represent each of the multiple times you performed your test.
-* Conclusion – What do the results tell you?  Was your hypothesis correct?  Why or why not?  What did you learn?  Explain how your experiment relates to the real world.
+* Title & Purpose - What's the name of your project and what do you want to find out by performing the experiment. State your question here.
+* Resources - What resources did you use in doing your research.
+* Hypothesis - Your prediction made based on your research.
+* Test Set Up - What equipment and materials did you use to perform your test and what did it look like when testing?
+* Test Procedure - What were the steps you used to conduct the experiment? Be very detailed. Every time you perform your test, you must follow these steps exactly.
+* Test Variables - Which parts of the experiment were the same and which did you change?
+* Test Data - Record the results of your test in a table or other visual format.
+* Test Results - Take the data you collected in the table and show it in a graph(s) or chart(s).
+* Conclusion - What do the results tell you? Was your hypothesis correct? Why or why not? What did you learn? Explain how your experiment relates to the real world.
 
-Be sure your display board has each of the items listed above on it.  You may also include any other pictures, charts, or drawings to make a nice visual presentation.
+<br/>
 
-<br>
-<br>
-#### <u>APPENDIX A</u>
+<b>*</b> More information about the <a href="http://www.udlcenter.org/aboutudl/whatisudl/3pr">Universal Design for Learning</a> 
 
-
-![DISPLAY BOARD LAYOUT](/img/displayboard.png)
+<br/>
+<br/>
