@@ -66,7 +66,7 @@ You must follow the project guidelines and safety rules.
 </center>
 
 <br/>
-There are two types of projects that can be performed for the Science Fair.
+There are two types of projects that can be performed for the Science Showcase.
 
 <br/>
 
