@@ -55,7 +55,7 @@ You must follow the project guidelines and safety rules.
 
 <br/>
 
-<b>*</b> More information about the <a href="http://www.udlcenter.org/aboutudl/whatisudl/3pr">Universal Design for Learning</a> 
+<b>*</b> More information about the <a href="http://udlguidelines.cast.org/">Universal Design for Learning</a> 
 
 
 <br/>
