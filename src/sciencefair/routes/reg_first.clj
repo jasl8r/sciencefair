@@ -141,8 +141,8 @@
       (db/register adults student-count students-map photopermission (:payment-type reg-map))
       (if (= "cc" (:payment-type reg-map))
         (try
-          (sciencefair.stripe/process-charge (:stripe-token reg-map) (* 6 student-count))
-          (db/save-paid-by-email primary-email (* 6 student-count))
+          (sciencefair.stripe/process-charge (:stripe-token reg-map) (* (Integer/parseInt (env :registration-fee)) student-count))
+          (db/save-paid-by-email primary-email (* (Integer/parseInt (env :registration-fee)) student-count))
           (catch RuntimeException ee (prn "Charge issue !!! " ee))))
       (layout/render "thanks.html"))))
 
