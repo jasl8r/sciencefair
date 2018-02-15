@@ -8,3 +8,9 @@ body {
 .error {
     color: red;
 }
+
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
